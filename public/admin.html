@@ -1,0 +1,46 @@
+<html> 
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="userAdmin.css">
+</head>
+<body> 
+  <nav>
+    <div class="nav-logo">HealthQueue Admin</div>
+    <ul>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Manage Queue</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main class="admin-panel">
+    <h1>Queue Administration</h1>
+    <p class="subtitle">View and manage the current queue in real-time.</p>
+
+    <ul id="queueList" class="queue-list"></ul>
+    <button class="admin-btn" onclick="nextPerson()">Call Next</button>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<!-- Firebase Config & Auth Display -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
+    authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
+    databaseURL: "https://digital-queue-system-ca4a3-default-rtdb.firebaseio.com",
+    projectId: "digital-queue-system-ca4a3",
+    storageBucket: "digital-queue-system-ca4a3.appspot.com",
+    messagingSenderId: "2888219915",
+    appId: "1:2888219915:web:668252d6ef99882cff760e"
+  };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+  </script>
+
+  <script src="userAdmin.js"></script>
+</body>
+</html>

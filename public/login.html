@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">   
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Firebase Auth</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="login.css" />
+  <style>
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .social-icon-btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 22px;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+    
+    .google-btn {
+      background-color: #DB4437;
+    }
+    
+    .facebook-btn {
+      background-color: #4267B2;
+    }
+    
+    .github-btn {
+      background-color: #333;
+    }
+    
+    .linkedin-btn {
+      background-color: #0077B5;
+    }
+    
+    .social-icon-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Login Form -->
+    <div class="form-box login">
+      <form>
+        <h1>Login</h1>
+        <div class="input-box">
+          <input type="email" id="login-email" placeholder="Email" required />
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+          <input type="password" id="login-password" placeholder="Password" required />
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="forgot-link">
+          <a href="#">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <p>or login with</p>
+        <div class="social-icons">
+          <button type="button" class="social-icon-btn google-btn" onclick="googleLogin()">
+            <i class='bx bxl-google'></i>
+          </button>
+          <button type="button" class="social-icon-btn facebook-btn" onclick="facebookLogin()">
+            <i class='bx bxl-facebook'></i>
+          </button>
+          <button type="button" class="social-icon-btn github-btn" onclick="githubLogin()">
+            <i class='bx bxl-github'></i>
+          </button>
+          <button type="button" class="social-icon-btn linkedin-btn" onclick="linkedinLogin()">
+            <i class='bx bxl-linkedin'></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="form-box register">
+      <form>
+        <h1>Registration</h1>
+        <div class="input-box">
+          <input type="text" id="register-username" placeholder="Username" required />
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+          <input type="email" id="register-email" placeholder="Email" required />
+          <i class='bx bxs-envelope'></i>
+        </div>
+        <div class="input-box">
+          <input type="password" id="register-password" placeholder="Password" required />
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+        <button type="submit" class="btn">Register</button>
+        <p>or register with</p>
+        <div class="social-icons">
+          <button type="button" class="social-icon-btn google-btn" onclick="googleLogin()">
+            <i class='bx bxl-google'></i>
+          </button>
+          <button type="button" class="social-icon-btn facebook-btn" onclick="facebookLogin()">
+            <i class='bx bxl-facebook'></i>
+          </button>
+          <button type="button" class="social-icon-btn github-btn" onclick="githubLogin()">
+            <i class='bx bxl-github'></i>
+          </button>
+          <button type="button" class="social-icon-btn linkedin-btn" onclick="linkedinLogin()">
+            <i class='bx bxl-linkedin'></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Toggle Panels -->
+    <div class="toggle-box">
+      <div class="toggle-panel toggle-left">
+        <h1>Hello, Welcome!</h1>
+        <p>Don't have an account?</p>
+        <button class="btn register-btn">Register</button>
+      </div>
+      <div class="toggle-panel toggle-right">
+        <h1>Welcome Back!</h1>
+        <p>Already have an account?</p>
+        <button class="btn login-btn">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+  <!-- Firebase Config & Initialization -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
+      authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
+      databaseURL: "https://digital-queue-system-ca4a3-default-rtdb.firebaseio.com",
+      projectId: "digital-queue-system-ca4a3",
+      storageBucket: "digital-queue-system-ca4a3.appspot.com",
+      messagingSenderId: "2888219915",
+      appId: "1:2888219915:web:668252d6ef99882cff760e"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- Authentication Logic -->
+  <script src="login.js"></script>
+
+  <!-- JavaScript for the toggle functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const container = document.querySelector('.container');
+      const registerBtn = document.querySelector('.register-btn');
+      const loginBtn = document.querySelector('.login-btn');
+      
+      registerBtn.addEventListener('click', () => {
+        container.classList.add('active');
+      });
+      
+      loginBtn.addEventListener('click', () => {
+        container.classList.remove('active');
+      });
+
+      // Add LinkedIn login function since it was added to the UI
+      window.linkedinLogin = function() {
+        // LinkedIn authentication logic would go here
+        console.log('LinkedIn login clicked');
+      };
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,981 @@
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .hospital-selection {
+        order: 1;
+    }
+    
+    .services-section {
+        order: 2;
+    }
+    
+    .services-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .dropdown-container {
+        width: 100%;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* User side css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body { 
+    background-color: hwb(189 94% 4%);
+    color: #36A8E6;
+  } 
+   
+  nav {
+    background-color: #36A8E6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  nav a:hover {
+    color: #b2dfdb;
+  }
+  
+  main {
+    text-align: center;
+    margin-top: 60px;
+  }
+  
+  h1 {
+    color: #36A8E6;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .form-container {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 50px;
+  }
+  
+  input, #appointmentDate {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #36A8E6;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  button {
+    background-color: #36A8E6;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #36A8E6;
+  }
+  
+  #positionMsg {
+    margin-top: 15px;
+    color: #36A8E6;
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  
+  #positionMsg img {
+    margin-top: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ticket Styling */
+  #ticket {
+    margin: 20px auto;
+    max-width: 320px;
+    text-align: center;
+    background: #ffffff;
+    padding: 20px;
+    border: 2px dashed #36A8E6;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  }
+  
+  #ticket h2 {
+    margin-bottom: 10px;
+    color: hwb(189 24% 13%);
+  }
+  
+  #ticket p {
+    margin: 5px 0;
+    color: #333;
+    font-size: 1rem;
+  }
+  
+  #ticket img {
+    margin-top: 10px;
+    width: 150px;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  #ticket button {
+    margin-top: 12px;
+    background-color: #36A8E6;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  #ticket button:hover {
+    background-color: #36A8E6;
+  }
+  
+  /* Print-only ticket */
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #ticket, #ticket * {
+      visibility: visible;
+    }
+    #ticket {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+  }
+  
+  /* Admin side css */
+  
+  .admin-panel {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+  
+  .queue-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 60px; /* space for sticky button */
+  }
+  
+  .queue-list li {
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border: 1px solid #d0e2e8;
+    border-radius: 8px;
+    background: #f9fcfd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.2s;
+  }
+  
+  .queue-list li:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  
+  .queue-list li span {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  .queue-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .queue-btn {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: 600;
+  }
+  
+  .remove-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .remove-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  .priority-btn {
+    background-color: #f39c12;
+    color: white;
+  }
+  
+  .priority-btn:hover {
+    background-color: #d35400;
+  }
+  
+  .admin-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    background-color: #36A8E6;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    font-size: 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.2s ease;
+    z-index: 1000;
+  }
+  
+  .admin-btn:hover {
+    background-color: #36A8E6;
+    transform: scale(1.05);
+  }
+   */
+
+   /* merged.css - Combined styles for QueueCare application */
+
+/* Global Styles & Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navigation */
+nav {
+  background: linear-gradient(135deg, #36A8E6, #36A8E6);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 1.5rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+}
+
+nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Header */
+header {
+  background-color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #36A8E6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Main Content */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #36A8E6#36A8E6;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: #36A8E6;
+}
+
+/* Hospital Selection */
+.hospital-selection {
+  margin-bottom: 3rem;
+}
+
+.hospital-list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hospital-card {
+  background-color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.hospital-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.hospital-card.active {
+  border-color: #36A8E6;
+  background-color: #f0f7ff;
+}
+
+/* Services Section */
+.services-section {
+  margin-bottom: 3rem;
+}
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.services-title {
+  margin-bottom: 0;
+}
+
+.dropdown-container {
+  position: relative;
+  width: 200px;
+}
+
+.dropdown-header {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dropdown-header:hover {
+  border-color: #36A8E6;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+}
+
+.dropdown-list.active {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.dropdown-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f7ff;
+}
+
+/* Service Cards */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid transparent;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.service-card.selected {
+  border-color: #36A8E6;
+  background-color: #f0f7ff;
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.service-name {
+  font-weight: 500;
+}
+
+/* Queue Form */
+.form-container {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.form-container input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-container input:focus {
+  outline: none;
+  border-color: #36A8E6;
+}
+
+.form-container button {
+  background-color: #36A8E6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 1rem;
+}
+
+.form-container button:hover {
+  background-color: #36A8E6;
+}
+
+#leaveBtn {
+  background-color: #dc3545;
+}
+
+#leaveBtn:hover {
+  background-color: #c82333;
+}
+
+#positionMsg {
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #36A8E6;
+}
+
+/* Ticket Display */
+#ticket {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  margin: 0 auto;
+  border: 2px dashed #36A8E6;
+}
+
+#ticket h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #36A8E6;
+}
+
+#ticket p {
+  margin-bottom: 0.75rem;
+}
+
+#ticket strong {
+  display: inline-block;
+  width: 120px;
+}
+
+#qrCode {
+  display: block;
+  margin: 1.5rem auto;
+  max-width: 150px;
+}
+
+#ticket button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 1rem auto 0;
+}
+
+#ticket button:hover {
+  background-color: #218838;
+}
+
+/* Voice Assistant */
+.voice-assistant {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #36A8E6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.voice-assistant:hover {
+  transform: scale(1.1);
+  background-color: #0056b3;
+}
+
+.voice-assistant-window {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  width: 350px;
+  height: 450px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.voice-assistant-window.active {
+  display: flex;
+}
+
+.voice-assistant-header {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.voice-assistant-title {
+  font-weight: 500;
+}
+
+.voice-assistant-close {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.voice-assistant-close:hover {
+  opacity: 0.8;
+}
+
+.voice-assistant-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.voice-response {
+  background-color: #f0f7ff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 3px solid #007bff;
+}
+
+.voice-controls {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #eee;
+}
+
+.voice-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.voice-button:hover {
+  background-color: #0056b3;
+}
+
+.voice-button.listening {
+  animation: pulse 1.5s infinite;
+  background-color: #dc3545;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  nav ul {
+    margin-top: 1rem;
+  }
+  
+  nav ul li {
+    margin-left: 1rem;
+  }
+  
+  header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .services-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .dropdown-container {
+    width: 100%;
+  }
+  
+  .hospital-list {
+    flex-direction: column;
+  }
+  
+  .services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .voice-assistant-window {
+    width: 90%;
+    right: 5%;
+    bottom: 5rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  nav, header, .hospital-selection, .services-section, .form-container, .voice-assistant, .voice-assistant-window {
+    display: none !important;
+  }
+  
+  #ticket {
+    box-shadow: none;
+    border: 2px solid #000;
+    padding: 1rem;
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  #ticket button {
+    display: none;
+  }
+  
+  body {
+    background-color: #fff;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.slideIn {
+  animation: slideIn 0.5s ease forwards;
+}
+
+/* Add JavaScript classes */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+.voice-assistant {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.2s ease;
+}
+
+.voice-assistant:hover {
+  transform: scale(1.1);
+}
+
+.voice-assistant img {
+  width: 32px;
+  height: 32px;
+}
+
+/* User Profile Styling */
+.user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #d4f5ee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+/* Avatar */
+.avatar {
+  background-color: #36A8E6;
+  color: #004d40;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+/* Logout Button */
+#logoutBtn {
+  background-color: white;
+  color: #36A8E6;
+  border: none;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+#logoutBtn:hover {
+  background-color: #e65050;
+  transform: translateY(-1px);
+  color: white
+}
+
+#logoutBtn:active {
+  transform: scale(0.98);
+}
+
+.video-call-btn {
+  position: fixed;
+  bottom: 110px; /* Adjust if needed */
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.video-call-btn:hover {
+  transform: scale(1.1);
+  background-color: rgb(232, 219, 219);
+}
+
+.video-call-btn img {
+  width: 30px;
+  height: 30px;
+}

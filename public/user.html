@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QueueCare</title>
+  <link rel="stylesheet" href="userService.css" />
+  <link rel="stylesheet" href="userAdmin.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">
+    <img src="1.jpg" alt="QueueCare Logo" style="height: 60px; vertical-align: middle;">
+    <span style="font-size: 24px; font-weight: bold; margin-left: 10px;">QueueCare</span>
+  </div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="user.html">Queue</a></li>
+    <li><a href="#contacts">Contact</a></li>
+  </ul>
+  <div class="user-profile">
+    <div class="avatar" id="avatar">SK</div>
+    <span id="username" style="margin-left: 10px;"></span>
+    <button id="logoutBtn" style="margin-left: 20px;">Logout</button>
+  </div>
+</nav>
+
+
+
+<!-- Main Content -->
+<main>
+  <h1>Digital Queue for Healthcare</h1>
+  <p class="subtitle">Helping patients wait less and get care faster.</p>
+
+  <!-- Hospital Selection -->
+  <section class="hospital-selection">
+    <h2 class="section-title">Select Hospital</h2>
+    <div class="hospital-list">
+      <div class="hospital-card active">Promhex Multispeciality Hospital</div>
+      <div class="hospital-card">Felix Hospital - Greater Noida</div>
+      <div class="hospital-card">Riverdale Healthcare</div>
+      <div class="hospital-card">Yatharth Super Speciality Hospital</div>
+      <div class="hospital-card">Apollo Spectra Hospital</div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="services-header">
+      <h2 class="services-title">Available Services</h2>
+
+        </div>
+        <div class="dropdown-list" id="serviceList">
+          <div class="dropdown-item" data-value="all">All Services</div>
+          <div class="dropdown-item" data-value="general">General Consultation</div>
+          <div class="dropdown-item" data-value="pediatrics">Pediatrics</div>
+          <div class="dropdown-item" data-value="blood-test">Blood Test</div>
+          <div class="dropdown-item" data-value="imaging">Diagnostic Imaging</div>
+          <div class="dropdown-item" data-value="dental">Dental Checkup</div>
+          <div class="dropdown-item" data-value="eye">Eye Examination</div>
+          <div class="dropdown-item" data-value="cardiology">Cardiology</div>
+          <div class="dropdown-item" data-value="vaccination">Vaccination</div>
+          <div class="dropdown-item" data-value="mental-health">Mental Health Support</div>
+          <div class="dropdown-item" data-value="orthopedics">Orthopedics</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card" data-service="general"><div class="service-icon">👨‍⚕️</div><div class="service-name">General Consultation</div></div>
+      <div class="service-card" data-service="pediatrics"><div class="service-icon">👶</div><div class="service-name">Pediatrics</div></div>
+      <div class="service-card" data-service="blood-test"><div class="service-icon">🩸</div><div class="service-name">Blood Test</div></div>
+      <div class="service-card" data-service="imaging"><div class="service-icon">📷</div><div class="service-name">Diagnostic Imaging</div></div>
+      <div class="service-card" data-service="dental"><div class="service-icon">🦷</div><div class="service-name">Dental Checkup</div></div>
+      <div class="service-card" data-service="eye"><div class="service-icon">👁️</div><div class="service-name">Eye Examination</div></div>
+      <div class="service-card" data-service="cardiology"><div class="service-icon">❤️</div><div class="service-name">Cardiology</div></div>
+      <div class="service-card" data-service="vaccination"><div class="service-icon">💉</div><div class="service-name">Vaccination</div></div>
+      <div class="service-card" data-service="mental-health"><div class="service-icon">🧠</div><div class="service-name">Mental Health</div></div>
+      <div class="service-card" data-service="orthopedics"><div class="service-icon">🦴</div><div class="service-name">Orthopedics</div></div>
+    </div>
+  </section>
+
+  <!-- Queue Form -->
+  <div class="form-container">
+    <input type="text" id="name" placeholder="Your name" />
+    <input type="text" id="phone" placeholder="Phone number" />
+    <input type="date" id="appointmentDate" />
+    <button onclick="joinQueue()">Join Queue</button>
+    <button id="leaveBtn" onclick="leaveQueue()" style="display:none;">Leave Queue</button>
+    <p id="positionMsg"></p>
+  </div>
+
+  <!-- Ticket Display -->
+  <div id="ticket" style="display:none;">
+    <h2>🎟️ Your Ticket</h2>
+    <p><strong>Name:</strong> <span id="ticketName"></span></p>
+    <p><strong>Phone:</strong> <span id="ticketPhone"></span></p>
+    <p><strong>Date:</strong> <span id="ticketDate"></span></p>
+    <p><strong>Queue Number:</strong> <span id="ticketPosition"></span></p>
+    <img id="qrCode" alt="QR Code" />
+    <button id="printBtn" onclick="printTicket()">🖨️ Print Ticket</button>
+      <a id="waBtn" href="#" target="_blank" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
+  </div>
+</main>
+
+<!-- Voice Assistant Button -->
+  <div class="voice-assistant" onclick="startVoiceAssistant()">
+    <img src="voice.png" alt="Voice Assistant" />
+  </div>
+  
+<!-- Video Call Button -->
+<a href="https://videocall-6nuu.onrender.com/patient.html" target="_blank" class="video-call-btn" title="Join Video Call">
+  <img src="video.png" alt="Video Call" />
+</a>
+
+<!-- Firebase SDK --> 
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<!-- Firebase Config & Auth Display -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
+    authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
+    databaseURL: "https://digital-queue-system-ca4a3-default-rtdb.firebaseio.com",
+    projectId: "digital-queue-system-ca4a3",
+    storageBucket: "digital-queue-system-ca4a3.appspot.com",
+    messagingSenderId: "2888219915",
+    appId: "1:2888219915:web:668252d6ef99882cff760e"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      const displayName = user.displayName;
+      const email = user.email;
+      const initials = displayName
+        ? displayName.trim().split(" ").map(word => word[0]).join("").toUpperCase()
+        : email[0].toUpperCase();
+
+      document.getElementById("username").textContent = displayName || email;
+      document.getElementById("avatar").textContent = initials;
+    }
+  });
+
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    firebase.auth().signOut().then(() => {
+      alert("You have been logged out.");
+      window.location.href = "login.html";
+    }).catch(error => {
+      alert("Logout failed: " + error.message);
+    });
+  });
+</script>
+
+<!-- Custom JS -->
+<script src="userAdmin.js"></script>
+<script src="service.js"></script>
+
+</body>
+</html>

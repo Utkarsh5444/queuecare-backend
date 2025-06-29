@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QueueCare - Family Mode</title>
+    <link rel="stylesheet" href="family.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <span class="logo-icon">⚕️</span>
+                <span>QueueCare</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="active" onclick="showDashboard()">Dashboard</a>
+                <a href="#" onclick="showHealthHistory()">Health History</a>
+                <a href="#">Hospitals</a>
+                <a href="#">Settings</a>
+            </nav>
+            <div class="user-actions">
+                <div class="notification-icon">
+                    <span>🔔</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-avatar">SK</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="page-header">
+            <h1 class="page-title">Family Dashboard</h1>
+        </div>
+
+        <div class="dashboard" id="mainDashboard">
+            <!-- Family Sidebar -->
+            <div class="family-sidebar">
+                <div class="sidebar-title">
+                    <span>Family Members</span>
+                    <button class="icon-button" onclick="toggleModal('addMemberModal')">+</button>
+                </div>
+                <div class="family-members" id="familyMembersList">
+                    <div class="member-card active" data-id="member1">
+                        <div class="member-avatar">
+                            <img src="/api/placeholder/50/50" alt="Rahul Sharma">
+                        </div>
+                        <div class="member-info">
+                            <div class="member-name">Rahul Sharma</div>
+                            <div class="member-relation">Self</div>
+                            <div class="member-tags">
+                                <span class="tag">B+</span>
+                            </div>
+                            <div class="member-actions">
+                                <button class="icon-button" onclick="toggleModal('editMemberModal', 'member1')">✏️</button>
+                                <button class="delete-btn" onclick="deleteMember('member1')">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-card" data-id="member2">
+                        <div class="member-avatar">
+                            <img src="/api/placeholder/50/50" alt="Priya Sharma">
+                        </div>
+                        <div class="member-info">
+                            <div class="member-name">Priya Sharma</div>
+                            <div class="member-relation">Wife</div>
+                            <div class="member-tags">
+                                <span class="tag">O+</span>
+                            </div>
+                            <div class="member-actions">
+                                <button class="icon-button" onclick="toggleModal('editMemberModal', 'member2')">✏️</button>
+                                <button class="delete-btn" onclick="deleteMember('member2')">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-card" data-id="member3">
+                        <div class="member-avatar">
+                            <img src="/api/placeholder/50/50" alt="Aarav Sharma">
+                        </div>
+                        <div class="member-info">
+                            <div class="member-name">Aarav Sharma</div>
+                            <div class="member-relation">Son</div>
+                            <div class="member-tags">
+                                <span class="tag child">Child</span>
+                                <span class="tag">AB+</span>
+                            </div>
+                            <div class="member-actions">
+                                <button class="icon-button" onclick="toggleModal('editMemberModal', 'member3')">✏️</button>
+                                <button class="delete-btn" onclick="deleteMember('member3')">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="member-card" data-id="member4">
+                        <div class="member-avatar member-avatar-placeholder">
+                            <span>DK</span>
+                        </div>
+                        <div class="member-info">
+                            <div class="member-name">D.K. Sharma</div>
+                            <div class="member-relation">Father</div>
+                            <div class="member-tags">
+                                <span class="tag senior">Senior</span>
+                                <span class="tag condition">Diabetic</span>
+                            </div>
+                            <div class="member-actions">
+                                <button class="icon-button" onclick="toggleModal('editMemberModal', 'member4')">✏️</button>
+                                <button class="delete-btn" onclick="deleteMember('member4')">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-light" style="width: 100%;" onclick="toggleModal('addMemberModal')">
+                    <span>+</span>
+                    <span>Add Family Member</span>
+                </button>
+            </div>
+
+            <!-- Queue Dashboard -->
+            <div class="queue-dashboard">
+                <div class="dashboard-nav">
+                    <button class="active" onclick="showAllQueues()">All Queues</button>
+                    <button onclick="filterQueues('upcoming')">Upcoming Today</button>
+                    <button onclick="filterQueues('completed')">Completed</button>
+                    <button onclick="filterQueues('cancelled')">Cancelled</button>
+                </div>
+
+                <div class="queue-cards" id="queueCardsList">
+                    <!-- Queue Card 1 -->
+                    <div class="queue-card" data-status="upcoming">
+                        <div class="card-header">
+                            <div class="hospital-info">
+                                <div class="hospital-icon">🏥</div>
+                                <div>
+                                    <div class="hospital-name">Apollo Hospital</div>
+                                    <div class="queue-service">Cardiology Consultation</div>
+                                </div>
+                            </div>
+                            <div class="queue-for">
+                                <div class="queue-for-avatar">
+                                    <img src="/api/placeholder/24/24" alt="D.K. Sharma">
+                                </div>
+                                <span>D.K. Sharma</span>
+                            </div>
+                        </div>
+
+                        <div class="queue-status">
+                            <div class="status-item">
+                                <div class="status-value">A-42</div>
+                                <div class="status-label">Token Number</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">2</div>
+                                <div class="status-label">Position</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">~15m</div>
+                                <div class="status-label">Wait Time</div>
+                            </div>
+                        </div>
+
+                        <div class="queue-actions">
+                            <button class="icon-button" title="View Details">📋</button>
+                            <button class="icon-button" title="Notifications">🔔</button>
+                            <button class="icon-button" title="Cancel Queue">✖️</button>
+                        </div>
+                    </div>
+
+                    <!-- Queue Card 2 -->
+                    <div class="queue-card" data-status="upcoming">
+                        <div class="card-header">
+                            <div class="hospital-info">
+                                <div class="hospital-icon">🏥</div>
+                                <div>
+                                    <div class="hospital-name">Max Super Speciality</div>
+                                    <div class="queue-service">Pediatric Check-up</div>
+                                </div>
+                            </div>
+                            <div class="queue-for">
+                                <div class="queue-for-avatar">
+                                    <img src="/api/placeholder/24/24" alt="Aarav Sharma">
+                                </div>
+                                <span>Aarav Sharma</span>
+                            </div>
+                        </div>
+
+                        <div class="queue-status">
+                            <div class="status-item">
+                                <div class="status-value">P-15</div>
+                                <div class="status-label">Token Number</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">5</div>
+                                <div class="status-label">Position</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">~35m</div>
+                                <div class="status-label">Wait Time</div>
+                            </div>
+                        </div>
+
+                        <div class="queue-actions">
+                            <button class="icon-button" title="View Details">📋</button>
+                            <button class="icon-button" title="Notifications">🔔</button>
+                            <button class="icon-button" title="Cancel Queue">✖️</button>
+                        </div>
+                    </div>
+
+                    <!-- Queue Card 3 -->
+                    <div class="queue-card" data-status="upcoming">
+                        <div class="card-header">
+                            <div class="hospital-info">
+                                <div class="hospital-icon">🏥</div>
+                                <div>
+                                    <div class="hospital-name">Fortis Healthcare</div>
+                                    <div class="queue-service">Blood Test</div>
+                                </div>
+                            </div>
+                            <div class="queue-for">
+                                <div class="queue-for-avatar">
+                                    <img src="/api/placeholder/24/24" alt="Rahul Sharma">
+                                </div>
+                                <span>Rahul Sharma</span>
+                            </div>
+                        </div>
+
+                        <div class="queue-status">
+                            <div class="status-item">
+                                <div class="status-value">L-08</div>
+                                <div class="status-label">Token Number</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">1</div>
+                                <div class="status-label">Position</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">~5m</div>
+                                <div class="status-label">Wait Time</div>
+                            </div>
+                        </div>
+
+                        <div class="queue-actions">
+                            <button class="icon-button" title="View Details">📋</button>
+                            <button class="icon-button" title="Notifications">🔔</button>
+                            <button class="icon-button" title="Cancel Queue">✖️</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Example Completed Queue -->
+                    <div class="queue-card" data-status="completed" style="display: none;">
+                        <div class="card-header">
+                            <div class="hospital-info">
+                                <div class="hospital-icon">🏥</div>
+                                <div>
+                                    <div class="hospital-name">AIIMS Hospital</div>
+                                    <div class="queue-service">General Check-up</div>
+                                </div>
+                            </div>
+                            <div class="queue-for">
+                                <div class="queue-for-avatar">
+                                    <img src="/api/placeholder/24/24" alt="Priya Sharma">
+                                </div>
+                                <span>Priya Sharma</span>
+                            </div>
+                        </div>
+
+                        <div class="queue-status">
+                            <div class="status-item">
+                                <div class="status-value">G-22</div>
+                                <div class="status-label">Token Number</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">✓</div>
+                                <div class="status-label">Completed</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">45m</div>
+                                <div class="status-label">Duration</div>
+                            </div>
+                        </div>
+
+                        <div class="queue-actions">
+                            <button class="icon-button" title="View Details">📋</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Example Cancelled Queue -->
+                    <div class="queue-card" data-status="cancelled" style="display: none;">
+                        <div class="card-header">
+                            <div class="hospital-info">
+                                <div class="hospital-icon">🏥</div>
+                                <div>
+                                    <div class="hospital-name">City Hospital</div>
+                                    <div class="queue-service">X-Ray</div>
+                                </div>
+                            </div>
+                            <div class="queue-for">
+                                <div class="queue-for-avatar">
+                                    <img src="/api/placeholder/24/24" alt="Rahul Sharma">
+                                </div>
+                                <span>Rahul Sharma</span>
+                            </div>
+                        </div>
+
+                        <div class="queue-status">
+                            <div class="status-item">
+                                <div class="status-value">X-15</div>
+                                <div class="status-label">Token Number</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">✕</div>
+                                <div class="status-label">Cancelled</div>
+                            </div>
+                            <div class="status-item">
+                                <div class="status-value">-</div>
+                                <div class="status-label">-</div>
+                            </div>
+                        </div>
+
+                        <div class="queue-actions">
+                            <button class="icon-button" title="View Details">📋</button>
+                            <button class="icon-button" title="Rebook">🔄</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Health History Section -->
+        <div class="health-history" id="healthHistorySection">
+            <div class="dashboard-nav">
+                <button class="active" onclick="showAllHistory()">All History</button>
+                <button onclick="filterHistory('rahul')">Rahul Sharma</button>
+                <button onclick="filterHistory('priya')">Priya Sharma</button>
+                <button onclick="filterHistory('aarav')">Aarav Sharma</button>
+                <button onclick="filterHistory('dk')">D.K. Sharma</button>
+            </div>
+            
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Member</th>
+                        <th>Hospital</th>
+                        <th>Service</th>
+                        <th>Wait Time</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </main>
+    <!-- Add Member Modal -->
+<div id="addMemberModal" class="modal-overlay" style="display: none;">
+    <div class="modal">
+        <h2>Add Family Member</h2>
+        <form id="addMemberForm">
+            <input type="text" id="memberName" placeholder="Full Name" required>
+            <input type="text" id="memberRelation" placeholder="Relation" required>
+            <input type="text" id="memberBloodGroup" placeholder="Blood Group" required>
+            <input type="text" id="memberTags" placeholder="Tags (comma separated)">
+            <button type="submit">Add Member</button>
+            <button type="button" onclick="closeModal('addMemberModal')">Cancel</button>
+        </form>
+    </div>
+</div>
+
+    <script src="family.js"></script>
+</body>
+</html>

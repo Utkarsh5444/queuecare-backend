@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    QueueCare - Your time matters. We make sure you don't waste it.
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="home.css" />
+  <style>
+    /* Global Styles and Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* Navigation Bar Styles */
+nav {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+/* Logo Styles */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4a90e2, #63d0ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #555;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: 8px 0;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #4a90e2;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #4a90e2;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Button Styles */
+.join-queue-btn, .family-mode-btn {
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.join-queue-btn {
+  background: linear-gradient(135deg, #4a90e2, #63d0ff);
+  color: white;
+  margin-left: 10px;
+}
+
+.join-queue-btn:hover {
+  background: linear-gradient(135deg, #3a80d2, #53c0ef);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+.family-mode-btn {
+  background-color: #f0f0f0;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.family-mode-btn:hover {
+  background-color: #e5e5e5;
+}
+
+/* Mobile Menu Button (initially hidden) */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #555;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .nav-links {
+    gap: 15px;
+  }
+  
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+  
+  .join-queue-btn, .family-mode-btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .nav-links {
+    position: absolute;
+    flex-direction: column;
+    background-color: white;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    align-items: center;
+  }
+  
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+  }
+  
+  .nav-links a::after {
+    display: none;
+  }
+  
+  .join-queue-btn, .family-mode-btn {
+    margin: 10px 0;
+    width: 80%;
+  }
+}
+
+/* JavaScript will add this class to show mobile menu */
+.nav-links.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="container navbar">
+      <a href="#home" class="logo">
+        <img src="1.jpg" alt="QueueCare Logo" />
+        <h1>QueueCare</h1>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="user.html">Join Queue</a>
+        <a href="admin.html">Manage Queue</a>
+        <a href="#contact-us">Contact</a>
+        <button type="button" class="join-queue-btn" id="authActionBtn">Signup/login</button>
+        <button class="family-mode-btn" id="familyModeBtn">🔓 Unlock Family Mode</button>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Family Mode Modal -->
+  <div id="familyModeModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeFamilyModal">&times;</span>
+      <h2>Enter your Family ID:</h2>
+      <input type="text" id="familyIdInput" placeholder="Enter Family ID" />
+      <button id="submitFamilyIdBtn">Unlock</button>
+    </div>
+  </div>
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeAuthModal">&times;</span>
+      <h2>Select Login Type</h2>
+      <button id="userLoginBtn" style="margin-top: 40px; padding: 10px 20px;" class="auth-btn">Login as User</button>
+      <button id="adminLoginBtn" style="margin-top: 20px; padding: 10px 20px;" class="auth-btn">Login as Admin</button>
+    </div>
+  </div>
+
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <h2 class="animate-heading">Smart Healthcare Queue Management</h2>
+      <p>
+        Skip the physical queues. Save your precious time for what matters
+        most.
+      </p>
+
+      <div class="hero-animation">
+        <div class="queue-animation">
+          <video autoplay loop muted playsinline class="hero-video">
+            <source src="1.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      <div class="tagline">
+        Your time matters. We make sure you don't waste it.
+      </div>
+
+      <a href="#how-it-works" class="cta-button">Learn How It Works
+        <i class="fas fa-arrow-right" style="margin-left: 8px"></i></a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 class="section-title">Our Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-hospital"></i>
+          </div>
+          <h3>Hospital/Clinic Discovery</h3>
+          <p>
+            Find nearby hospitals or clinics via search or QR code. Get
+            instant access to healthcare facilities in your area with just a
+            few taps.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-info-circle"></i>
+          </div>
+          <h3>Hospital/Clinic Details View</h3>
+          <p>
+            View detailed information about services, operating hours, and
+            current queue status for better decision-making.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-stethoscope"></i>
+          </div>
+          <h3>Service Selection</h3>
+          <p>
+            Choose from available medical services like consultations,
+            diagnostics, and health checkups with ease.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-user-edit"></i>
+          </div>
+          <h3>Patient Information Entry</h3>
+          <p>
+            Quickly fill out personal details to register for a visit or
+            consultation securely.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clipboard-list"></i>
+          </div>
+          <h3>Queue Enrollment</h3>
+          <p>
+            Receive a digital token, join a virtual queue, and monitor your
+            estimated wait time conveniently.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3>Queue Status Tracking</h3>
+          <p>
+            Track your real-time position in the queue and get timely
+            notifications for your turn.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-comments-medical"></i>
+          </div>
+          <h3>Health Advice Chatbot</h3>
+          <p>
+            Chatbot offers basic triage, health tips, and wellness advice
+            anytime you need it.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h3>Admin Dashboard</h3>
+          <p>
+            Admins can manage queues, monitor analytics, and configure
+            hospital settings with powerful tools.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- How it works Section -->
+  <section id="how-it-works" class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps-wrapper">
+        <div class="step-card">
+          <div class="step-icon"><i class="fas fa-search-location"></i></div>
+          <h3>Search for a Hospital or Clinic</h3>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+
+        <div class="step-card">
+          <div class="step-icon"><i class="fas fa-info-circle"></i></div>
+          <h3>View Hospital/Clinic Details</h3>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+
+        <div class="step-card">
+          <div class="step-icon"><i class="fas fa-stethoscope"></i></div>
+          <h3>Choose a Service</h3>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+
+        <div class="step-card">
+          <div class="step-icon"><i class="fas fa-user-edit"></i></div>
+          <h3>Enter Personal Details</h3>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+
+        <div class="step-card">
+          <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+          <h3>Join the Queue</h3>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+
+        <div class="step-card">
+          <div class="step-icon"><i class="fas fa-stream"></i></div>
+          <h3>Track Queue Status</h3>
+        </div>
+        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+
+        <div class="step-card">
+          <div class="step-icon"><i class="fas fa-bell"></i></div>
+          <h3>Notifications & Alerts</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chat Bot Popup Button -->
+  <!-- Family Mode Trigger Button -->
+
+
+  <!-- Family Mode Modal -->
+  <div id="familyModeModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeFamilyModal">&times;</span>
+      <h2>Enter your Family ID:</h2>
+      <input type="text" id="familyIdInput" placeholder="Enter Family ID" />
+      <button id="submitFamilyIdBtn">Unlock</button>
+    </div>
+  </div>
+
+  <!-- QueueCare Bot Button -->
+  <button class="queuecare-bot-btn" onclick="openChatbot()">
+    <i class="fas fa-robot"></i> QueueCare Bot
+  </button>
+
+  <!-- Chatbot Iframe -->
+  <button class="queuecare-bot-btn" onclick="openChatbot()">
+    <i class="fas fa-robot"></i> QueueCare Bot
+  </button>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Our Users Are Saying</h2>
+      <div class="testimonials-container">
+        
+        <div class="testimonial">
+          <div class="testimonial-content">
+            <p>
+              "Thanks to QueueCare, I was able to skip long queues at the
+              hospital. I saved so much time and got to see my doctor sooner.
+              The convenience is unbelievable!"
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="ua.jpg" alt="ua" />
+              </div>
+              <div class="author-info">
+                <h4>Utkarsh Arora</h4>
+                <p>Patient, Age 20</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial">
+          <div class="testimonial-content">
+            <p>
+              "I no longer have to wait for hours at the clinic. QueueCare
+              allowed me to book my spot in advance, saving me precious time
+              during my treatment."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="sudha.jpg" alt="ss" />
+              </div>
+              <div class="author-info">
+                <h4>Sudhansu Shukla</h4>
+                <p>Patient, Age 20</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial">
+          <div class="testimonial-content">
+            <p>
+              "As a busy professional, I don't have time to wait in long
+              queues. QueueCare allowed me to efficiently manage my
+              appointments and get treated faster."
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="ak.jpg" alt="ak" />
+              </div>
+              <div class="author-info">
+                <h4>Akanksha Khantwal</h4>
+                <p>Patient, Age 20</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial">
+          <div class="testimonial-content">
+            <p>
+              "QueueCare changed the way I manage my medical appointments. I
+              no longer have to wait for hours in the waiting room. It's such
+              a relief to have a seamless experience!"
+            </p>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="sk.jpg" alt="sk" />
+              </div>
+              <div class="author-info">
+                <h4>Sanya Kumari</h4>
+                <p>Patient, Age 20</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About us -->
+  <section id="about-us" class="about-us">
+    <div class="container about-us-content">
+      <h2>About Us</h2>
+      <p>
+        At <strong>QueueCare</strong>, we're changing the way people
+        experience healthcare. Our goal is to eliminate long waiting times and
+        enhance the overall patient experience by offering a virtual queue
+        management system that saves your precious time.
+      </p>
+
+      <div class="about-us-details">
+        <div class="about-us-item">
+          <h3>Our Mission</h3>
+          <p>
+            Our mission is to provide an innovative solution that allows
+            patients to bypass waiting in long queues, enabling faster and
+            more efficient healthcare delivery. We are dedicated to making
+            healthcare accessible, easy, and stress-free.
+          </p>
+        </div>
+
+        <div class="about-us-item">
+          <h3>Our Vision</h3>
+          <p>
+            We envision a future where patients no longer waste time in
+            queues. Instead, they can virtually join the queue, monitor their
+            position, and focus on their health. We aim to become the global
+            leader in healthcare queue management.
+          </p>
+        </div>
+
+        <div class="about-us-item">
+          <h3>Why Choose QueueCare?</h3>
+          <ul>
+            <li>
+              <strong>Time-Saving:</strong> Skip the physical queues and
+              manage your appointments remotely.
+            </li>
+            <li>
+              <strong>Seamless Experience:</strong> Easy-to-use platform that
+              lets you join queues virtually and receive real-time updates.
+            </li>
+            <li>
+              <strong>Improved Patient Satisfaction:</strong> With reduced
+              waiting times, patients enjoy a more comfortable and stress-free
+              experience.
+            </li>
+            <li>
+              <strong>Real-Time Updates:</strong> Track your queue position
+              and get notified when it’s your turn.
+            </li>
+            <li>
+              <strong>Accessibility:</strong> Available anytime and anywhere
+              to manage your healthcare experience with ease.
+            </li>
+            <li>
+              <strong>Affordable and Efficient:</strong> A cost-effective
+              solution that benefits both patients and healthcare providers.
+            </li>
+          </ul>
+        </div>
+
+        <div class="about-us-item">
+          <h3>Our Values</h3>
+          <p>
+            At QueueCare, we believe in making a meaningful impact on the
+            healthcare industry. Our core values drive us to innovate and
+            strive for excellence in every aspect of our platform. We value:
+          </p>
+          <ul>
+            <li>
+              <strong>Innovation:</strong> Continuously improving to meet the
+              ever-changing needs of healthcare.
+            </li>
+            <li>
+              <strong>Efficiency:</strong> Providing fast and effective
+              solutions that reduce wait times and increase patient
+              satisfaction.
+            </li>
+            <li>
+              <strong>Accessibility:</strong> Ensuring that our services are
+              available to everyone, no matter where they are.
+            </li>
+            <li>
+              <strong>Integrity:</strong> Building trust with our users and
+              partners by maintaining the highest ethical standards.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact-us" class="contact-us">
+    <div class="container">
+      <h2>Get in Touch with Us</h2>
+      <p>
+        If you have any questions or need assistance, we are here to help!
+        Please feel free to contact us via email, phone, or by filling out the
+        contact form below. Our team will get back to you as soon as possible.
+      </p>
+
+      <h3>Contact Information</h3>
+      <ul>
+        <li>
+          <strong>Email:</strong>
+          <a href="mailto:queuecaresupport@gmail.com">queuecaresupport@gmail.com</a>
+        </li>
+        <li><strong>Phone:</strong> +91 9305865673</li>
+        <li>
+          <strong>Office Hours:</strong> Monday - Friday, 9:00 AM - 5:00 PM
+          (GMT)
+        </li>
+      </ul>
+
+      <h3 class="form-heading">Send Us a Message</h3>
+      <center>
+        <form action="/submit-form" method="POST">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+
+          <button type="submit" class="cta-button">Send Message</button>
+        </form>
+      </center>
+
+
+      <h3>Follow Us</h3>
+      <ul class="social-links">
+        <li>
+          <a href="https://facebook.com/queuacare" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+        </li>
+        <li>
+          <a href="https://twitter.com/queuacare" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+        </li>
+        <li>
+          <a href="https://linkedin.com/company/queuacare" target="_blank"><i class="fab fa-linkedin-in"></i>
+            LinkedIn</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <script src="home.js"></script>
+</body>
+
+</html>

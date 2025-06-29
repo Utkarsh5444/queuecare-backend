@@ -1,0 +1,1124 @@
+/* Admin Controls and Actions */
+.admin-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-controls button {
+  min-width: 120px;
+}
+
+/* Queue Status Indicators */
+.status-indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-normal {
+  background-color: #36A8E6;
+}
+
+.status-emergency {
+  background-color: #fd7e14;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(253, 126, 20, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(253, 126, 20, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(253, 126, 20, 0);
+  }
+}
+
+/* Admin Action Group */
+.action-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Emergency Handling Styles */
+.emergency-container {
+  background-color: #fff4ec;
+  border: 1px solid #fd7e14;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.emergency-container h3 {
+  color: #fd7e14;
+  margin-bottom: 0.5rem;
+}
+
+/* Admin Modal Styles */
+.admin-modal {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}/* ===== COMBINED CSS FOR BOTH ADMIN PANEL AND USER SERVICE ===== */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===== SHARED NAVIGATION STYLES ===== */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #36A8E6;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 2rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+nav ul li a:hover {
+  opacity: 0.8;
+}
+
+/* ===== SHARED CONTENT STYLES ===== */
+h1 {
+  color: #36A8E6;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+button {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* ===== ADMIN PANEL STYLES ===== */
+.admin-panel {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Queue List Styling */
+.queue-list {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.queue-list li {
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.5rem;
+  background-color: #f9f9f9;
+  border-left: 4px solid #36A8E6;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.queue-list li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Admin Button Styling */
+.admin-btn {
+  background-color: #36A8E6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.admin-btn:hover {
+  background-color: #2b8bc0;
+}
+
+/* Queue Item Details */
+.queue-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.queue-item-name {
+  font-weight: bold;
+}
+
+.queue-item-info {
+  color: #666;
+}
+
+.queue-item-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #36A8E6;
+  transition: color 0.3s;
+}
+
+.action-btn:hover {
+  color: #2b8bc0;
+}
+
+/* ===== USER SERVICE PAGE STYLES ===== */
+/* Header */
+header {
+  background-color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  background-color: #36A8E6;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+#logoutBtn {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#logoutBtn:hover {
+  background-color: #e5e5e5;
+}
+
+/* Main Content */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  color: #36A8E6;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+/* Hospital Selection */
+.hospital-selection {
+  margin-bottom: 2rem;
+}
+
+.hospital-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.hospital-card {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-left: 3px solid transparent;
+}
+
+.hospital-card:hover {
+  background-color: #f0f0f0;
+}
+
+.hospital-card.active {
+  background-color: #e6f4fd;
+  border-left: 3px solid #36A8E6;
+}
+
+/* Services Section */
+.services-section {
+  margin-bottom: 2rem;
+}
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.services-title {
+  color: #36A8E6;
+  font-size: 1.5rem;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  min-width: 200px;
+  z-index: 10;
+  display: none;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-list.active {
+  display: block;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.service-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.service-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.service-card.active {
+  border-color: #36A8E6;
+  background-color: #e6f4fd;
+}
+
+.service-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-name {
+  font-weight: 500;
+}
+
+/* Form */
+.form-container {
+  margin-top: 2rem;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-container input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-container button {
+  background-color: #36A8E6;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+  background-color: #2b8bc0;
+}
+
+#leaveBtn {
+  background-color: #ff6b6b;
+}
+
+#leaveBtn:hover {
+  background-color: #e05757;
+}
+
+#positionMsg {
+  text-align: center;
+  font-weight: bold;
+  color: #36A8E6;
+}
+
+/* Ticket */
+#ticket {
+  margin-top: 2rem;
+  background-color: #fff;
+  border: 2px dashed #36A8E6;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ticket h2 {
+  color: #36A8E6;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#ticket p {
+  margin-bottom: 0.5rem;
+}
+
+#qrCode {
+  display: block;
+  margin: 1rem auto;
+  max-width: 150px;
+}
+
+#ticket button {
+  background-color: #36A8E6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin: 1rem auto 0;
+  transition: background-color 0.3s;
+}
+
+#ticket button:hover {
+  background-color: #2b8bc0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  nav ul {
+    margin-top: 1rem;
+  }
+  
+  nav ul li {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .hospital-list,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  main, .admin-panel {
+    padding: 1rem;
+  }
+  
+  .form-container {
+    padding: 1rem;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  #ticket, #ticket * {
+    visibility: visible;
+  }
+  
+  #ticket {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: none;
+  }
+  
+  #ticket button {
+    display: none;
+  }
+}
+
+/* Header */
+header {
+  background-color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  background-color: #36A8E6;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+#logoutBtn {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#logoutBtn:hover {
+  background-color: #e5e5e5;
+}
+
+/* Main Content */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+  color: #36A8E6;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  color: #36A8E6;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+/* Hospital Selection */
+.hospital-selection {
+  margin-bottom: 2rem;
+}
+
+.hospital-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.hospital-card {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-left: 3px solid transparent;
+}
+
+.hospital-card:hover {
+  background-color: #f0f0f0;
+}
+
+.hospital-card.active {
+  background-color: #e6f4fd;
+  border-left: 3px solid #36A8E6;
+}
+
+/* Services Section */
+.services-section {
+  margin-bottom: 2rem;
+}
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.services-title {
+  color: #36A8E6;
+  font-size: 1.5rem;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  min-width: 200px;
+  z-index: 10;
+  display: none;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-list.active {
+  display: block;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.service-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.service-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.service-card.active {
+  border-color: #36A8E6;
+  background-color: #e6f4fd;
+}
+
+.service-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-name {
+  font-weight: 500;
+}
+
+/* Form */
+.form-container {
+  margin-top: 2rem;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-container input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-container button {
+  background-color: #36A8E6;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-container button:hover {
+  background-color: #2b8bc0;
+}
+
+#leaveBtn {
+  background-color: #ff6b6b;
+}
+
+#leaveBtn:hover {
+  background-color: #e05757;
+}
+
+#positionMsg {
+  text-align: center;
+  font-weight: bold;
+  color: #36A8E6;
+}
+
+/* Ticket */
+#ticket {
+  margin-top: 2rem;
+  background-color: #fff;
+  border: 2px dashed #36A8E6;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ticket h2 {
+  color: #36A8E6;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#ticket p {
+  margin-bottom: 0.5rem;
+}
+
+#qrCode {
+  display: block;
+  margin: 1rem auto;
+  max-width: 150px;
+}
+
+#ticket button {
+  background-color: #36A8E6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  margin: 1rem auto 0;
+  transition: background-color 0.3s;
+}
+
+#ticket button:hover {
+  background-color: #2b8bc0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  nav ul {
+    margin-top: 1rem;
+  }
+  
+  nav ul li {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .hospital-list,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  main {
+    padding: 1rem;
+  }
+  
+  .form-container {
+    padding: 1rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  #ticket, #ticket * {
+    visibility: visible;
+  }
+  
+  #ticket {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: none;
+  }
+  
+  #ticket button {
+    display: none;
+  }
+}
+/* Reset and basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Navigation bar */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 80px;
+  background-color: #36A8E6;
+  box-shadow: 0 2px 10px rgba(54, 168, 230, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo section */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 60px;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+.logo span {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 10px;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+/* Navigation links */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  padding: 8px 4px;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: white;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* User profile section */
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  color: #36A8E6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+#username {
+  margin-left: 10px;
+  font-weight: 500;
+  color: white;
+}
+
+#logoutBtn {
+  margin-left: 20px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#logoutBtn:hover {
+  background-color: white;
+  color: #36A8E6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  nav {
+    padding: 0 1rem;
+  }
+  
+  nav ul {
+    gap: 1rem;
+  }
+  
+  .logo span {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo span {
+    display: none;
+  }
+  
+  #username {
+    display: none;
+  }
+}
+
+/* User Profile Styles */
+.user-profile {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #40b0e8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin-left: auto; /* Changed from margin: 0 auto to push to right */
+  margin-right: 20px; /* Added margin on right side */
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  color: #36A8E6;
+  font-weight: 600;
+  border-radius: 50%;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+#username {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-left: 10px;
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#logoutBtn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+#logoutBtn:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .user-profile {
+    padding: 10px;
+  }
+  
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  
+  #username {
+    font-size: 14px;
+  }
+  
+  #logoutBtn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
