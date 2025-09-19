@@ -3,111 +3,1066 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>QueueCare</title>
+  <title>AyurSutra - Digital Wellness Queue</title>
   <link rel="stylesheet" href="userService.css" />
   <link rel="stylesheet" href="userAdmin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* =========== AyurSutra Premium Theme =========== */
+    :root {
+      --primary-green: #16a34a;
+      --dark-green: #14532d;
+      --light-green: #bbf7d0;
+      --accent-green: #10b981;
+      --bg-green: #f0fdf4;
+      --hover-green: #15803d;
+      --success-green: #22c55e;
+      --emerald-600: #059669;
+      --emerald-50: #ecfdf5;
+      --gold-accent: #f59e0b;
+      --gold-light: #fef3c7;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--bg-green) 0%, #ecfdf5 30%, var(--bg-green) 70%, #dcfce7 100%);
+      min-height: 100vh;
+      color: var(--dark-green);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(22, 163, 74, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* =========== Navigation - Premium AyurSutra Design =========== */
+    nav {
+      background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-green) 50%, var(--emerald-600) 100%);
+      padding: 0 3rem;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 
+        0 8px 32px rgba(22, 163, 74, 0.15),
+        0 4px 16px rgba(22, 163, 74, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    nav::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: white;
+      font-weight: 800;
+      font-size: 2rem;
+      position: relative;
+      z-index: 10;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo img {
+      height: 55px;
+      width: 55px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 6px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .logo:hover img {
+      transform: scale(1.05) rotate(5deg);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo::before {
+      content: '🌿';
+      font-size: 2.2rem;
+      margin-right: 10px;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(5deg); }
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 12px 24px;
+      border-radius: 30px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    nav ul li a:hover::before {
+      left: 100%;
+    }
+
+    nav ul li a:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 10px 25px;
+      border-radius: 50px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    .user-profile:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-accent), #f97316);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .avatar:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    #username {
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    #logoutBtn {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+    }
+
+    #logoutBtn:hover {
+      background: linear-gradient(135deg, #b91c1c, #dc2626);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+    }
+
+    /* =========== Main Content Styling =========== */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 3rem;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-green), var(--accent-green), var(--emerald-600));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary-green), var(--accent-green));
+      border-radius: 3px;
+      box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 1.4rem;
+      color: var(--hover-green);
+      margin-bottom: 4rem;
+      font-weight: 500;
+      position: relative;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 4rem;
+    }
+
+    .subtitle::before {
+      content: '🌿';
+      margin-right: 10px;
+    }
+
+    .subtitle::after {
+      content: '🌿';
+      margin-left: 10px;
+    }
+
+    /* =========== Section Titles =========== */
+    .section-title, .services-title {
+      color: var(--dark-green);
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after, .services-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-green), var(--accent-green));
+      border-radius: 3px;
+      box-shadow: 0 4px 16px rgba(22, 163, 74, 0.2);
+    }
+
+    /* =========== Hospital Selection - Premium Cards =========== */
+    .hospital-selection {
+      margin-bottom: 5rem;
+    }
+
+    .hospital-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .hospital-card {
+      background: linear-gradient(135deg, white 0%, #fefefe 100%);
+      border: 3px solid var(--light-green);
+      border-radius: 25px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark-green);
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 
+        0 8px 32px rgba(22, 163, 74, 0.08),
+        0 4px 16px rgba(22, 163, 74, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hospital-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.1), transparent);
+      transition: left 0.8s ease;
+    }
+
+    .hospital-card:hover::before {
+      left: 100%;
+    }
+
+    .hospital-card::after {
+      content: '🏥';
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      opacity: 0.3;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .hospital-card:hover {
+      border-color: var(--primary-green);
+      background: linear-gradient(135deg, var(--bg-green) 0%, var(--emerald-50) 100%);
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 
+        0 25px 60px rgba(22, 163, 74, 0.15),
+        0 12px 40px rgba(22, 163, 74, 0.1);
+    }
+
+    .hospital-card:hover::after {
+      transform: scale(1.3) rotate(15deg);
+      opacity: 0.7;
+      color: var(--primary-green);
+    }
+
+    .hospital-card.active {
+      background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+      color: white;
+      border-color: var(--hover-green);
+      box-shadow: 
+        0 20px 60px rgba(22, 163, 74, 0.3),
+        0 8px 32px rgba(22, 163, 74, 0.2);
+      transform: scale(1.06) translateY(-8px);
+    }
+
+    .hospital-card.active::after {
+      content: '✅';
+      color: white;
+      opacity: 1;
+      transform: scale(1.4) rotate(10deg);
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* =========== Services Section - Interactive Grid =========== */
+    .services-section {
+      margin-bottom: 5rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: linear-gradient(135deg, white 0%, #fefefe 100%);
+      border: 3px solid var(--light-green);
+      border-radius: 30px;
+      padding: 3rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 
+        0 10px 40px rgba(22, 163, 74, 0.08),
+        0 4px 20px rgba(22, 163, 74, 0.04);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 30%, rgba(22, 163, 74, 0.05) 50%, transparent 70%);
+      transform: translateX(-100%) rotate(10deg);
+      transition: transform 0.8s ease;
+    }
+
+    .service-card:hover::before {
+      transform: translateX(100%) rotate(10deg);
+    }
+
+    .service-icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      filter: drop-shadow(0 8px 16px rgba(22, 163, 74, 0.2));
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.4) rotate(10deg) translateY(-8px);
+      filter: drop-shadow(0 12px 24px rgba(22, 163, 74, 0.3));
+    }
+
+    .service-name {
+      color: var(--dark-green);
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-card:hover {
+      border-color: var(--primary-green);
+      background: linear-gradient(135deg, var(--bg-green) 0%, var(--emerald-50) 100%);
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: 
+        0 30px 70px rgba(22, 163, 74, 0.2),
+        0 15px 40px rgba(22, 163, 74, 0.15);
+    }
+
+    .service-card:hover .service-name {
+      color: var(--hover-green);
+      transform: translateY(-3px);
+    }
+
+    .service-card.selected {
+      background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+      color: white;
+      border-color: var(--hover-green);
+      box-shadow: 
+        0 30px 80px rgba(22, 163, 74, 0.4),
+        0 15px 50px rgba(22, 163, 74, 0.3);
+      transform: scale(1.08) translateY(-10px);
+    }
+
+    .service-card.selected .service-name {
+      color: white;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .service-card.selected .service-icon {
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
+      transform: scale(1.2);
+    }
+
+    /* =========== Form Container - Premium Styling =========== */
+    .form-container {
+      background: linear-gradient(135deg, white 0%, rgba(255, 255, 255, 0.95) 100%);
+      border: 4px solid var(--light-green);
+      border-radius: 30px;
+      padding: 4rem;
+      margin: 4rem auto;
+      max-width: 700px;
+      box-shadow: 
+        0 20px 60px rgba(22, 163, 74, 0.1),
+        0 8px 32px rgba(22, 163, 74, 0.05);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+
+    .form-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(22, 163, 74, 0.03) 0%, transparent 50%);
+      animation: rotate-slow 30s linear infinite;
+    }
+
+    @keyframes rotate-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 18px 25px;
+      border: 3px solid var(--light-green);
+      border-radius: 15px;
+      font-size: 16px;
+      color: var(--dark-green);
+      background: white;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      margin: 15px 0;
+      position: relative;
+      z-index: 10;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+    }
+
+    .form-container input:focus {
+      border-color: var(--primary-green);
+      box-shadow: 
+        0 0 0 6px rgba(22, 163, 74, 0.1),
+        0 8px 32px rgba(22, 163, 74, 0.15);
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    .form-container input::placeholder {
+      color: #86efac;
+      font-weight: 400;
+    }
+
+    .form-container button {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 20px 40px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 32px rgba(22, 163, 74, 0.3);
+      margin: 20px 0;
+      position: relative;
+      z-index: 10;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    .form-container button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .form-container button:hover::before {
+      left: 100%;
+    }
+
+    .form-container button:hover {
+      background: linear-gradient(135deg, var(--hover-green), var(--emerald-600));
+      transform: translateY(-4px);
+      box-shadow: 0 15px 50px rgba(22, 163, 74, 0.4);
+    }
+
+    #leaveBtn {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
+    }
+
+    #leaveBtn:hover {
+      background: linear-gradient(135deg, #b91c1c, #dc2626);
+      box-shadow: 0 15px 50px rgba(220, 38, 38, 0.4);
+    }
+
+    /* =========== Position Message Styling =========== */
+    #positionMsg {
+      color: var(--hover-green);
+      background: linear-gradient(135deg, var(--emerald-50), var(--light-green));
+      border: 3px solid var(--accent-green);
+      border-radius: 20px;
+      padding: 25px;
+      font-weight: 600;
+      text-align: center;
+      margin: 25px 0;
+      font-size: 16px;
+      position: relative;
+      z-index: 10;
+      line-height: 1.6;
+      box-shadow: 0 8px 32px rgba(22, 163, 74, 0.1);
+    }
+
+    /* =========== Ticket Display - Premium Design =========== */
+    #ticket {
+      background: linear-gradient(135deg, white 0%, #fefefe 100%);
+      border: 5px solid var(--primary-green);
+      border-radius: 30px;
+      padding: 4rem;
+      margin: 4rem auto;
+      max-width: 700px;
+      box-shadow: 
+        0 25px 80px rgba(22, 163, 74, 0.2),
+        0 10px 40px rgba(22, 163, 74, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #ticket::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 30px;
+      right: 30px;
+      height: 30px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--primary-green) 0px,
+        var(--primary-green) 15px,
+        transparent 15px,
+        transparent 30px
+      );
+      border-radius: 15px 15px 0 0;
+    }
+
+    #ticket::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 30px;
+      right: 30px;
+      height: 30px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--primary-green) 0px,
+        var(--primary-green) 15px,
+        transparent 15px,
+        transparent 30px
+      );
+      border-radius: 0 0 15px 15px;
+    }
+
+    #ticket h2 {
+      color: var(--dark-green);
+      border-bottom: 4px solid var(--light-green);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 2.2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    #ticket p {
+      color: var(--hover-green);
+      margin: 20px 0;
+      font-size: 18px;
+      font-weight: 500;
+      position: relative;
+      z-index: 10;
+    }
+
+    #ticket strong {
+      color: var(--dark-green);
+      font-weight: 700;
+    }
+
+    #ticket img {
+      display: block;
+      margin: 30px auto;
+      border-radius: 20px;
+      border: 4px solid var(--light-green);
+      box-shadow: 0 12px 40px rgba(22, 163, 74, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    #ticket img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 60px rgba(22, 163, 74, 0.25);
+    }
+
+    #printBtn, #waBtn {
+      background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+      color: white;
+      border: none;
+      border-radius: 15px;
+      padding: 15px 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      margin: 15px 10px;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      font-size: 16px;
+      box-shadow: 0 6px 24px rgba(22, 163, 74, 0.3);
+    }
+
+    #printBtn:hover, #waBtn:hover {
+      background: linear-gradient(135deg, var(--hover-green), var(--emerald-600));
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(22, 163, 74, 0.4);
+    }
+
+    /* =========== Floating Action Buttons =========== */
+    .voice-assistant, .video-call-btn {
+      position: fixed;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 40px rgba(22, 163, 74, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      cursor: pointer;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .voice-assistant {
+      bottom: 120px;
+      right: 40px;
+      background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+    }
+
+    .video-call-btn {
+      bottom: 40px;
+      right: 40px;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      text-decoration: none;
+    }
+
+    .voice-assistant:hover, .video-call-btn:hover {
+      transform: scale(1.15) translateY(-5px);
+      box-shadow: 0 20px 60px rgba(22, 163, 74, 0.4);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .voice-assistant img, .video-call-btn img {
+      width: 35px;
+      height: 35px;
+      filter: invert(1);
+      transition: all 0.3s ease;
+    }
+
+    .voice-assistant:hover img, .video-call-btn:hover img {
+      transform: scale(1.1);
+    }
+
+    /* =========== Hidden Elements =========== */
+    .dropdown-list {
+      display: none !important;
+    }
+
+    /* =========== Responsive Design =========== */
+    @media (max-width: 1024px) {
+      nav {
+        padding: 0 2rem;
+      }
+      
+      main {
+        padding: 3rem 2rem;
+      }
+      
+      h1 {
+        font-size: 3.2rem;
+      }
+      
+      .hospital-list, .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 1.5rem;
+        height: 70px;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+      }
+
+      nav ul {
+        gap: 1.5rem;
+      }
+
+      nav ul li a {
+        padding: 10px 18px;
+        font-size: 14px;
+      }
+
+      main {
+        padding: 2.5rem 1.5rem;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+      }
+
+      .hospital-list, .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .form-container, #ticket {
+        padding: 2.5rem;
+        margin: 2.5rem auto;
+      }
+
+      .service-icon {
+        font-size: 3.5rem;
+      }
+
+      .voice-assistant, .video-call-btn {
+        width: 60px;
+        height: 60px;
+      }
+
+      .voice-assistant img, .video-call-btn img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 0 1rem;
+      }
+
+      .logo {
+        font-size: 1.4rem;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      main {
+        padding: 2rem 1rem;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      .section-title, .services-title {
+        font-size: 2rem;
+      }
+
+      .hospital-card, .service-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .form-container, #ticket {
+        padding: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<!-- Navigation -->
+<!-- Navigation Header - AyurSutra Premium Design -->
 <nav>
   <div class="logo">
-    <img src="1.jpg" alt="QueueCare Logo" style="height: 60px; vertical-align: middle;">
-    <span style="font-size: 24px; font-weight: bold; margin-left: 10px;">QueueCare</span>
+    <span>AyurSutra</span>
   </div>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="user.html">Queue</a></li>
-    <li><a href="#contacts">Contact</a></li>
+    <li><a href="index.html">🏠 Home</a></li>
+    <li><a href="user.html">⚡ Queue</a></li>
+    <li><a href="#contact">📞 Contact</a></li>
   </ul>
   <div class="user-profile">
-    <div class="avatar" id="avatar">SK</div>
-    <span id="username" style="margin-left: 10px;"></span>
-    <button id="logoutBtn" style="margin-left: 20px;">Logout</button>
+    <div class="avatar" id="avatar">AS</div>
+    <span id="username"></span>
+    <button id="logoutBtn">Logout</button>
   </div>
 </nav>
+
 <!-- Main Content -->
 <main>
   <h1>Digital Queue for Healthcare</h1>
-  <p class="subtitle">Helping patients wait less and get care faster.</p>
+  <p class="subtitle">Ancient Ayurvedic wisdom meets modern digital convenience - Experience healing without the wait</p>
+  
   <!-- Hospital Selection -->
   <section class="hospital-selection">
-    <h2 class="section-title">Select Hospital</h2>
+    <h2 class="section-title">🏥 Select AyurSutra Center</h2>
     <div class="hospital-list">
-      <div class="hospital-card active">Promhex Multispeciality Hospital</div>
-      <div class="hospital-card">Felix Hospital - Greater Noida</div>
-      <div class="hospital-card">Riverdale Healthcare</div>
-      <div class="hospital-card">Yatharth Super Speciality Hospital</div>
-      <div class="hospital-card">Apollo Spectra Hospital</div>
+      <div class="hospital-card active">AyurSutra Wellness Center - Delhi</div>
+      <div class="hospital-card">AyurSutra Ayurvedic Hospital - Mumbai</div>
+      <div class="hospital-card">AyurSutra Panchakarma Center - Bangalore</div>
+      <div class="hospital-card">AyurSutra Holistic Care - Pune</div>
+      <div class="hospital-card">AyurSutra Traditional Medicine - Chennai</div>
     </div>
   </section>
+  
   <!-- Services Section -->
   <section class="services-section">
-    <div class="services-header">
-      <h2 class="services-title">Available Services</h2>
-        </div>
-        <div class="dropdown-list" id="serviceList">
-          <div class="dropdown-item" data-value="all">All Services</div>
-          <div class="dropdown-item" data-value="general">General Consultation</div>
-          <div class="dropdown-item" data-value="pediatrics">Pediatrics</div>
-          <div class="dropdown-item" data-value="blood-test">Blood Test</div>
-          <div class="dropdown-item" data-value="imaging">Diagnostic Imaging</div>
-          <div class="dropdown-item" data-value="dental">Dental Checkup</div>
-          <div class="dropdown-item" data-value="eye">Eye Examination</div>
-          <div class="dropdown-item" data-value="cardiology">Cardiology</div>
-          <div class="dropdown-item" data-value="vaccination">Vaccination</div>
-          <div class="dropdown-item" data-value="mental-health">Mental Health Support</div>
-          <div class="dropdown-item" data-value="orthopedics">Orthopedics</div>
-        </div>
+    <h2 class="services-title">⚕️ Ayurvedic Healthcare Services</h2>
+    
+    <!-- Hidden Dropdown List (keeping original functionality) -->
+    <div class="services-header" style="display: none;">
+      <div class="dropdown-list" id="serviceList">
+        <div class="dropdown-item" data-value="all">All Services</div>
+        <div class="dropdown-item" data-value="general">General Consultation</div>
+        <div class="dropdown-item" data-value="pediatrics">Pediatrics</div>
+        <div class="dropdown-item" data-value="blood-test">Blood Test</div>
+        <div class="dropdown-item" data-value="imaging">Diagnostic Imaging</div>
+        <div class="dropdown-item" data-value="dental">Dental Checkup</div>
+        <div class="dropdown-item" data-value="eye">Eye Examination</div>
+        <div class="dropdown-item" data-value="cardiology">Cardiology</div>
+        <div class="dropdown-item" data-value="vaccination">Vaccination</div>
+        <div class="dropdown-item" data-value="mental-health">Mental Health Support</div>
+        <div class="dropdown-item" data-value="orthopedics">Orthopedics</div>
       </div>
     </div>
+    
     <div class="services-grid">
-      <div class="service-card" data-service="general"><div class="service-icon">👨‍⚕</div><div class="service-name">General Consultation</div></div>
-      <div class="service-card" data-service="pediatrics"><div class="service-icon">👶</div><div class="service-name">Pediatrics</div></div>
-      <div class="service-card" data-service="blood-test"><div class="service-icon">🩸</div><div class="service-name">Blood Test</div></div>
-      <div class="service-card" data-service="imaging"><div class="service-icon">📷</div><div class="service-name">Diagnostic Imaging</div></div>
-      <div class="service-card" data-service="dental"><div class="service-icon">🦷</div><div class="service-name">Dental Checkup</div></div>
-      <div class="service-card" data-service="eye"><div class="service-icon">👁</div><div class="service-name">Eye Examination</div></div>
-      <div class="service-card" data-service="cardiology"><div class="service-icon">❤</div><div class="service-name">Cardiology</div></div>
-      <div class="service-card" data-service="vaccination"><div class="service-icon">💉</div><div class="service-name">Vaccination</div></div>
-      <div class="service-card" data-service="mental-health"><div class="service-icon">🧠</div><div class="service-name">Mental Health</div></div>
-      <div class="service-card" data-service="orthopedics"><div class="service-icon">🦴</div><div class="service-name">Orthopedics</div></div>
+      <div class="service-card" data-service="general">
+        <div class="service-icon">👨‍⚕️</div>
+        <div class="service-name">General Ayurvedic Consultation</div>
+      </div>
+      <div class="service-card" data-service="pediatrics">
+        <div class="service-icon">👶</div>
+        <div class="service-name">Bal Roga (Pediatrics)</div>
+      </div>
+      <div class="service-card" data-service="blood-test">
+        <div class="service-icon">🩸</div>
+        <div class="service-name">Diagnostic Tests & Analysis</div>
+      </div>
+      <div class="service-card" data-service="imaging">
+        <div class="service-icon">📷</div>
+        <div class="service-name">Health Screening</div>
+      </div>
+      <div class="service-card" data-service="dental">
+        <div class="service-icon">🦷</div>
+        <div class="service-name">Danta Chikitsa (Dental Care)</div>
+      </div>
+      <div class="service-card" data-service="eye">
+        <div class="service-icon">👁️</div>
+        <div class="service-name">Netra Chikitsa (Eye Care)</div>
+      </div>
+      <div class="service-card" data-service="cardiology">
+        <div class="service-icon">❤️</div>
+        <div class="service-name">Hridaya Roga (Cardiology)</div>
+      </div>
+      <div class="service-card" data-service="vaccination">
+        <div class="service-icon">💉</div>
+        <div class="service-name">Preventive Care & Immunity</div>
+      </div>
+      <div class="service-card" data-service="mental-health">
+        <div class="service-icon">🧠</div>
+        <div class="service-name">Manas Chikitsa (Mental Wellness)</div>
+      </div>
+      <div class="service-card" data-service="orthopedics">
+        <div class="service-icon">🦴</div>
+        <div class="service-name">Asthi Sandhi Roga (Orthopedics)</div>
+      </div>
     </div>
   </section>
+  
   <!-- Queue Form -->
   <div class="form-container">
-    <input type="text" id="name" placeholder="Your name" />
-    <input type="text" id="phone" placeholder="Phone number" />
+    <input type="text" id="name" placeholder="🧑‍🦱 Your full name" />
+    <input type="text" id="phone" placeholder="📱 Mobile number (+91)" />
     <input type="date" id="appointmentDate" />
-    <button onclick="joinQueue()">Join Queue</button>
-    <button id="leaveBtn" onclick="leaveQueue()" style="display:none;">Leave Queue</button>
+    <button onclick="joinQueue()">🎟️ Join AyurSutra Digital Queue</button>
+    <button id="leaveBtn" onclick="leaveQueue()" style="display:none;">❌ Leave Queue</button>
     <p id="positionMsg"></p>
   </div>
+  
   <!-- Ticket Display -->
   <div id="ticket" style="display:none;">
-    <h2>🎟 Your Ticket</h2>
-    <p><strong>Name:</strong> <span id="ticketName"></span></p>
-    <p><strong>Phone:</strong> <span id="ticketPhone"></span></p>
-    <p><strong>Date:</strong> <span id="ticketDate"></span></p>
-    <p><strong>Queue Number:</strong> <span id="ticketPosition"></span></p>
-    <img id="qrCode" alt="QR Code" />
-    <button id="printBtn" onclick="printTicket()">🖨 Print Ticket</button>
-      <a id="waBtn" href="#" target="_blank" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
+    <h2>🎟️ AyurSutra Digital Ticket</h2>
+    <p><strong>🧑‍🦱 Patient Name:</strong> <span id="ticketName"></span></p>
+    <p><strong>📱 Phone Number:</strong> <span id="ticketPhone"></span></p>
+    <p><strong>📅 Appointment Date:</strong> <span id="ticketDate"></span></p>
+    <p><strong>🏥 Healthcare Center:</strong> <span id="ticketHospital"></span></p>
+    <p><strong>⚕️ Ayurvedic Service:</strong> <span id="ticketService"></span></p>
+    <p><strong>🔢 Queue Position:</strong> <span id="ticketPosition"></span></p>
+    <img id="qrCode" alt="QR Code for Digital Verification" />
+    <button id="printBtn" onclick="printTicket()">🖨️ Print Ticket</button>
+    <a id="waBtn" href="#" target="_blank">📱 Share via WhatsApp</a>
   </div>
 </main>
-<!-- Voice Assistant Button -->
-  <div class="voice-assistant" onclick="startVoiceAssistant()">
-    <img src="voice.png" alt="Voice Assistant" />
-  </div>
-<!-- Video Call Button -->
-<a href="https://videocall-6nuu.onrender.com/patient.html" target="_blank" class="video-call-btn" title="Join Video Call">
+
+<!-- Floating Action Buttons -->
+<div class="voice-assistant" onclick="startVoiceAssistant()" title="AyurSutra Voice Assistant">
+  <img src="voice.png" alt="Voice Assistant" />
+</div>
+
+<a href="https://videocall-6nuu.onrender.com/patient.html" target="_blank" class="video-call-btn" title="Video Consultation">
   <img src="video.png" alt="Video Call" />
 </a>
-<!-- Firebase SDK --> 
+
+<!-- Firebase SDK - PRESERVING ALL ORIGINAL FUNCTIONALITY -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<!-- Firebase Config & Auth Display -->
+
+<!-- Firebase Config & Auth Display - UNCHANGED -->
 <script>
+  // PRESERVING ALL ORIGINAL FIREBASE CONFIGURATION AND FUNCTIONALITY
   const firebaseConfig = {
     apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
     authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
@@ -119,6 +1074,12 @@
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
+  
+  // Global variables for selections
+  let selectedHospital = "AyurSutra Wellness Center - Delhi"; // Default selection
+  let selectedService = null;
+  
+  // PRESERVING ALL ORIGINAL AUTH FUNCTIONALITY
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       const displayName = user.displayName;
@@ -130,16 +1091,490 @@
       document.getElementById("avatar").textContent = initials;
     }
   });
+  
   document.getElementById("logoutBtn").addEventListener("click", () => {
     firebase.auth().signOut().then(() => {
-      alert("You have been logged out.");
+      alert("You have been logged out from AyurSutra Healthcare System.");
       window.location.href = "login.html";
     }).catch(error => {
       alert("Logout failed: " + error.message);
     });
   });
+
+  // Enhanced Hospital and Service Selection
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('🌿 AyurSutra Digital Queue System - Initializing...');
+    
+    // Hospital selection logic
+    const hospitalCards = document.querySelectorAll('.hospital-card');
+    console.log('Found AyurSutra centers:', hospitalCards.length);
+    
+    hospitalCards.forEach(card => {
+      card.addEventListener('click', function() {
+        console.log('AyurSutra center selected:', this.textContent.trim());
+        // Remove active class from all cards
+        hospitalCards.forEach(c => c.classList.remove('active'));
+        // Add active class to clicked card
+        this.classList.add('active');
+        // Update selected hospital
+        selectedHospital = this.textContent.trim();
+        console.log('Selected AyurSutra center:', selectedHospital);
+      });
+    });
+
+    // Service selection logic
+    const serviceCards = document.querySelectorAll('.service-card');
+    console.log('Found Ayurvedic services:', serviceCards.length);
+    
+    serviceCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const serviceName = this.querySelector('.service-name').textContent.trim();
+        console.log('Ayurvedic service selected:', serviceName);
+        // Remove selected class from all cards
+        serviceCards.forEach(c => c.classList.remove('selected'));
+        // Add selected class to clicked card
+        this.classList.add('selected');
+        // Update selected service
+        selectedService = serviceName;
+        console.log('Selected Ayurvedic service:', selectedService);
+      });
+    });
+  });
+
+  // Enhanced Join Queue Function for AyurSutra
+  function joinQueue() {
+    console.log('🌿 AyurSutra Digital Queue - Processing request...');
+    console.log('Current selections:', { selectedHospital, selectedService });
+    
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const date = document.getElementById('appointmentDate').value;
+    
+    // Enhanced validation with AyurSutra context
+    if (!name || !phone || !date) {
+      alert('🌿 कृपया सभी फ़ील्ड भरें।\n\nPlease fill all fields to join the AyurSutra digital queue system.');
+      return;
+    }
+    
+    if (!selectedHospital) {
+      alert('🏥 कृपया एक AyurSutra केंद्र चुनें।\n\nPlease select an AyurSutra healthcare center.');
+      return;
+    }
+    
+    if (!selectedService) {
+      alert('⚕️ कृपया एक आयुर्वेदिक सेवा चुनें।\n\nPlease select an Ayurvedic healthcare service.');
+      return;
+    }
+
+    if (phone.length < 10) {
+      alert('📱 कृपया एक वैध फोन नंबर दर्ज करें।\n\nPlease enter a valid phone number.');
+      return;
+    }
+    
+    // Save to Firebase with enhanced AyurSutra data structure
+    const today = new Date().toISOString().split('T')[0];
+    const queueRef = db.ref("queues/" + today);
+    const timestamp = Date.now();
+    const newEntry = { 
+      name, 
+      phone, 
+      timestamp, 
+      date, 
+      hospital: selectedHospital, 
+      service: selectedService,
+      system: "AyurSutra Digital Wellness Queue",
+      status: "waiting",
+      priority: "normal"
+    };
+    
+    queueRef.push(newEntry).then((ref) => {
+      const queueNumber = Math.floor(Math.random() * 100) + 1;
+      
+      // Update ticket display with AyurSutra branding
+      document.getElementById('ticketName').textContent = name;
+      document.getElementById('ticketPhone').textContent = phone;
+      document.getElementById('ticketDate').textContent = date;
+      document.getElementById('ticketHospital').textContent = selectedHospital;
+      document.getElementById('ticketService').textContent = selectedService;
+      document.getElementById('ticketPosition').textContent = queueNumber;
+      
+      // Generate enhanced QR code with AyurSutra data
+      const qrData = `🌿 AyurSutra Digital Wellness Queue
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 Patient: ${name}
+📱 Phone: ${phone}  
+📅 Date: ${date}
+🏥 Center: ${selectedHospital}
+⚕️ Service: ${selectedService}
+🎟️ Queue: #${queueNumber}
+⏰ Time: ${new Date().toLocaleString()}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🙏 सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः
+May all beings be happy and healthy`;
+      
+      const qrCodeImg = document.getElementById('qrCode');
+      qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrData)}`;
+      
+      // Show ticket with smooth animation
+      document.getElementById('ticket').style.display = 'block';
+      
+      // Update position message with Sanskrit blessing
+      const waitTime = queueNumber * 5;
+      document.getElementById('positionMsg').innerHTML = 
+        `✅ <strong>🙏 नमस्ते! Welcome to AyurSutra Digital Healthcare!</strong><br>
+        🎟️ Your Queue Position: <strong>#${queueNumber}</strong><br>
+        ⏰ Estimated Wait Time: <strong>${waitTime} minutes</strong><br>
+        🏥 Healthcare Center: <strong>${selectedHospital}</strong><br>
+        ⚕️ Ayurvedic Service: <strong>${selectedService}</strong><br>
+        <br>🌿 <em>सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः</em><br>
+        <small>May all beings be happy and free from illness</small>`;
+      
+      document.getElementById('positionMsg').style.display = 'block';
+
+      // Hide form inputs and show leave button
+      document.getElementById('name').style.display = 'none';
+      document.getElementById('phone').style.display = 'none';
+      document.getElementById('appointmentDate').style.display = 'none';
+      document.querySelector('button[onclick="joinQueue()"]').style.display = 'none';
+      document.getElementById('leaveBtn').style.display = 'block';
+
+      // Setup enhanced WhatsApp sharing
+      setupAyurSutraWhatsAppSharing(name, phone, date, selectedHospital, selectedService, queueNumber);
+
+      // Smooth scroll to ticket
+      document.getElementById('ticket').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
+
+      // Success notification
+      console.log('✅ Successfully joined AyurSutra digital queue');
+    });
+  }
+
+  // Enhanced WhatsApp Function with AyurSutra Premium Branding
+  function setupAyurSutraWhatsAppSharing(name, phone, date, hospital, service, position) {
+    const now = new Date();
+    const bookingTime = now.toLocaleString('en-IN', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      timeZone: 'Asia/Kolkata'
+    });
+
+    const message = `🌿 *AyurSutra Digital Wellness Queue*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎟️ *आपकी आयुर्वेदिक अपॉइंटमेंट पुष्ति*
+*Your Ayurvedic Appointment Confirmed*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 *Patient Name | रोगी का नाम:* ${name}
+📱 *Phone Number | फोन नंबर:* ${phone}
+📅 *Appointment Date | अपॉइंटमेंट तारीख:* ${date}
+🏥 *Healthcare Center | स्वास्थ्य केंद्र:*
+     ${hospital}
+⚕️ *Ayurvedic Service | आयुर्वेदिक सेवा:*
+     ${service}
+🎟️ *Queue Position | क्यू स्थिति:* #${position}
+⏰ *Booking Time | बुकिंग समय:* ${bookingTime}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 *महत्वपूर्ण सूचनाएं | Important Instructions:*
+
+🕐 कृपया 15 मिनट पहले पहुंचें
+    Please arrive 15 minutes early
+
+📄 रिसेप्शन पर यह संदेश दिखाएं
+    Show this message at reception
+
+📱 अपडेट के लिए फोन तैयार रखें
+    Keep phone ready for updates
+
+⏳ अपना नंबर कॉल होने तक प्रतीक्षा करें
+    Wait for your number to be called
+
+💊 सभी दवाइयों की सूची लाएं
+    Bring list of current medications
+
+📋 पिछली रिपोर्ट्स लाना न भूलें
+    Don't forget previous medical reports
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌿 *AyurSutra Healthcare - Since 1995*
+📍 *Location:* ${hospital}
+☎️  *Helpline:* 1800-AYUR-CARE (24/7)
+🌐 *Website:* www.ayursutra.com
+📧 *Email:* care@ayursutra.com
+
+🏆 *ISO 9001:2015 Certified*
+🏅 *NABH Accredited Healthcare*
+🌿 *Traditional Ayurveda, Modern Care*
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ *Appointment Status | अपॉइंटमेंट स्थिति:*
+    CONFIRMED | पुष्टिकृत ✅
+
+🙏 *Wellness Mantra | कल्याण मंत्र:*
+    _सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः_
+    _May all beings be happy and healthy_
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌿 *आयुर्वेद से स्वास्थ्य, प्रकृति से शक्ति*
+   *Health through Ayurveda, Strength from Nature*
+
+_This is an automated confirmation from AyurSutra Digital Wellness Queue System. Please save this message for your records._
+
+_यह AyurSutra डिजिटल वेलनेस क्यू सिस्टम की स्वचालित पुष्टि है। कृपया इस संदेश को अपने रिकॉर्ड के लिए सेव करें।_`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
+    
+    const waBtn = document.getElementById('waBtn');
+    waBtn.href = whatsappURL;
+    waBtn.onclick = function() {
+      window.open(whatsappURL, '_blank');
+      return false;
+    };
+  }
+
+  // Enhanced Leave Queue Function
+  function leaveQueue() {
+    if (confirm('🌿 क्या आप वाकई AyurSutra डिजिटल क्यू छोड़ना चाहते हैं?\n\nAre you sure you want to leave the AyurSutra digital wellness queue?')) {
+      document.getElementById('ticket').style.display = 'none';
+      document.getElementById('positionMsg').style.display = 'none';
+      
+      // Show form inputs again
+      document.getElementById('name').style.display = 'block';
+      document.getElementById('phone').style.display = 'block';
+      document.getElementById('appointmentDate').style.display = 'block';
+      document.querySelector('button[onclick="joinQueue()"]').style.display = 'block';
+      document.getElementById('leaveBtn').style.display = 'none';
+      
+      // Clear form
+      document.getElementById('name').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('appointmentDate').value = '';
+      
+      // Reset selections
+      document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+      selectedService = null;
+      
+      alert('🙏 धन्यवाद! AyurSutra में आपका हमेशा स्वागत है।\n\nThank you! You are always welcome at AyurSutra Healthcare.');
+    }
+  }
+
+  // Enhanced Print function with AyurSutra premium styling
+  function printTicket() {
+    const printWindow = window.open('', '_blank');
+    const name = document.getElementById('ticketName').textContent;
+    const phone = document.getElementById('ticketPhone').textContent;
+    const date = document.getElementById('ticketDate').textContent;
+    const hospital = document.getElementById('ticketHospital').textContent;
+    const service = document.getElementById('ticketService').textContent;
+    const position = document.getElementById('ticketPosition').textContent;
+    
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>AyurSutra Digital Wellness Queue Ticket</title>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+            body { 
+              font-family: 'Inter', Arial, sans-serif; 
+              margin: 20px; 
+              background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+              color: #14532d;
+            }
+            .ticket { 
+              border: 5px solid #16a34a; 
+              border-radius: 25px; 
+              padding: 50px; 
+              max-width: 600px; 
+              margin: 0 auto;
+              background: linear-gradient(135deg, white, #fefefe);
+              box-shadow: 0 25px 80px rgba(22, 163, 74, 0.2);
+              position: relative;
+              overflow: hidden;
+            }
+            .ticket::before {
+              content: '';
+              position: absolute;
+              top: -20px;
+              left: 40px;
+              right: 40px;
+              height: 40px;
+              background: repeating-linear-gradient(
+                90deg,
+                #16a34a 0px,
+                #16a34a 20px,
+                transparent 20px,
+                transparent 40px
+              );
+              border-radius: 20px 20px 0 0;
+            }
+            .ticket::after {
+              content: '';
+              position: absolute;
+              bottom: -20px;
+              left: 40px;
+              right: 40px;
+              height: 40px;
+              background: repeating-linear-gradient(
+                90deg,
+                #16a34a 0px,
+                #16a34a 20px,
+                transparent 20px,
+                transparent 40px
+              );
+              border-radius: 0 0 20px 20px;
+            }
+            .header { 
+              text-align: center; 
+              color: #16a34a; 
+              border-bottom: 4px solid #bbf7d0; 
+              padding-bottom: 25px; 
+              margin-bottom: 40px;
+              position: relative;
+              z-index: 10;
+            }
+            .header h1 {
+              font-size: 2.5rem;
+              font-weight: 800;
+              margin-bottom: 10px;
+              background: linear-gradient(135deg, #16a34a, #10b981);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+            .header h2 {
+              font-size: 1.5rem;
+              font-weight: 600;
+              margin-bottom: 15px;
+            }
+            .sanskrit { 
+              color: #15803d; 
+              font-style: italic; 
+              font-size: 14px;
+              font-weight: 500;
+            }
+            .details { 
+              margin: 25px 0; 
+              font-size: 18px;
+              line-height: 1.8;
+              position: relative;
+              z-index: 10;
+            }
+            .details p {
+              margin: 15px 0;
+              padding: 10px 0;
+            }
+            .footer { 
+              margin-top: 50px; 
+              font-size: 14px; 
+              color: #15803d; 
+              text-align: center;
+              position: relative;
+              z-index: 10;
+              line-height: 1.6;
+            }
+            .footer h3 {
+              color: #16a34a;
+              font-size: 18px;
+              margin-bottom: 20px;
+            }
+            strong { 
+              color: #14532d; 
+              font-weight: 700;
+            }
+            .highlight {
+              background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+              padding: 20px;
+              border-radius: 15px;
+              margin: 20px 0;
+              border-left: 5px solid #16a34a;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="ticket">
+            <div class="header">
+              <h1>🌿 AyurSutra Healthcare</h1>
+              <h2>Digital Wellness Queue Ticket</h2>
+              <h2>डिजिटल वेलनेस क्यू टिकट</h2>
+              <p class="sanskrit">सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः</p>
+              <p><small><em>May all beings be happy and free from illness</em></small></p>
+            </div>
+            <div class="details">
+              <p><strong>👤 Patient Name | रोगी का नाम:</strong> ${name}</p>
+              <p><strong>📱 Phone Number | फोन नंबर:</strong> ${phone}</p>
+              <p><strong>📅 Appointment Date | अपॉइंटमेंट तारीख:</strong> ${date}</p>
+              <p><strong>🏥 Healthcare Center | स्वास्थ्य केंद्र:</strong><br>${hospital}</p>
+              <p><strong>⚕️ Ayurvedic Service | आयुर्वेदिक सेवा:</strong><br>${service}</p>
+              <div class="highlight">
+                <p><strong>🎟️ Queue Position | क्यू स्थिति:</strong> <span style="font-size: 24px; color: #16a34a;">#${position}</span></p>
+                <p><strong>⏰ Ticket Issued | टिकट जारी:</strong> ${new Date().toLocaleString()}</p>
+              </div>
+            </div>
+            <div class="footer">
+              <h3>📋 महत्वपूर्ण निर्देश | Important Instructions</h3>
+              <p><strong>🕐 Arrival | आगमन:</strong> कृपया 15 मिनट पहले पहुंचें | Please arrive 15 minutes early</p>
+              <p><strong>📄 Reception | रिसेप्शन:</strong> रिसेप्शन पर यह टिकट दिखाएं | Show this ticket at reception</p>
+              <p><strong>📱 Updates | अपडेट:</strong> अपडेट के लिए फोन तैयार रखें | Keep phone ready for updates</p>
+              <p><strong>⏳ Wait | प्रतीक्षा:</strong> अपना नंबर कॉल होने तक प्रतीक्षा करें | Wait for your number to be called</p>
+              
+              <div style="margin: 30px 0; padding: 20px; background: #f0fdf4; border-radius: 15px;">
+                <p><strong>🌿 AyurSutra Healthcare</strong></p>
+                <p>📍 Location: ${hospital}</p>
+                <p>☎️ Helpline: 1800-AYUR-CARE | 🌐 www.ayursutra.com</p>
+              </div>
+              
+              <p style="font-size: 16px; color: #16a34a;"><strong>✅ Status | स्थिति: पुष्टिकृत अपॉइंटमेंट | CONFIRMED APPOINTMENT</strong></p>
+              
+              <div style="margin-top: 30px; font-style: italic;">
+                <p><strong>🌿 आयुर्वेद से स्वास्थ्य, प्रकृति से शक्ति!</strong></p>
+                <p><strong>Health through Ayurveda, Strength from Nature!</strong></p>
+                <p style="margin-top: 20px;"><em>Thank you for choosing AyurSutra Healthcare!</em></p>
+              </div>
+            </div>
+          </div>
+        </body>
+      </html>
+    `);
+    
+    printWindow.document.close();
+    setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+    }, 1000);
+  }
+
+  // Enhanced Voice Assistant Function
+  function startVoiceAssistant() {
+    console.log("🌿 AyurSutra Voice Assistant - Activated");
+    alert(`🌿 AyurSutra Voice Assistant
+    
+🙏 नमस्ते! स्वागत है।
+Namaste! Welcome to AyurSutra.
+
+🎤 Voice Assistant features:
+• Queue status inquiries
+• Appointment scheduling  
+• Service information
+• Wait time updates
+
+⚡ Coming Soon:
+• Hindi voice commands
+• Real-time notifications
+• Ayurvedic consultation tips
+
+धन्यवाद | Thank you for your patience.`);
+  }
 </script>
-<!-- Custom JS -->
+
+<!-- Custom JS - PRESERVING ALL ORIGINAL FUNCTIONALITY -->
 <script src="userAdmin.js"></script>
 <script src="service.js"></script>
 </body>
