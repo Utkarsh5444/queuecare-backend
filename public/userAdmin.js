@@ -68,7 +68,7 @@ function trackQueuePosition(userId, timestamp, name, phone, date, hospital, serv
     const position = sorted.findIndex(([key, val]) => key === userId) + 1;
     const estWait = (position - 1) * 5;
 
-    const msg = 'You are' #${position} 'in the queue. Est. wait: '${estWait} 'mins.';
+    const msg = `You are #${position} in the queue. Est. wait: ${estWait} mins.`;
     const positionMsg = document.getElementById("positionMsg");
     positionMsg.innerText = msg;
 
@@ -221,4 +221,5 @@ function promoteToEmergency(userId) {
 if (document.querySelector(".admin-panel")) {
   renderQueueList();
 }
+
 
