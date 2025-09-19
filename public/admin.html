@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<html> 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HealthQueue Admin - AyurSutra</title>
+  <title>Admin Panel</title>
   <style>
-    /* Reset */
-    * {
+    /* Replace external CSS for demonstration - keep your userAdmin.css if you want */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f9f7;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: #f5f9f7;
       color: #2c3e50;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      font-size: 16px;
     }
 
     nav {
-      background-color: #22c55e; /* Updated AyurSutra green */
+      background-color: #22c55e; /* Updated green */
       color: #e8f5e9;
       padding: 1rem 2rem;
-      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
     }
 
     .nav-logo {
@@ -42,6 +31,8 @@
       list-style: none;
       display: flex;
       gap: 1.5rem;
+      margin: 0;
+      padding: 0;
     }
 
     nav ul li a {
@@ -61,10 +52,9 @@
     }
 
     main.admin-panel {
-      flex-grow: 1;
       max-width: 900px;
       margin: 2rem auto 3rem;
-      background: #ffffff;
+      background: #fff;
       padding: 2rem 2.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -86,7 +76,7 @@
 
     ul.queue-list {
       list-style: none;
-      max-height: 270px;
+      max-height: 300px;
       overflow-y: auto;
       margin-bottom: 2rem;
       border: 1px solid #a7f3d0;
@@ -116,7 +106,7 @@
       background-color: #bbf7d0;
     }
 
-    /* Common button style */
+    /* Button common styles */
     .queue-btn {
       border: none;
       border-radius: 8px;
@@ -125,14 +115,14 @@
       font-size: 1rem;
       cursor: pointer;
       color: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
       transition: background-color 0.3s ease, transform 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       user-select: none;
-      margin-left: 0.5rem;
       white-space: nowrap;
+      margin-left: 0.6rem;
     }
 
     /* Remove button */
@@ -161,9 +151,9 @@
       box-shadow: 0 6px 12px rgba(180, 83, 9, 0.4);
     }
 
-    /* Next person button */
+    /* Call Next button */
     button.admin-btn {
-      background-color: #22c55e; /* Updated green */
+      background-color: #22c55e;
       color: #fff;
       font-size: 1.2rem;
       padding: 12px 28px;
@@ -233,25 +223,13 @@
   <main class="admin-panel">
     <h1>Queue Administration</h1>
     <p class="subtitle">View and manage the current queue in real-time.</p>
-    <ul id="queueList" class="queue-list">
-      <!-- Example queue items (populate dynamically) -->
-      <!--
-      <li>
-        Patient 1
-        <div>
-          <button class="queue-btn btn-remove" onclick="removePerson('Patient 1')">🗑️ Remove</button>
-          <button class="queue-btn btn-emergency" onclick="emergencyCall('Patient 1')">⚠️ Emergency</button>
-        </div>
-      </li>
-      -->
-    </ul>
+    <ul id="queueList" class="queue-list"></ul>
     <button class="admin-btn" onclick="nextPerson()">Call Next</button>
   </main>
-
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <!-- Firebase Config & Initialize -->
+  <!-- Firebase Config & Auth Display -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
@@ -265,65 +243,64 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Sample queue data for demonstration (use your real-time Firebase data here)
     const queueListEl = document.getElementById('queueList');
 
-    function updateQueue(queue) {
+    // Listen to queue data in Firebase and update UI dynamically
+    db.ref('queue').on('value', snapshot => {
+      const queueData = snapshot.val();
+      renderQueue(queueData);
+    });
+
+    function renderQueue(queueData) {
       queueListEl.innerHTML = '';
-      if (!queue || queue.length === 0) {
+      if (!queueData) {
         queueListEl.innerHTML = '<li>No one in queue</li>';
         return;
       }
-      queue.forEach(person => {
+      Object.entries(queueData).forEach(([id, person]) => {
         const li = document.createElement('li');
         li.textContent = person.name;
 
-        const controlsDiv = document.createElement('div');
-
+        const controls = document.createElement('div');
+        
+        // Remove button
         const btnRemove = document.createElement('button');
         btnRemove.className = 'queue-btn btn-remove';
         btnRemove.textContent = '🗑️ Remove';
         btnRemove.title = `Remove ${person.name}`;
-        btnRemove.onclick = () => removePerson(person.id);
+        btnRemove.onclick = () => removePerson(id);
 
+        // Emergency button
         const btnEmergency = document.createElement('button');
         btnEmergency.className = 'queue-btn btn-emergency';
         btnEmergency.textContent = '⚠️ Emergency';
         btnEmergency.title = `Emergency call for ${person.name}`;
-        btnEmergency.onclick = () => emergencyCall(person.id);
+        btnEmergency.onclick = () => emergencyCall(id);
 
-        controlsDiv.appendChild(btnRemove);
-        controlsDiv.appendChild(btnEmergency);
+        controls.appendChild(btnRemove);
+        controls.appendChild(btnEmergency);
 
-        li.appendChild(controlsDiv);
+        li.appendChild(controls);
         queueListEl.appendChild(li);
       });
     }
 
-    // Demo queue array - replace with your Firebase listener for real-time updates
-    const demoQueue = [
-      { id: 'p1', name: 'Patient 1' },
-      { id: 'p2', name: 'Patient 2' },
-      { id: 'p3', name: 'Patient 3' }
-    ];
-
-    updateQueue(demoQueue);
-
     function nextPerson() {
       alert('Next person called!');
-      // Implement your logic to call next person in Firebase and update UI accordingly
+      // Add your logic to handle next person call in Firebase
     }
 
-    function removePerson(personId) {
+    function removePerson(id) {
       if (confirm('Are you sure you want to remove this person from the queue?')) {
-        alert(`Person with ID ${personId} removed.`);
-        // Implement Firebase logic to remove person by ID
+        db.ref('queue/' + id).remove()
+          .then(() => alert('Person removed from queue'))
+          .catch((e) => alert('Error removing person: ' + e.message));
       }
     }
 
-    function emergencyCall(personId) {
-      alert(`Emergency call sent for person ID ${personId}`);
-      // Implement logic for emergency call notification/alert
+    function emergencyCall(id) {
+      alert('Emergency call sent for person ID: ' + id);
+      // Your logic to handle emergency call notification
     }
   </script>
 </body>
