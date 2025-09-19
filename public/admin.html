@@ -1,9 +1,167 @@
-<html> 
+<html>
 <head>
-  <title>Admin Panel</title>
-  <link rel="stylesheet" href="userAdmin.css">
+  <title>HealthQueue Admin - AyurSutra</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Body */
+    body {
+      background-color: #f5f9f7;
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #2e7d32; /* AyurSutra green */
+      color: #e8f5e9;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 1.2px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li a {
+      color: #e8f5e9;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      background-color: #81c784;
+      color: #1b5e20;
+      outline: none;
+    }
+
+    /* Main Section */
+    main.admin-panel {
+      flex-grow: 1;
+      max-width: 900px;
+      margin: 2rem auto 3rem;
+      background: #ffffff;
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+      font-size: 2.25rem;
+      letter-spacing: 1px;
+    }
+
+    p.subtitle {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    /* Queue List */
+    ul.queue-list {
+      list-style: none;
+      max-height: 270px;
+      overflow-y: auto;
+      margin-bottom: 2rem;
+      border: 1px solid #c8e6c9;
+      border-radius: 8px;
+      padding: 0.5rem 0;
+      background-color: #f1f8e9;
+    }
+
+    ul.queue-list li {
+      padding: 10px 20px;
+      border-bottom: 1px solid #aed581;
+      font-size: 1.1rem;
+      color: #33691e;
+      font-weight: 600;
+      cursor: default;
+      transition: background-color 0.2s ease;
+    }
+
+    ul.queue-list li:last-child {
+      border-bottom: none;
+    }
+
+    ul.queue-list li:hover {
+      background-color: #dcedc8;
+    }
+
+    /* Button */
+    button.admin-btn {
+      background-color: #43a047; /* AyurSutra accent green */
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 5px 15px rgba(67, 160, 71, 0.3);
+      user-select: none;
+    }
+
+    button.admin-btn:hover,
+    button.admin-btn:focus {
+      background-color: #2e7d32;
+      outline: none;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(46, 125, 50, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 576px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      main.admin-panel {
+        margin: 1.5rem 1rem 2rem;
+        padding: 1.5rem;
+      }
+
+      ul.queue-list {
+        max-height: 180px;
+      }
+
+      button.admin-btn {
+        width: 100%;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
-<body> 
+<body>
   <nav>
     <div class="nav-logo">HealthQueue Admin</div>
     <ul>
@@ -12,35 +170,30 @@
       <li><a href="#">Logout</a></li>
     </ul>
   </nav>
-
   <main class="admin-panel">
     <h1>Queue Administration</h1>
     <p class="subtitle">View and manage the current queue in real-time.</p>
-
     <ul id="queueList" class="queue-list"></ul>
     <button class="admin-btn" onclick="nextPerson()">Call Next</button>
   </main>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<!-- Firebase Config & Auth Display -->
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
-    authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
-    databaseURL: "https://digital-queue-system-ca4a3-default-rtdb.firebaseio.com",
-    projectId: "digital-queue-system-ca4a3",
-    storageBucket: "digital-queue-system-ca4a3.appspot.com",
-    messagingSenderId: "2888219915",
-    appId: "1:2888219915:web:668252d6ef99882cff760e"
-  };
-
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <!-- Firebase Config & Auth Display -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
+      authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
+      databaseURL: "https://digital-queue-system-ca4a3-default-rtdb.firebaseio.com",
+      projectId: "digital-queue-system-ca4a3",
+      storageBucket: "digital-queue-system-ca4a3.appspot.com",
+      messagingSenderId: "2888219915",
+      appId: "1:2888219915:web:668252d6ef99882cff760e"
+    };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
   </script>
-
   <script src="userAdmin.js"></script>
 </body>
 </html>
