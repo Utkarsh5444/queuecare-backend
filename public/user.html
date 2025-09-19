@@ -49,7 +49,7 @@
       position: relative !important;
     }
 
-    /* Floating Background Elements */
+    /* Updated Floating Background Elements */
     body::before {
       content: '';
       position: fixed;
@@ -64,15 +64,40 @@
     }
 
     body::after {
-      content: '🌿';
+      content: '🏥';
       position: fixed;
-      top: 10%;
-      right: 5%;
-      font-size: 120px;
-      opacity: 0.05;
+      top: 15%;
+      right: 8%;
+      font-size: 100px;
+      opacity: 0.06;
       pointer-events: none;
       z-index: -1;
       animation: gentle-sway 15s ease-in-out infinite;
+    }
+
+    /* Additional floating elements */
+    .floating-element-1::before {
+      content: '💊';
+      position: fixed;
+      top: 60%;
+      left: 5%;
+      font-size: 80px;
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: -1;
+      animation: gentle-float 20s ease-in-out infinite;
+    }
+
+    .floating-element-2::before {
+      content: '🩺';
+      position: fixed;
+      bottom: 20%;
+      right: 3%;
+      font-size: 90px;
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: -1;
+      animation: gentle-bounce 18s ease-in-out infinite;
     }
 
     @keyframes float {
@@ -83,6 +108,16 @@
     @keyframes gentle-sway {
       0%, 100% { transform: rotate(-2deg); }
       50% { transform: rotate(2deg); }
+    }
+
+    @keyframes gentle-float {
+      0%, 100% { transform: translateY(0px) rotate(-1deg); }
+      50% { transform: translateY(-15px) rotate(1deg); }
+    }
+
+    @keyframes gentle-bounce {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-10px) scale(1.02); }
     }
 
     /* Navigation - Premium Design */
@@ -388,7 +423,7 @@
     }
 
     .services-title::before {
-      content: '🌿';
+      content: '🏨';
       position: absolute;
       left: -50px;
       top: 50%;
@@ -639,7 +674,7 @@
       z-index: 10 !important;
     }
 
-    /* Floating Action Buttons - Next Level */
+    /* Enhanced Floating Action Buttons - Repositioned */
     .voice-assistant, .video-call-btn {
       position: fixed !important;
       width: 70px !important;
@@ -655,15 +690,15 @@
     }
 
     .voice-assistant {
-      bottom: 30px !important;
-      left: 30px !important;
+      bottom: 120px !important;
+      right: 30px !important;
       background: linear-gradient(135deg, var(--primary-green), var(--emerald)) !important;
       animation: voice-pulse 2s infinite;
     }
 
     .video-call-btn {
       bottom: 30px !important;
-      left: 120px !important;
+      right: 30px !important;
       background: linear-gradient(135deg, var(--emerald), var(--primary-green-light)) !important;
       animation: video-pulse 2s infinite 0.5s;
     }
@@ -702,6 +737,13 @@
       box-shadow: var(--soft-shadow) !important;
     }
 
+    /* Add floating elements */
+    .floating-element-1, .floating-element-2 {
+      position: fixed;
+      pointer-events: none;
+      z-index: -1;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       h1 { font-size: 2.5rem !important; }
@@ -710,6 +752,8 @@
       .services-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important; }
       .hospital-list { grid-template-columns: 1fr !important; }
       .form-container { margin: 2rem 1rem !important; padding: 2rem !important; }
+      .voice-assistant { bottom: 120px !important; right: 20px !important; }
+      .video-call-btn { bottom: 30px !important; right: 20px !important; }
     }
 
     /* Smooth scroll behavior */
@@ -719,6 +763,10 @@
   </style>
 </head>
 <body>
+<!-- Floating Elements -->
+<div class="floating-element-1"></div>
+<div class="floating-element-2"></div>
+
 <!-- Navigation -->
 <nav>
   <div class="logo">
@@ -738,51 +786,51 @@
 </nav>
 <!-- Main Content -->
 <main>
-  <h1>Digital Queue for Ayurvedic Healthcare</h1>
-  <p class="subtitle">🌿 Helping patients wait less and get natural care faster.</p>
+  <h1>Digital Queue for Healthcare</h1>
+  <p class="subtitle">🏥 Helping patients wait less and get quality care faster.</p>
   <!-- Hospital Selection -->
   <section class="hospital-selection">
-    <h2 class="section-title">Select AyurSutra Center</h2>
+    <h2 class="section-title">Select Hospital</h2>
     <div class="hospital-list">
-      <div class="hospital-card active">AyurSutra Wellness Center - Mumbai</div>
-      <div class="hospital-card">AyurSutra Vedic Healing - Pune</div>
-      <div class="hospital-card">AyurSutra Holistic Care - Delhi</div>
-      <div class="hospital-card">AyurSutra Panchakarma Center - Bangalore</div>
-      <div class="hospital-card">AyurSutra Ayurvedic Hospital - Chennai</div>
+      <div class="hospital-card active">Promhex Multispeciality Hospital</div>
+      <div class="hospital-card">Felix Hospital - Greater Noida</div>
+      <div class="hospital-card">Riverdale Healthcare</div>
+      <div class="hospital-card">Yatharth Superspeciality Hospital</div>
+      <div class="hospital-card">Kailash Hospital</div>
     </div>
   </section>
   <!-- Services Section -->
   <section class="services-section">
     <div class="services-header">
-      <h2 class="services-title">Available Ayurvedic Services</h2>
+      <h2 class="services-title">Available Hospital Services</h2>
         </div>
         <div class="dropdown-list" id="serviceList" style="display: none;">
           <div class="dropdown-item" data-value="all">All Services</div>
-          <div class="dropdown-item" data-value="general">General Ayurvedic Consultation</div>
-          <div class="dropdown-item" data-value="panchakarma">Panchakarma Therapy</div>
-          <div class="dropdown-item" data-value="pulse-diagnosis">Pulse Diagnosis (Nadi Pariksha)</div>
-          <div class="dropdown-item" data-value="herbal-medicine">Herbal Medicine Consultation</div>
-          <div class="dropdown-item" data-value="abhyanga">Abhyanga (Oil Massage)</div>
-          <div class="dropdown-item" data-value="shirodhara">Shirodhara Therapy</div>
-          <div class="dropdown-item" data-value="dosha-analysis">Dosha Analysis</div>
-          <div class="dropdown-item" data-value="lifestyle-counseling">Ayurvedic Lifestyle Counseling</div>
-          <div class="dropdown-item" data-value="yoga-therapy">Yoga Therapy</div>
-          <div class="dropdown-item" data-value="meditation">Meditation & Wellness</div>
+          <div class="dropdown-item" data-value="general">General Consultation</div>
+          <div class="dropdown-item" data-value="pediatrics">Pediatrics</div>
+          <div class="dropdown-item" data-value="blood-test">Blood Test</div>
+          <div class="dropdown-item" data-value="imaging">Diagnostic Imaging</div>
+          <div class="dropdown-item" data-value="dental">Dental Checkup</div>
+          <div class="dropdown-item" data-value="eye">Eye Examination</div>
+          <div class="dropdown-item" data-value="cardiology">Cardiology</div>
+          <div class="dropdown-item" data-value="vaccination">Vaccination</div>
+          <div class="dropdown-item" data-value="mental-health">Mental Health</div>
+          <div class="dropdown-item" data-value="orthopedics">Orthopedics</div>
         </div>
       </div>
     </div>
-    <h2 class="services-title">Available Ayurvedic Services</h2>
+    <h2 class="services-title">Available Hospital Services</h2>
     <div class="services-grid">
-      <div class="service-card" data-service="general"><div class="service-icon">🧘‍♂️</div><div class="service-name">General Ayurvedic Consultation</div></div>
-      <div class="service-card" data-service="panchakarma"><div class="service-icon">🌿</div><div class="service-name">Panchakarma Therapy</div></div>
-      <div class="service-card" data-service="pulse-diagnosis"><div class="service-icon">👋</div><div class="service-name">Pulse Diagnosis</div></div>
-      <div class="service-card" data-service="herbal-medicine"><div class="service-icon">🌱</div><div class="service-name">Herbal Medicine</div></div>
-      <div class="service-card" data-service="abhyanga"><div class="service-icon">💆‍♀️</div><div class="service-name">Abhyanga Massage</div></div>
-      <div class="service-card" data-service="shirodhara"><div class="service-icon">🫗</div><div class="service-name">Shirodhara Therapy</div></div>
-      <div class="service-card" data-service="dosha-analysis"><div class="service-icon">⚖️</div><div class="service-name">Dosha Analysis</div></div>
-      <div class="service-card" data-service="lifestyle-counseling"><div class="service-icon">🌅</div><div class="service-name">Lifestyle Counseling</div></div>
-      <div class="service-card" data-service="yoga-therapy"><div class="service-icon">🧘‍♀️</div><div class="service-name">Yoga Therapy</div></div>
-      <div class="service-card" data-service="meditation"><div class="service-icon">🕉️</div><div class="service-name">Meditation & Wellness</div></div>
+      <div class="service-card" data-service="general"><div class="service-icon">👨‍⚕️</div><div class="service-name">General Consultation</div></div>
+      <div class="service-card" data-service="pediatrics"><div class="service-icon">👶</div><div class="service-name">Pediatrics</div></div>
+      <div class="service-card" data-service="blood-test"><div class="service-icon">🩸</div><div class="service-name">Blood Test</div></div>
+      <div class="service-card" data-service="imaging"><div class="service-icon">📷</div><div class="service-name">Diagnostic Imaging</div></div>
+      <div class="service-card" data-service="dental"><div class="service-icon">🦷</div><div class="service-name">Dental Checkup</div></div>
+      <div class="service-card" data-service="eye"><div class="service-icon">👁️</div><div class="service-name">Eye Examination</div></div>
+      <div class="service-card" data-service="cardiology"><div class="service-icon">❤️</div><div class="service-name">Cardiology</div></div>
+      <div class="service-card" data-service="vaccination"><div class="service-icon">💉</div><div class="service-name">Vaccination</div></div>
+      <div class="service-card" data-service="mental-health"><div class="service-icon">🧠</div><div class="service-name">Mental Health</div></div>
+      <div class="service-card" data-service="orthopedics"><div class="service-icon">🦴</div><div class="service-name">Orthopedics</div></div>
     </div>
   </section>
   <!-- Queue Form -->
@@ -790,28 +838,28 @@
     <input type="text" id="name" placeholder="Your name" />
     <input type="text" id="phone" placeholder="Phone number" />
     <input type="date" id="appointmentDate" />
-    <button onclick="joinQueue()">🌿 Join Ayurvedic Queue</button>
+    <button onclick="joinQueue()">🏥 Join Hospital Queue</button>
     <button id="leaveBtn" onclick="leaveQueue()" style="display:none;">Leave Queue</button>
     <p id="positionMsg"></p>
   </div>
   <!-- Ticket Display -->
   <div id="ticket" style="display:none;">
-    <h2>🎫 Your AyurSutra Appointment Ticket</h2>
+    <h2>🎫 Your Hospital Appointment Ticket</h2>
     <p><strong>Name:</strong> <span id="ticketName"></span></p>
     <p><strong>Phone:</strong> <span id="ticketPhone"></span></p>
     <p><strong>Date:</strong> <span id="ticketDate"></span></p>
     <p><strong>Queue Number:</strong> <span id="ticketPosition"></span></p>
     <img id="qrCode" alt="QR Code" />
-    <button id="printBtn" onclick="printTicket()">🖨️ Print Ayurvedic Ticket</button>
+    <button id="printBtn" onclick="printTicket()">🖨️ Print Hospital Ticket</button>
       <a id="waBtn" href="#" target="_blank" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
   </div>
 </main>
 <!-- Voice Assistant Button -->
   <div class="voice-assistant" onclick="startVoiceAssistant()">
-    <img src="voice.png" alt="Ayurvedic Voice Assistant" />
+    <img src="voice.png" alt="Voice Assistant" />
   </div>
 <!-- Video Call Button -->
-<a href="https://videocall-6nuu.onrender.com/patient.html" target="_blank" class="video-call-btn" title="Join Ayurvedic Consultation">
+<a href="https://videocall-6nuu.onrender.com/patient.html" target="_blank" class="video-call-btn" title="Join Video Consultation">
   <img src="video.png" alt="Video Consultation" />
 </a>
 <!-- Firebase SDK --> 
