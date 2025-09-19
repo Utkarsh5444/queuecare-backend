@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HealthQueue Admin - AyurSutra</title>
   <style>
     /* Reset */
@@ -10,7 +13,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* Body */
     body {
       background-color: #f5f9f7;
       color: #2c3e50;
@@ -20,12 +22,11 @@
       font-size: 16px;
     }
 
-    /* Navbar */
     nav {
-      background-color: #2e7d32; /* AyurSutra green */
+      background-color: #22c55e; /* Updated AyurSutra green */
       color: #e8f5e9;
       padding: 1rem 2rem;
-      box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -54,12 +55,11 @@
 
     nav ul li a:hover,
     nav ul li a:focus {
-      background-color: #81c784;
-      color: #1b5e20;
+      background-color: #a7f3d0;
+      color: #065f46;
       outline: none;
     }
 
-    /* Main Section */
     main.admin-panel {
       flex-grow: 1;
       max-width: 900px;
@@ -71,7 +71,7 @@
     }
 
     h1 {
-      color: #2e7d32;
+      color: #22c55e;
       margin-bottom: 0.5rem;
       font-size: 2.25rem;
       letter-spacing: 1px;
@@ -84,26 +84,28 @@
       font-weight: 500;
     }
 
-    /* Queue List */
     ul.queue-list {
       list-style: none;
       max-height: 270px;
       overflow-y: auto;
       margin-bottom: 2rem;
-      border: 1px solid #c8e6c9;
+      border: 1px solid #a7f3d0;
       border-radius: 8px;
       padding: 0.5rem 0;
-      background-color: #f1f8e9;
+      background-color: #dcfce7;
     }
 
     ul.queue-list li {
       padding: 10px 20px;
-      border-bottom: 1px solid #aed581;
+      border-bottom: 1px solid #bbf7d0;
       font-size: 1.1rem;
-      color: #33691e;
+      color: #166534;
       font-weight: 600;
       cursor: default;
       transition: background-color 0.2s ease;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     ul.queue-list li:last-child {
@@ -111,12 +113,57 @@
     }
 
     ul.queue-list li:hover {
-      background-color: #dcedc8;
+      background-color: #bbf7d0;
     }
 
-    /* Button */
+    /* Common button style */
+    .queue-btn {
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+      margin-left: 0.5rem;
+      white-space: nowrap;
+    }
+
+    /* Remove button */
+    .btn-remove {
+      background-color: #ef4444; /* Red */
+    }
+
+    .btn-remove:hover,
+    .btn-remove:focus {
+      background-color: #b91c1c;
+      outline: none;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(185, 28, 28, 0.4);
+    }
+
+    /* Emergency button */
+    .btn-emergency {
+      background-color: #f59e0b; /* Amber/Orange */
+    }
+
+    .btn-emergency:hover,
+    .btn-emergency:focus {
+      background-color: #b45309;
+      outline: none;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(180, 83, 9, 0.4);
+    }
+
+    /* Next person button */
     button.admin-btn {
-      background-color: #43a047; /* AyurSutra accent green */
+      background-color: #22c55e; /* Updated green */
       color: #fff;
       font-size: 1.2rem;
       padding: 12px 28px;
@@ -125,16 +172,19 @@
       cursor: pointer;
       font-weight: 700;
       transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 5px 15px rgba(67, 160, 71, 0.3);
+      box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
       user-select: none;
+      display: block;
+      margin: 0 auto;
+      min-width: 180px;
     }
 
     button.admin-btn:hover,
     button.admin-btn:focus {
-      background-color: #2e7d32;
+      background-color: #16a34a;
       outline: none;
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(46, 125, 50, 0.5);
+      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.5);
     }
 
     /* Responsive */
@@ -157,6 +207,16 @@
       button.admin-btn {
         width: 100%;
         font-size: 1.1rem;
+        min-width: unset;
+      }
+
+      ul.queue-list li {
+        flex-wrap: wrap;
+      }
+
+      .queue-btn {
+        margin: 0.3rem 0 0 0;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -173,14 +233,25 @@
   <main class="admin-panel">
     <h1>Queue Administration</h1>
     <p class="subtitle">View and manage the current queue in real-time.</p>
-    <ul id="queueList" class="queue-list"></ul>
+    <ul id="queueList" class="queue-list">
+      <!-- Example queue items (populate dynamically) -->
+      <!--
+      <li>
+        Patient 1
+        <div>
+          <button class="queue-btn btn-remove" onclick="removePerson('Patient 1')">🗑️ Remove</button>
+          <button class="queue-btn btn-emergency" onclick="emergencyCall('Patient 1')">⚠️ Emergency</button>
+        </div>
+      </li>
+      -->
+    </ul>
     <button class="admin-btn" onclick="nextPerson()">Call Next</button>
   </main>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <!-- Firebase Config & Auth Display -->
+  <!-- Firebase Config & Initialize -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
@@ -193,7 +264,67 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
+
+    // Sample queue data for demonstration (use your real-time Firebase data here)
+    const queueListEl = document.getElementById('queueList');
+
+    function updateQueue(queue) {
+      queueListEl.innerHTML = '';
+      if (!queue || queue.length === 0) {
+        queueListEl.innerHTML = '<li>No one in queue</li>';
+        return;
+      }
+      queue.forEach(person => {
+        const li = document.createElement('li');
+        li.textContent = person.name;
+
+        const controlsDiv = document.createElement('div');
+
+        const btnRemove = document.createElement('button');
+        btnRemove.className = 'queue-btn btn-remove';
+        btnRemove.textContent = '🗑️ Remove';
+        btnRemove.title = `Remove ${person.name}`;
+        btnRemove.onclick = () => removePerson(person.id);
+
+        const btnEmergency = document.createElement('button');
+        btnEmergency.className = 'queue-btn btn-emergency';
+        btnEmergency.textContent = '⚠️ Emergency';
+        btnEmergency.title = `Emergency call for ${person.name}`;
+        btnEmergency.onclick = () => emergencyCall(person.id);
+
+        controlsDiv.appendChild(btnRemove);
+        controlsDiv.appendChild(btnEmergency);
+
+        li.appendChild(controlsDiv);
+        queueListEl.appendChild(li);
+      });
+    }
+
+    // Demo queue array - replace with your Firebase listener for real-time updates
+    const demoQueue = [
+      { id: 'p1', name: 'Patient 1' },
+      { id: 'p2', name: 'Patient 2' },
+      { id: 'p3', name: 'Patient 3' }
+    ];
+
+    updateQueue(demoQueue);
+
+    function nextPerson() {
+      alert('Next person called!');
+      // Implement your logic to call next person in Firebase and update UI accordingly
+    }
+
+    function removePerson(personId) {
+      if (confirm('Are you sure you want to remove this person from the queue?')) {
+        alert(`Person with ID ${personId} removed.`);
+        // Implement Firebase logic to remove person by ID
+      }
+    }
+
+    function emergencyCall(personId) {
+      alert(`Emergency call sent for person ID ${personId}`);
+      // Implement logic for emergency call notification/alert
+    }
   </script>
-  <script src="userAdmin.js"></script>
 </body>
 </html>
