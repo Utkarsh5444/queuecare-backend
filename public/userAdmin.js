@@ -68,13 +68,13 @@ function trackQueuePosition(userId, timestamp, name, phone, date, hospital, serv
     const position = sorted.findIndex(([key, val]) => key === userId) + 1;
     const estWait = (position - 1) * 5;
 
-    const msg = `You are #${position} in the queue. Est. wait: ${estWait} mins.`;
+    const msg = You are #${position} in the queue. Est. wait: ${estWait} mins.;
     const positionMsg = document.getElementById("positionMsg");
     positionMsg.innerText = msg;
 
     // QR Code
-    const qrData = `https://digital-queue-system-ca4a3.web.app/scan-result.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&pos=${position}&wait=${estWait}&hospital=${encodeURIComponent(hospital)}&service=${encodeURIComponent(service)}`;
-    const qrURL = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qrData)}&size=150x150`;
+    const qrData = https://digital-queue-system-ca4a3.web.app/scan-result.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&pos=${position}&wait=${estWait}&hospital=${encodeURIComponent(hospital)}&service=${encodeURIComponent(service)};
+    const qrURL = https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qrData)}&size=150x150;
 
     const qrImg = document.getElementById("qrCode");
     qrImg.src = qrURL;
@@ -90,7 +90,7 @@ function trackQueuePosition(userId, timestamp, name, phone, date, hospital, serv
 
     if (!document.getElementById("ticketHospital")) {
       const hosp = document.createElement("p");
-      hosp.innerHTML = `<strong>Hospital:</strong> <span id="ticketHospital">${hospital}</span>`;
+      hosp.innerHTML = <strong>Hospital:</strong> <span id="ticketHospital">${hospital}</span>;
       ticketEl.insertBefore(hosp, qrImg);
     } else {
       document.getElementById("ticketHospital").innerText = hospital;
@@ -98,15 +98,15 @@ function trackQueuePosition(userId, timestamp, name, phone, date, hospital, serv
 
     if (!document.getElementById("ticketService")) {
       const serv = document.createElement("p");
-      serv.innerHTML = `<strong>Service:</strong> <span id="ticketService">${service}</span>`;
+      serv.innerHTML = <strong>Service:</strong> <span id="ticketService">${service}</span>;
       ticketEl.insertBefore(serv, qrImg);
     } else {
       document.getElementById("ticketService").innerText = service;
     }
 
     // WhatsApp Link
-    const waText = `Hi ${name}, you're #${position} in the queue for ${service} at ${hospital} on ${date}. Estimated wait: ${estWait} mins.';
-    const waLink = `https://wa.me/91${phone}?text=${encodeURIComponent(waText)}`;
+    const waText = Hi ${name}, you're #${position} in the queue for ${service} at ${hospital} on ${date}. Estimated wait: ${estWait} mins.;
+    const waLink = https://wa.me/91${phone}?text=${encodeURIComponent(waText)};
     const waBtn = document.createElement("a");
     waBtn.href = waLink;
     waBtn.target = "_blank";
@@ -180,7 +180,7 @@ function nextPerson() {
     const sorted = Object.entries(data).sort((a, b) => a[1].timestamp - b[1].timestamp);
     const [firstKey, firstUser] = sorted[0];
 
-    alert(`Calling: ${firstUser.name} (${firstUser.phone})`);
+    alert(Calling: ${firstUser.name} (${firstUser.phone}));
 
     // Optionally remove the person after calling
     queueRef.child(firstKey).remove();
@@ -189,15 +189,15 @@ function nextPerson() {
 
 function removeUser(userId) {
   const today = new Date().toISOString().split("T")[0];
-  db.ref(`queues/${today}/${userId}`).remove()
-    .then(() => console.log(`Removed ${userId}`))
+  db.ref(queues/${today}/${userId}).remove()
+    .then(() => console.log(Removed ${userId}))
     .catch(err => console.error("Error removing user:", err));
 }
 
 function promoteToEmergency(userId) {
   const today = new Date().toISOString().split("T")[0];
-  const userRef = db.ref(`queues/${today}/${userId}`);
-  const queueRef = db.ref(`queues/${today}`);
+  const userRef = db.ref(queues/${today}/${userId});
+  const queueRef = db.ref(queues/${today});
 
   userRef.once("value", (snapshot) => {
     const data = snapshot.val();
@@ -221,5 +221,3 @@ function promoteToEmergency(userId) {
 if (document.querySelector(".admin-panel")) {
   renderQueueList();
 }
-
-
