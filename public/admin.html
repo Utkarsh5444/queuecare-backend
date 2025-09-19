@@ -1,217 +1,9 @@
 <html> 
 <head>
   <title>Admin Panel</title>
-  <style>
-    /* Replace external CSS for demonstration - keep your userAdmin.css if you want */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f9f7;
-      margin: 0;
-      padding: 0;
-      color: #2c3e50;
-    }
-
-    nav {
-      background-color: #22c55e; /* Updated green */
-      color: #e8f5e9;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
-    }
-
-    .nav-logo {
-      font-weight: 700;
-      font-size: 1.5rem;
-      letter-spacing: 1.2px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav ul li a {
-      color: #e8f5e9;
-      text-decoration: none;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 4px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    nav ul li a:hover,
-    nav ul li a:focus {
-      background-color: #a7f3d0;
-      color: #065f46;
-      outline: none;
-    }
-
-    main.admin-panel {
-      max-width: 900px;
-      margin: 2rem auto 3rem;
-      background: #fff;
-      padding: 2rem 2.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      color: #22c55e;
-      margin-bottom: 0.5rem;
-      font-size: 2.25rem;
-      letter-spacing: 1px;
-    }
-
-    p.subtitle {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 2rem;
-      font-weight: 500;
-    }
-
-    ul.queue-list {
-      list-style: none;
-      max-height: 300px;
-      overflow-y: auto;
-      margin-bottom: 2rem;
-      border: 1px solid #a7f3d0;
-      border-radius: 8px;
-      padding: 0.5rem 0;
-      background-color: #dcfce7;
-    }
-
-    ul.queue-list li {
-      padding: 10px 20px;
-      border-bottom: 1px solid #bbf7d0;
-      font-size: 1.1rem;
-      color: #166534;
-      font-weight: 600;
-      cursor: default;
-      transition: background-color 0.2s ease;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    ul.queue-list li:last-child {
-      border-bottom: none;
-    }
-
-    ul.queue-list li:hover {
-      background-color: #bbf7d0;
-    }
-
-    /* Button common styles */
-    .queue-btn {
-      border: none;
-      border-radius: 8px;
-      padding: 8px 16px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      color: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      user-select: none;
-      white-space: nowrap;
-      margin-left: 0.6rem;
-    }
-
-    /* Remove button */
-    .btn-remove {
-      background-color: #ef4444; /* Red */
-    }
-
-    .btn-remove:hover,
-    .btn-remove:focus {
-      background-color: #b91c1c;
-      outline: none;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(185, 28, 28, 0.4);
-    }
-
-    /* Emergency button */
-    .btn-emergency {
-      background-color: #f59e0b; /* Amber/Orange */
-    }
-
-    .btn-emergency:hover,
-    .btn-emergency:focus {
-      background-color: #b45309;
-      outline: none;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(180, 83, 9, 0.4);
-    }
-
-    /* Call Next button */
-    button.admin-btn {
-      background-color: #22c55e;
-      color: #fff;
-      font-size: 1.2rem;
-      padding: 12px 28px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
-      user-select: none;
-      display: block;
-      margin: 0 auto;
-      min-width: 180px;
-    }
-
-    button.admin-btn:hover,
-    button.admin-btn:focus {
-      background-color: #16a34a;
-      outline: none;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(22, 163, 74, 0.5);
-    }
-
-    /* Responsive */
-    @media (max-width: 576px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-
-      main.admin-panel {
-        margin: 1.5rem 1rem 2rem;
-        padding: 1.5rem;
-      }
-
-      ul.queue-list {
-        max-height: 180px;
-      }
-
-      button.admin-btn {
-        width: 100%;
-        font-size: 1.1rem;
-        min-width: unset;
-      }
-
-      ul.queue-list li {
-        flex-wrap: wrap;
-      }
-
-      .queue-btn {
-        margin: 0.3rem 0 0 0;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="userAdmin.css">
 </head>
-<body>
+<body> 
   <nav>
     <div class="nav-logo">HealthQueue Admin</div>
     <ul>
@@ -220,88 +12,35 @@
       <li><a href="#">Logout</a></li>
     </ul>
   </nav>
+
   <main class="admin-panel">
     <h1>Queue Administration</h1>
     <p class="subtitle">View and manage the current queue in real-time.</p>
+
     <ul id="queueList" class="queue-list"></ul>
     <button class="admin-btn" onclick="nextPerson()">Call Next</button>
   </main>
+
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <!-- Firebase Config & Auth Display -->
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
-      authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
-      databaseURL: "https://digital-queue-system-ca4a3-default-rtdb.firebaseio.com",
-      projectId: "digital-queue-system-ca4a3",
-      storageBucket: "digital-queue-system-ca4a3.appspot.com",
-      messagingSenderId: "2888219915",
-      appId: "1:2888219915:web:668252d6ef99882cff760e"
-    };
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+<!-- Firebase Config & Auth Display -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
+    authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
+    databaseURL: "https://digital-queue-system-ca4a3-default-rtdb.firebaseio.com",
+    projectId: "digital-queue-system-ca4a3",
+    storageBucket: "digital-queue-system-ca4a3.appspot.com",
+    messagingSenderId: "2888219915",
+    appId: "1:2888219915:web:668252d6ef99882cff760e"
+  };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
-
-    const queueListEl = document.getElementById('queueList');
-
-    // Listen to queue data in Firebase and update UI dynamically
-    db.ref('queue').on('value', snapshot => {
-      const queueData = snapshot.val();
-      renderQueue(queueData);
-    });
-
-    function renderQueue(queueData) {
-      queueListEl.innerHTML = '';
-      if (!queueData) {
-        queueListEl.innerHTML = '<li>No one in queue</li>';
-        return;
-      }
-      Object.entries(queueData).forEach(([id, person]) => {
-        const li = document.createElement('li');
-        li.textContent = person.name;
-
-        const controls = document.createElement('div');
-        
-        // Remove button
-        const btnRemove = document.createElement('button');
-        btnRemove.className = 'queue-btn btn-remove';
-        btnRemove.textContent = '🗑️ Remove';
-        btnRemove.title = `Remove ${person.name}`;
-        btnRemove.onclick = () => removePerson(id);
-
-        // Emergency button
-        const btnEmergency = document.createElement('button');
-        btnEmergency.className = 'queue-btn btn-emergency';
-        btnEmergency.textContent = '⚠️ Emergency';
-        btnEmergency.title = `Emergency call for ${person.name}`;
-        btnEmergency.onclick = () => emergencyCall(id);
-
-        controls.appendChild(btnRemove);
-        controls.appendChild(btnEmergency);
-
-        li.appendChild(controls);
-        queueListEl.appendChild(li);
-      });
-    }
-
-    function nextPerson() {
-      alert('Next person called!');
-      // Add your logic to handle next person call in Firebase
-    }
-
-    function removePerson(id) {
-      if (confirm('Are you sure you want to remove this person from the queue?')) {
-        db.ref('queue/' + id).remove()
-          .then(() => alert('Person removed from queue'))
-          .catch((e) => alert('Error removing person: ' + e.message));
-      }
-    }
-
-    function emergencyCall(id) {
-      alert('Emergency call sent for person ID: ' + id);
-      // Your logic to handle emergency call notification
-    }
   </script>
+
+  <script src="userAdmin.js"></script>
 </body>
 </html>
