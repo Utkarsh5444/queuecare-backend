@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AyurSutra - Digital Wellness Queue</title>
+  <title>AyurSutra - Digital Queue System</title>
   <link rel="stylesheet" href="userService.css" />
   <link rel="stylesheet" href="userAdmin.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@
       z-index: -1;
     }
 
-    /* =========== Navigation - Premium AyurSutra Design =========== */
+    /* =========== Navigation - Updated with Logo and Menu =========== */
     nav {
       background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-green) 50%, var(--emerald-600) 100%);
       padding: 0 3rem;
@@ -118,23 +118,10 @@
       box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
     }
 
-    .logo::before {
-      content: '🌿';
-      font-size: 2.2rem;
-      margin-right: 10px;
-      animation: float 3s ease-in-out infinite;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(5deg); }
-    }
-
     nav ul {
       display: flex;
       list-style: none;
-      gap: 2.5rem;
+      gap: 2rem;
       align-items: center;
       position: relative;
       z-index: 10;
@@ -145,8 +132,8 @@
       text-decoration: none;
       font-weight: 600;
       font-size: 16px;
-      padding: 12px 24px;
-      border-radius: 30px;
+      padding: 12px 20px;
+      border-radius: 25px;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(20px);
@@ -290,16 +277,6 @@
       margin-left: auto;
       margin-right: auto;
       margin-bottom: 4rem;
-    }
-
-    .subtitle::before {
-      content: '🌿';
-      margin-right: 10px;
-    }
-
-    .subtitle::after {
-      content: '🌿';
-      margin-left: 10px;
     }
 
     /* =========== Section Titles =========== */
@@ -648,14 +625,14 @@
       box-shadow: 0 8px 32px rgba(22, 163, 74, 0.1);
     }
 
-    /* =========== Ticket Display - Premium Design =========== */
+    /* =========== Ticket Display - Fixed Layout =========== */
     #ticket {
       background: linear-gradient(135deg, white 0%, #fefefe 100%);
       border: 5px solid var(--primary-green);
       border-radius: 30px;
-      padding: 4rem;
-      margin: 4rem auto;
-      max-width: 700px;
+      padding: 3rem;
+      margin: 3rem auto;
+      max-width: 600px;
       box-shadow: 
         0 25px 80px rgba(22, 163, 74, 0.2),
         0 10px 40px rgba(22, 163, 74, 0.15);
@@ -680,23 +657,6 @@
       border-radius: 15px 15px 0 0;
     }
 
-    #ticket::after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      left: 30px;
-      right: 30px;
-      height: 30px;
-      background: repeating-linear-gradient(
-        90deg,
-        var(--primary-green) 0px,
-        var(--primary-green) 15px,
-        transparent 15px,
-        transparent 30px
-      );
-      border-radius: 0 0 15px 15px;
-    }
-
     #ticket h2 {
       color: var(--dark-green);
       border-bottom: 4px solid var(--light-green);
@@ -708,18 +668,36 @@
       z-index: 10;
     }
 
-    #ticket p {
-      color: var(--hover-green);
-      margin: 20px 0;
-      font-size: 18px;
-      font-weight: 500;
+    #ticket .ticket-info {
       position: relative;
       z-index: 10;
     }
 
-    #ticket strong {
+    #ticket .ticket-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px 0;
+      padding: 10px 0;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 16px;
+    }
+
+    #ticket .ticket-row:last-child {
+      border-bottom: none;
+    }
+
+    #ticket .ticket-label {
+      color: var(--hover-green);
+      font-weight: 600;
+      min-width: 40%;
+    }
+
+    #ticket .ticket-value {
       color: var(--dark-green);
-      font-weight: 700;
+      font-weight: 500;
+      text-align: right;
+      flex: 1;
     }
 
     #ticket img {
@@ -759,54 +737,13 @@
       box-shadow: 0 10px 40px rgba(22, 163, 74, 0.4);
     }
 
-    /* =========== Floating Action Buttons =========== */
-    .voice-assistant, .video-call-btn {
-      position: fixed;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 40px rgba(22, 163, 74, 0.3);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 1000;
-      cursor: pointer;
-      border: 3px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .voice-assistant {
-      bottom: 120px;
-      right: 40px;
-      background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-    }
-
-    .video-call-btn {
-      bottom: 40px;
-      right: 40px;
-      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-      text-decoration: none;
-    }
-
-    .voice-assistant:hover, .video-call-btn:hover {
-      transform: scale(1.15) translateY(-5px);
-      box-shadow: 0 20px 60px rgba(22, 163, 74, 0.4);
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .voice-assistant img, .video-call-btn img {
-      width: 35px;
-      height: 35px;
-      filter: invert(1);
-      transition: all 0.3s ease;
-    }
-
-    .voice-assistant:hover img, .video-call-btn:hover img {
-      transform: scale(1.1);
-    }
-
     /* =========== Hidden Elements =========== */
     .dropdown-list {
+      display: none !important;
+    }
+
+    /* Remove floating buttons */
+    .voice-assistant, .video-call-btn {
       display: none !important;
     }
 
@@ -841,11 +778,11 @@
       }
 
       nav ul {
-        gap: 1.5rem;
+        gap: 1rem;
       }
 
       nav ul li a {
-        padding: 10px 18px;
+        padding: 8px 14px;
         font-size: 14px;
       }
 
@@ -873,16 +810,6 @@
 
       .service-icon {
         font-size: 3.5rem;
-      }
-
-      .voice-assistant, .video-call-btn {
-        width: 60px;
-        height: 60px;
-      }
-
-      .voice-assistant img, .video-call-btn img {
-        width: 30px;
-        height: 30px;
       }
     }
 
@@ -918,19 +845,34 @@
       .form-container, #ticket {
         padding: 2rem;
       }
+
+      #ticket .ticket-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      #ticket .ticket-value {
+        text-align: left;
+      }
     }
   </style>
 </head>
 <body>
-<!-- Navigation Header - AyurSutra Premium Design -->
+<!-- Navigation Header - Updated with Logo and Full Menu -->
 <nav>
   <div class="logo">
+    <img src="logo.jpg" alt="AyurSutra Logo">
     <span>AyurSutra</span>
   </div>
   <ul>
-    <li><a href="index.html">🏠 Home</a></li>
-    <li><a href="user.html">⚡ Queue</a></li>
-    <li><a href="#contact">📞 Contact</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="patients.html">Patients</a></li>
+    <li><a href="therapies.html">Therapies</a></li>
+    <li><a href="appointments.html">Appointments</a></li>
+    <li><a href="user.html">Queue</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="reports.html">Reports</a></li>
   </ul>
   <div class="user-profile">
     <div class="avatar" id="avatar">AS</div>
@@ -944,21 +886,21 @@
   <h1>Digital Queue for Healthcare</h1>
   <p class="subtitle">Ancient Ayurvedic wisdom meets modern digital convenience - Experience healing without the wait</p>
   
-  <!-- Hospital Selection -->
+  <!-- Hospital Selection - Updated Title -->
   <section class="hospital-selection">
-    <h2 class="section-title">🏥 Select AyurSutra Center</h2>
+    <h2 class="section-title">🏥 Select Hospital</h2>
     <div class="hospital-list">
-      <div class="hospital-card active">AyurSutra Wellness Center - Delhi</div>
-      <div class="hospital-card">AyurSutra Ayurvedic Hospital - Mumbai</div>
-      <div class="hospital-card">AyurSutra Panchakarma Center - Bangalore</div>
-      <div class="hospital-card">AyurSutra Holistic Care - Pune</div>
-      <div class="hospital-card">AyurSutra Traditional Medicine - Chennai</div>
+      <div class="hospital-card active">Promhex Multispeciality Hospital</div>
+      <div class="hospital-card">Felix Hospital - Greater Noida</div>
+      <div class="hospital-card">Riverdale Healthcare</div>
+      <div class="hospital-card">Yatharth Super Speciality Hospital</div>
+      <div class="hospital-card">Apollo Spectra Hospital</div>
     </div>
   </section>
   
   <!-- Services Section -->
   <section class="services-section">
-    <h2 class="services-title">⚕️ Ayurvedic Healthcare Services</h2>
+    <h2 class="services-title">⚕️ Available Services</h2>
     
     <!-- Hidden Dropdown List (keeping original functionality) -->
     <div class="services-header" style="display: none;">
@@ -980,89 +922,100 @@
     <div class="services-grid">
       <div class="service-card" data-service="general">
         <div class="service-icon">👨‍⚕️</div>
-        <div class="service-name">General Ayurvedic Consultation</div>
+        <div class="service-name">General Consultation</div>
       </div>
       <div class="service-card" data-service="pediatrics">
         <div class="service-icon">👶</div>
-        <div class="service-name">Bal Roga (Pediatrics)</div>
+        <div class="service-name">Pediatrics</div>
       </div>
       <div class="service-card" data-service="blood-test">
         <div class="service-icon">🩸</div>
-        <div class="service-name">Diagnostic Tests & Analysis</div>
+        <div class="service-name">Blood Test</div>
       </div>
       <div class="service-card" data-service="imaging">
         <div class="service-icon">📷</div>
-        <div class="service-name">Health Screening</div>
+        <div class="service-name">Diagnostic Imaging</div>
       </div>
       <div class="service-card" data-service="dental">
         <div class="service-icon">🦷</div>
-        <div class="service-name">Danta Chikitsa (Dental Care)</div>
+        <div class="service-name">Dental Checkup</div>
       </div>
       <div class="service-card" data-service="eye">
         <div class="service-icon">👁️</div>
-        <div class="service-name">Netra Chikitsa (Eye Care)</div>
+        <div class="service-name">Eye Examination</div>
       </div>
       <div class="service-card" data-service="cardiology">
         <div class="service-icon">❤️</div>
-        <div class="service-name">Hridaya Roga (Cardiology)</div>
+        <div class="service-name">Cardiology</div>
       </div>
       <div class="service-card" data-service="vaccination">
         <div class="service-icon">💉</div>
-        <div class="service-name">Preventive Care & Immunity</div>
+        <div class="service-name">Vaccination</div>
       </div>
       <div class="service-card" data-service="mental-health">
         <div class="service-icon">🧠</div>
-        <div class="service-name">Manas Chikitsa (Mental Wellness)</div>
+        <div class="service-name">Mental Health</div>
       </div>
       <div class="service-card" data-service="orthopedics">
         <div class="service-icon">🦴</div>
-        <div class="service-name">Asthi Sandhi Roga (Orthopedics)</div>
+        <div class="service-name">Orthopedics</div>
       </div>
     </div>
   </section>
   
   <!-- Queue Form -->
   <div class="form-container">
-    <input type="text" id="name" placeholder="🧑‍🦱 Your full name" />
-    <input type="text" id="phone" placeholder="📱 Mobile number (+91)" />
+    <input type="text" id="name" placeholder="Your full name" />
+    <input type="text" id="phone" placeholder="Mobile number (+91)" />
     <input type="date" id="appointmentDate" />
-    <button onclick="joinQueue()">🎟️ Join AyurSutra Digital Queue</button>
+    <button onclick="joinQueue()">🎟️ Join Digital Queue</button>
     <button id="leaveBtn" onclick="leaveQueue()" style="display:none;">❌ Leave Queue</button>
     <p id="positionMsg"></p>
   </div>
   
-  <!-- Ticket Display -->
+  <!-- Ticket Display - Fixed Layout -->
   <div id="ticket" style="display:none;">
-    <h2>🎟️ AyurSutra Digital Ticket</h2>
-    <p><strong>🧑‍🦱 Patient Name:</strong> <span id="ticketName"></span></p>
-    <p><strong>📱 Phone Number:</strong> <span id="ticketPhone"></span></p>
-    <p><strong>📅 Appointment Date:</strong> <span id="ticketDate"></span></p>
-    <p><strong>🏥 Healthcare Center:</strong> <span id="ticketHospital"></span></p>
-    <p><strong>⚕️ Ayurvedic Service:</strong> <span id="ticketService"></span></p>
-    <p><strong>🔢 Queue Position:</strong> <span id="ticketPosition"></span></p>
+    <h2>🎟️ Digital Queue Ticket</h2>
+    <div class="ticket-info">
+      <div class="ticket-row">
+        <span class="ticket-label">👤 Patient Name:</span>
+        <span class="ticket-value" id="ticketName"></span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">📱 Phone Number:</span>
+        <span class="ticket-value" id="ticketPhone"></span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">📅 Appointment Date:</span>
+        <span class="ticket-value" id="ticketDate"></span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">🏥 Healthcare Center:</span>
+        <span class="ticket-value" id="ticketHospital"></span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">⚕️ Service:</span>
+        <span class="ticket-value" id="ticketService"></span>
+      </div>
+      <div class="ticket-row">
+        <span class="ticket-label">🔢 Queue Position:</span>
+        <span class="ticket-value" id="ticketPosition"></span>
+      </div>
+    </div>
     <img id="qrCode" alt="QR Code for Digital Verification" />
     <button id="printBtn" onclick="printTicket()">🖨️ Print Ticket</button>
     <a id="waBtn" href="#" target="_blank">📱 Share via WhatsApp</a>
   </div>
 </main>
 
-<!-- Floating Action Buttons -->
-<div class="voice-assistant" onclick="startVoiceAssistant()" title="AyurSutra Voice Assistant">
-  <img src="voice.png" alt="Voice Assistant" />
-</div>
-
-<a href="https://videocall-6nuu.onrender.com/patient.html" target="_blank" class="video-call-btn" title="Video Consultation">
-  <img src="video.png" alt="Video Call" />
-</a>
-
 <!-- Firebase SDK - PRESERVING ALL ORIGINAL FUNCTIONALITY -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 
-<!-- Firebase Config & Auth Display - UNCHANGED -->
+<!-- Firebase Config & Enhanced Queue Logic -->
 <script>
-  // PRESERVING ALL ORIGINAL FIREBASE CONFIGURATION AND FUNCTIONALITY
+  // PRESERVING ALL ORIGINAL FIREBASE CONFIGURATION
   const firebaseConfig = {
     apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
     authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
@@ -1076,8 +1029,9 @@
   const db = firebase.database();
   
   // Global variables for selections
-  let selectedHospital = "AyurSutra Wellness Center - Delhi"; // Default selection
+  let selectedHospital = "Promhex Multispeciality Hospital"; // Default selection
   let selectedService = null;
+  let realTimeQueuePosition = 1; // For real-time queue tracking
   
   // PRESERVING ALL ORIGINAL AUTH FUNCTIONALITY
   firebase.auth().onAuthStateChanged(user => {
@@ -1101,48 +1055,67 @@
     });
   });
 
+  // Get real-time queue position
+  function getRealTimeQueuePosition() {
+    const today = new Date().toISOString().split('T')[0];
+    const queueRef = db.ref("queues/" + today);
+    
+    return queueRef.once('value').then((snapshot) => {
+      const data = snapshot.val();
+      if (!data) {
+        return 1; // First person in queue
+      }
+      
+      // Count existing entries and add 1
+      const existingEntries = Object.keys(data).length;
+      return existingEntries + 1;
+    }).catch(() => {
+      return Math.floor(Math.random() * 10) + 1; // Fallback
+    });
+  }
+
   // Enhanced Hospital and Service Selection
   document.addEventListener('DOMContentLoaded', function() {
     console.log('🌿 AyurSutra Digital Queue System - Initializing...');
     
     // Hospital selection logic
     const hospitalCards = document.querySelectorAll('.hospital-card');
-    console.log('Found AyurSutra centers:', hospitalCards.length);
+    console.log('Found hospitals:', hospitalCards.length);
     
     hospitalCards.forEach(card => {
       card.addEventListener('click', function() {
-        console.log('AyurSutra center selected:', this.textContent.trim());
+        console.log('Hospital selected:', this.textContent.trim());
         // Remove active class from all cards
         hospitalCards.forEach(c => c.classList.remove('active'));
         // Add active class to clicked card
         this.classList.add('active');
         // Update selected hospital
         selectedHospital = this.textContent.trim();
-        console.log('Selected AyurSutra center:', selectedHospital);
+        console.log('Selected hospital:', selectedHospital);
       });
     });
 
     // Service selection logic
     const serviceCards = document.querySelectorAll('.service-card');
-    console.log('Found Ayurvedic services:', serviceCards.length);
+    console.log('Found services:', serviceCards.length);
     
     serviceCards.forEach(card => {
       card.addEventListener('click', function() {
         const serviceName = this.querySelector('.service-name').textContent.trim();
-        console.log('Ayurvedic service selected:', serviceName);
+        console.log('Service selected:', serviceName);
         // Remove selected class from all cards
         serviceCards.forEach(c => c.classList.remove('selected'));
         // Add selected class to clicked card
         this.classList.add('selected');
         // Update selected service
         selectedService = serviceName;
-        console.log('Selected Ayurvedic service:', selectedService);
+        console.log('Selected service:', selectedService);
       });
     });
   });
 
-  // Enhanced Join Queue Function for AyurSutra
-  function joinQueue() {
+  // Enhanced Join Queue Function with Real-time Position
+  async function joinQueue() {
     console.log('🌿 AyurSutra Digital Queue - Processing request...');
     console.log('Current selections:', { selectedHospital, selectedService });
     
@@ -1150,84 +1123,84 @@
     const phone = document.getElementById('phone').value.trim();
     const date = document.getElementById('appointmentDate').value;
     
-    // Enhanced validation with AyurSutra context
+    // Enhanced validation
     if (!name || !phone || !date) {
-      alert('🌿 कृपया सभी फ़ील्ड भरें।\n\nPlease fill all fields to join the AyurSutra digital queue system.');
+      alert('Please fill all fields to join the AyurSutra digital queue system.');
       return;
     }
     
     if (!selectedHospital) {
-      alert('🏥 कृपया एक AyurSutra केंद्र चुनें।\n\nPlease select an AyurSutra healthcare center.');
+      alert('Please select a hospital.');
       return;
     }
     
     if (!selectedService) {
-      alert('⚕️ कृपया एक आयुर्वेदिक सेवा चुनें।\n\nPlease select an Ayurvedic healthcare service.');
+      alert('Please select a service.');
       return;
     }
 
     if (phone.length < 10) {
-      alert('📱 कृपया एक वैध फोन नंबर दर्ज करें।\n\nPlease enter a valid phone number.');
+      alert('Please enter a valid phone number.');
       return;
     }
     
-    // Save to Firebase with enhanced AyurSutra data structure
-    const today = new Date().toISOString().split('T')[0];
-    const queueRef = db.ref("queues/" + today);
-    const timestamp = Date.now();
-    const newEntry = { 
-      name, 
-      phone, 
-      timestamp, 
-      date, 
-      hospital: selectedHospital, 
-      service: selectedService,
-      system: "AyurSutra Digital Wellness Queue",
-      status: "waiting",
-      priority: "normal"
-    };
-    
-    queueRef.push(newEntry).then((ref) => {
-      const queueNumber = Math.floor(Math.random() * 100) + 1;
+    try {
+      // Get real-time queue position
+      const queuePosition = await getRealTimeQueuePosition();
       
-      // Update ticket display with AyurSutra branding
+      // Save to Firebase
+      const today = new Date().toISOString().split('T')[0];
+      const queueRef = db.ref("queues/" + today);
+      const timestamp = Date.now();
+      const newEntry = { 
+        name, 
+        phone, 
+        timestamp, 
+        date, 
+        hospital: selectedHospital, 
+        service: selectedService,
+        position: queuePosition,
+        system: "AyurSutra Digital Queue",
+        status: "waiting"
+      };
+      
+      await queueRef.push(newEntry);
+      
+      // Update ticket display with proper alignment
       document.getElementById('ticketName').textContent = name;
       document.getElementById('ticketPhone').textContent = phone;
       document.getElementById('ticketDate').textContent = date;
       document.getElementById('ticketHospital').textContent = selectedHospital;
       document.getElementById('ticketService').textContent = selectedService;
-      document.getElementById('ticketPosition').textContent = queueNumber;
+      document.getElementById('ticketPosition').textContent = queuePosition;
       
-      // Generate enhanced QR code with AyurSutra data
-      const qrData = `🌿 AyurSutra Digital Wellness Queue
+      // Generate QR code
+      const qrData = `🌿 AyurSutra Digital Queue System
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 👤 Patient: ${name}
 📱 Phone: ${phone}  
 📅 Date: ${date}
-🏥 Center: ${selectedHospital}
+🏥 Hospital: ${selectedHospital}
 ⚕️ Service: ${selectedService}
-🎟️ Queue: #${queueNumber}
+🎟️ Queue: #${queuePosition}
 ⏰ Time: ${new Date().toLocaleString()}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🙏 सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः
-May all beings be happy and healthy`;
+Digital Healthcare at its Best`;
       
       const qrCodeImg = document.getElementById('qrCode');
       qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrData)}`;
       
-      // Show ticket with smooth animation
+      // Show ticket
       document.getElementById('ticket').style.display = 'block';
       
-      // Update position message with Sanskrit blessing
-      const waitTime = queueNumber * 5;
+      // Update position message
+      const waitTime = queuePosition * 5;
       document.getElementById('positionMsg').innerHTML = 
-        `✅ <strong>🙏 नमस्ते! Welcome to AyurSutra Digital Healthcare!</strong><br>
-        🎟️ Your Queue Position: <strong>#${queueNumber}</strong><br>
-        ⏰ Estimated Wait Time: <strong>${waitTime} minutes</strong><br>
-        🏥 Healthcare Center: <strong>${selectedHospital}</strong><br>
-        ⚕️ Ayurvedic Service: <strong>${selectedService}</strong><br>
-        <br>🌿 <em>सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः</em><br>
-        <small>May all beings be happy and free from illness</small>`;
+        `✅ <strong>Successfully joined AyurSutra Digital Queue!</strong><br>
+        🎟️ Your Position: <strong>#${queuePosition}</strong><br>
+        ⏰ Estimated Wait: <strong>${waitTime} minutes</strong><br>
+        🏥 Hospital: <strong>${selectedHospital}</strong><br>
+        ⚕️ Service: <strong>${selectedService}</strong>`;
       
       document.getElementById('positionMsg').style.display = 'block';
 
@@ -1238,8 +1211,8 @@ May all beings be happy and healthy`;
       document.querySelector('button[onclick="joinQueue()"]').style.display = 'none';
       document.getElementById('leaveBtn').style.display = 'block';
 
-      // Setup enhanced WhatsApp sharing
-      setupAyurSutraWhatsAppSharing(name, phone, date, selectedHospital, selectedService, queueNumber);
+      // Setup WhatsApp sharing
+      setupWhatsAppSharing(name, phone, date, selectedHospital, selectedService, queuePosition);
 
       // Smooth scroll to ticket
       document.getElementById('ticket').scrollIntoView({ 
@@ -1247,13 +1220,14 @@ May all beings be happy and healthy`;
         block: 'center'
       });
 
-      // Success notification
-      console.log('✅ Successfully joined AyurSutra digital queue');
-    });
+    } catch (error) {
+      console.error('Error joining queue:', error);
+      alert('Failed to join queue. Please try again.');
+    }
   }
 
-  // Enhanced WhatsApp Function with AyurSutra Premium Branding
-  function setupAyurSutraWhatsAppSharing(name, phone, date, hospital, service, position) {
+  // WhatsApp Function
+  function setupWhatsAppSharing(name, phone, date, hospital, service, position) {
     const now = new Date();
     const bookingTime = now.toLocaleString('en-IN', {
       day: '2-digit',
@@ -1261,89 +1235,48 @@ May all beings be happy and healthy`;
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: true,
-      timeZone: 'Asia/Kolkata'
+      hour12: true
     });
 
-    const message = `🌿 *AyurSutra Digital Wellness Queue*
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const message = `🌿 *AyurSutra Digital Queue System*
 
-🎟️ *आपकी आयुर्वेदिक अपॉइंटमेंट पुष्ति*
-*Your Ayurvedic Appointment Confirmed*
+🎟️ *Your Healthcare Appointment Confirmed*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 *Patient:* ${name}
+📱 *Phone:* ${phone}
+📅 *Date:* ${date}
+🏥 *Hospital:* ${hospital}
+⚕️ *Service:* ${service}
+🔢 *Queue Position:* #${position}
+⏰ *Booked:* ${bookingTime}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-👤 *Patient Name | रोगी का नाम:* ${name}
-📱 *Phone Number | फोन नंबर:* ${phone}
-📅 *Appointment Date | अपॉइंटमेंट तारीख:* ${date}
-🏥 *Healthcare Center | स्वास्थ्य केंद्र:*
-     ${hospital}
-⚕️ *Ayurvedic Service | आयुर्वेदिक सेवा:*
-     ${service}
-🎟️ *Queue Position | क्यू स्थिति:* #${position}
-⏰ *Booking Time | बुकिंग समय:* ${bookingTime}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 *Important Instructions:*
+• Please arrive 15 minutes early
+• Show this message at reception
+• Keep phone ready for updates
+• Wait for your number to be called
 
-📋 *महत्वपूर्ण सूचनाएं | Important Instructions:*
-
-🕐 कृपया 15 मिनट पहले पहुंचें
-    Please arrive 15 minutes early
-
-📄 रिसेप्शन पर यह संदेश दिखाएं
-    Show this message at reception
-
-📱 अपडेट के लिए फोन तैयार रखें
-    Keep phone ready for updates
-
-⏳ अपना नंबर कॉल होने तक प्रतीक्षा करें
-    Wait for your number to be called
-
-💊 सभी दवाइयों की सूची लाएं
-    Bring list of current medications
-
-📋 पिछली रिपोर्ट्स लाना न भूलें
-    Don't forget previous medical reports
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌿 *AyurSutra Healthcare - Since 1995*
+🌿 *AyurSutra Healthcare*
 📍 *Location:* ${hospital}
-☎️  *Helpline:* 1800-AYUR-CARE (24/7)
+☎️ *Helpline:* 1800-AYUR-CARE
 🌐 *Website:* www.ayursutra.com
-📧 *Email:* care@ayursutra.com
 
-🏆 *ISO 9001:2015 Certified*
-🏅 *NABH Accredited Healthcare*
-🌿 *Traditional Ayurveda, Modern Care*
+✅ *Status:* CONFIRMED APPOINTMENT
+Thank you for choosing AyurSutra Healthcare!
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ *Appointment Status | अपॉइंटमेंट स्थिति:*
-    CONFIRMED | पुष्टिकृत ✅
-
-🙏 *Wellness Mantra | कल्याण मंत्र:*
-    _सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः_
-    _May all beings be happy and healthy_
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌿 *आयुर्वेद से स्वास्थ्य, प्रकृति से शक्ति*
-   *Health through Ayurveda, Strength from Nature*
-
-_This is an automated confirmation from AyurSutra Digital Wellness Queue System. Please save this message for your records._
-
-_यह AyurSutra डिजिटल वेलनेस क्यू सिस्टम की स्वचालित पुष्टि है। कृपया इस संदेश को अपने रिकॉर्ड के लिए सेव करें।_`;
+_This is an automated message from AyurSutra Digital Queue System_`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
     
     const waBtn = document.getElementById('waBtn');
     waBtn.href = whatsappURL;
-    waBtn.onclick = function() {
-      window.open(whatsappURL, '_blank');
-      return false;
-    };
   }
 
-  // Enhanced Leave Queue Function
+  // Leave Queue Function
   function leaveQueue() {
-    if (confirm('🌿 क्या आप वाकई AyurSutra डिजिटल क्यू छोड़ना चाहते हैं?\n\nAre you sure you want to leave the AyurSutra digital wellness queue?')) {
+    if (confirm('Are you sure you want to leave the AyurSutra digital queue?')) {
       document.getElementById('ticket').style.display = 'none';
       document.getElementById('positionMsg').style.display = 'none';
       
@@ -1363,11 +1296,11 @@ _यह AyurSutra डिजिटल वेलनेस क्यू सिस�
       document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
       selectedService = null;
       
-      alert('🙏 धन्यवाद! AyurSutra में आपका हमेशा स्वागत है।\n\nThank you! You are always welcome at AyurSutra Healthcare.');
+      alert('Thank you! You are always welcome at AyurSutra Healthcare.');
     }
   }
 
-  // Enhanced Print function with AyurSutra premium styling
+  // Enhanced Print function with compact single-page layout
   function printTicket() {
     const printWindow = window.open('', '_blank');
     const name = document.getElementById('ticketName').textContent;
@@ -1380,164 +1313,160 @@ _यह AyurSutra डिजिटल वेलनेस क्यू सिस�
     printWindow.document.write(`
       <html>
         <head>
-          <title>AyurSutra Digital Wellness Queue Ticket</title>
+          <title>AyurSutra Digital Queue Ticket</title>
           <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+            * { margin: 0; padding: 0; box-sizing: border-box; }
             body { 
               font-family: 'Inter', Arial, sans-serif; 
-              margin: 20px; 
-              background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+              background: #f0fdf4;
+              padding: 20px;
               color: #14532d;
             }
             .ticket { 
-              border: 5px solid #16a34a; 
-              border-radius: 25px; 
-              padding: 50px; 
-              max-width: 600px; 
+              width: 400px;
               margin: 0 auto;
-              background: linear-gradient(135deg, white, #fefefe);
-              box-shadow: 0 25px 80px rgba(22, 163, 74, 0.2);
+              border: 4px solid #16a34a; 
+              border-radius: 20px; 
+              padding: 25px; 
+              background: white;
+              box-shadow: 0 10px 30px rgba(22, 163, 74, 0.15);
               position: relative;
               overflow: hidden;
             }
             .ticket::before {
               content: '';
               position: absolute;
-              top: -20px;
-              left: 40px;
-              right: 40px;
-              height: 40px;
+              top: -10px;
+              left: 20px;
+              right: 20px;
+              height: 20px;
               background: repeating-linear-gradient(
                 90deg,
                 #16a34a 0px,
-                #16a34a 20px,
-                transparent 20px,
-                transparent 40px
+                #16a34a 10px,
+                transparent 10px,
+                transparent 20px
               );
-              border-radius: 20px 20px 0 0;
-            }
-            .ticket::after {
-              content: '';
-              position: absolute;
-              bottom: -20px;
-              left: 40px;
-              right: 40px;
-              height: 40px;
-              background: repeating-linear-gradient(
-                90deg,
-                #16a34a 0px,
-                #16a34a 20px,
-                transparent 20px,
-                transparent 40px
-              );
-              border-radius: 0 0 20px 20px;
+              border-radius: 10px 10px 0 0;
             }
             .header { 
               text-align: center; 
               color: #16a34a; 
-              border-bottom: 4px solid #bbf7d0; 
-              padding-bottom: 25px; 
-              margin-bottom: 40px;
-              position: relative;
-              z-index: 10;
-            }
-            .header h1 {
-              font-size: 2.5rem;
-              font-weight: 800;
-              margin-bottom: 10px;
-              background: linear-gradient(135deg, #16a34a, #10b981);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-            }
-            .header h2 {
-              font-size: 1.5rem;
-              font-weight: 600;
-              margin-bottom: 15px;
-            }
-            .sanskrit { 
-              color: #15803d; 
-              font-style: italic; 
-              font-size: 14px;
-              font-weight: 500;
-            }
-            .details { 
-              margin: 25px 0; 
-              font-size: 18px;
-              line-height: 1.8;
-              position: relative;
-              z-index: 10;
-            }
-            .details p {
-              margin: 15px 0;
-              padding: 10px 0;
-            }
-            .footer { 
-              margin-top: 50px; 
-              font-size: 14px; 
-              color: #15803d; 
-              text-align: center;
-              position: relative;
-              z-index: 10;
-              line-height: 1.6;
-            }
-            .footer h3 {
-              color: #16a34a;
-              font-size: 18px;
+              border-bottom: 3px solid #bbf7d0; 
+              padding-bottom: 15px; 
               margin-bottom: 20px;
             }
-            strong { 
-              color: #14532d; 
+            .header h1 {
+              font-size: 1.8rem;
               font-weight: 700;
+              margin-bottom: 5px;
             }
-            .highlight {
+            .header h2 {
+              font-size: 1.1rem;
+              font-weight: 600;
+              color: #15803d;
+            }
+            .info-row {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin: 12px 0;
+              padding: 8px 0;
+              border-bottom: 1px solid #f3f4f6;
+              font-size: 14px;
+            }
+            .info-row:last-child {
+              border-bottom: none;
+              margin-bottom: 0;
+            }
+            .info-label {
+              color: #15803d;
+              font-weight: 600;
+              min-width: 35%;
+            }
+            .info-value {
+              color: #14532d;
+              font-weight: 500;
+              text-align: right;
+              flex: 1;
+              word-wrap: break-word;
+            }
+            .queue-highlight {
               background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-              padding: 20px;
-              border-radius: 15px;
-              margin: 20px 0;
-              border-left: 5px solid #16a34a;
+              padding: 15px;
+              border-radius: 12px;
+              margin: 15px 0;
+              text-align: center;
+            }
+            .queue-number {
+              font-size: 2rem;
+              font-weight: 800;
+              color: #16a34a;
+            }
+            .footer { 
+              margin-top: 20px; 
+              font-size: 11px; 
+              color: #15803d; 
+              text-align: center;
+              line-height: 1.4;
+            }
+            .footer p { margin: 3px 0; }
+            .status {
+              background: #16a34a;
+              color: white;
+              padding: 8px 15px;
+              border-radius: 20px;
+              font-size: 12px;
+              font-weight: 600;
+              display: inline-block;
+              margin-top: 10px;
             }
           </style>
         </head>
         <body>
           <div class="ticket">
             <div class="header">
-              <h1>🌿 AyurSutra Healthcare</h1>
-              <h2>Digital Wellness Queue Ticket</h2>
-              <h2>डिजिटल वेलनेस क्यू टिकट</h2>
-              <p class="sanskrit">सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः</p>
-              <p><small><em>May all beings be happy and free from illness</em></small></p>
+              <h1>🌿 AyurSutra</h1>
+              <h2>Digital Queue Ticket</h2>
             </div>
-            <div class="details">
-              <p><strong>👤 Patient Name | रोगी का नाम:</strong> ${name}</p>
-              <p><strong>📱 Phone Number | फोन नंबर:</strong> ${phone}</p>
-              <p><strong>📅 Appointment Date | अपॉइंटमेंट तारीख:</strong> ${date}</p>
-              <p><strong>🏥 Healthcare Center | स्वास्थ्य केंद्र:</strong><br>${hospital}</p>
-              <p><strong>⚕️ Ayurvedic Service | आयुर्वेदिक सेवा:</strong><br>${service}</p>
-              <div class="highlight">
-                <p><strong>🎟️ Queue Position | क्यू स्थिति:</strong> <span style="font-size: 24px; color: #16a34a;">#${position}</span></p>
-                <p><strong>⏰ Ticket Issued | टिकट जारी:</strong> ${new Date().toLocaleString()}</p>
-              </div>
+            
+            <div class="info-row">
+              <span class="info-label">👤 Patient:</span>
+              <span class="info-value">${name}</span>
             </div>
+            <div class="info-row">
+              <span class="info-label">📱 Phone:</span>
+              <span class="info-value">${phone}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">📅 Date:</span>
+              <span class="info-value">${date}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">🏥 Hospital:</span>
+              <span class="info-value">${hospital}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">⚕️ Service:</span>
+              <span class="info-value">${service}</span>
+            </div>
+            
+            <div class="queue-highlight">
+              <div style="font-size: 14px; color: #15803d; margin-bottom: 5px;">Queue Position</div>
+              <div class="queue-number">#${position}</div>
+            </div>
+            
             <div class="footer">
-              <h3>📋 महत्वपूर्ण निर्देश | Important Instructions</h3>
-              <p><strong>🕐 Arrival | आगमन:</strong> कृपया 15 मिनट पहले पहुंचें | Please arrive 15 minutes early</p>
-              <p><strong>📄 Reception | रिसेप्शन:</strong> रिसेप्शन पर यह टिकट दिखाएं | Show this ticket at reception</p>
-              <p><strong>📱 Updates | अपडेट:</strong> अपडेट के लिए फोन तैयार रखें | Keep phone ready for updates</p>
-              <p><strong>⏳ Wait | प्रतीक्षा:</strong> अपना नंबर कॉल होने तक प्रतीक्षा करें | Wait for your number to be called</p>
-              
-              <div style="margin: 30px 0; padding: 20px; background: #f0fdf4; border-radius: 15px;">
-                <p><strong>🌿 AyurSutra Healthcare</strong></p>
-                <p>📍 Location: ${hospital}</p>
-                <p>☎️ Helpline: 1800-AYUR-CARE | 🌐 www.ayursutra.com</p>
-              </div>
-              
-              <p style="font-size: 16px; color: #16a34a;"><strong>✅ Status | स्थिति: पुष्टिकृत अपॉइंटमेंट | CONFIRMED APPOINTMENT</strong></p>
-              
-              <div style="margin-top: 30px; font-style: italic;">
-                <p><strong>🌿 आयुर्वेद से स्वास्थ्य, प्रकृति से शक्ति!</strong></p>
-                <p><strong>Health through Ayurveda, Strength from Nature!</strong></p>
-                <p style="margin-top: 20px;"><em>Thank you for choosing AyurSutra Healthcare!</em></p>
-              </div>
+              <p><strong>Instructions:</strong></p>
+              <p>• Arrive 15 minutes early • Show at reception</p>
+              <p>• Keep phone ready • Wait for your number</p>
+              <p style="margin-top: 8px;"><strong>AyurSutra Healthcare</strong></p>
+              <p>Helpline: 1800-AYUR-CARE</p>
+              <div class="status">CONFIRMED APPOINTMENT</div>
+              <p style="margin-top: 10px; font-style: italic;">
+                Issued: ${new Date().toLocaleString()}
+              </p>
             </div>
           </div>
         </body>
@@ -1548,29 +1477,7 @@ _यह AyurSutra डिजिटल वेलनेस क्यू सिस�
     setTimeout(() => {
       printWindow.print();
       printWindow.close();
-    }, 1000);
-  }
-
-  // Enhanced Voice Assistant Function
-  function startVoiceAssistant() {
-    console.log("🌿 AyurSutra Voice Assistant - Activated");
-    alert(`🌿 AyurSutra Voice Assistant
-    
-🙏 नमस्ते! स्वागत है।
-Namaste! Welcome to AyurSutra.
-
-🎤 Voice Assistant features:
-• Queue status inquiries
-• Appointment scheduling  
-• Service information
-• Wait time updates
-
-⚡ Coming Soon:
-• Hindi voice commands
-• Real-time notifications
-• Ayurvedic consultation tips
-
-धन्यवाद | Thank you for your patience.`);
+    }, 500);
   }
 </script>
 
