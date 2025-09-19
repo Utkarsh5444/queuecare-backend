@@ -141,89 +141,257 @@
       transform: translateY(-1px) !important;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
     }
-
     /* Main Content - Convert all blue colors to green */
     body {
       background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdf4 100%) !important;
     }
-
     h1 {
       color: #14532d !important;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.1) !important;
     }
-
     .subtitle {
       color: #15803d !important;
     }
-
-    /* Hospital Selection - Green Theme */
+    /* Hospital Selection - Enhanced Dynamic Effects */
     .section-title, .services-title {
       color: #166534 !important;
       font-weight: 700 !important;
     }
 
+    .hospital-list {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 2rem !important;
+      max-width: 1200px !important;
+      margin: 2rem auto !important;
+      padding: 0 1rem !important;
+    }
+
     .hospital-card {
-      border: 2px solid #bbf7d0 !important;
-      background: white !important;
-      transition: all 0.3s ease !important;
-      box-shadow: 0 2px 10px rgba(22, 163, 74, 0.08) !important;
+      border: 3px solid #bbf7d0 !important;
+      background: linear-gradient(135deg, white 0%, #fefefe 100%) !important;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.08) !important;
       color: #166534 !important;
+      border-radius: 20px !important;
+      padding: 2rem 1.5rem !important;
+      text-align: center !important;
+      font-size: 1.1rem !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      position: relative !important;
+      overflow: hidden !important;
+      min-height: 120px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .hospital-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .hospital-card:hover::before {
+      left: 100%;
+    }
+
+    .hospital-card::after {
+      content: '🏥';
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      opacity: 0.3;
+      transition: all 0.4s ease;
     }
 
     .hospital-card:hover {
       border-color: #16a34a !important;
-      background: #f0fdf4 !important;
-      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.15) !important;
-      transform: translateY(-2px) !important;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%) !important;
+      box-shadow: 0 12px 35px rgba(22, 163, 74, 0.2), 0 0 0 8px rgba(22, 163, 74, 0.05) !important;
+      transform: translateY(-10px) scale(1.03) !important;
       color: #14532d !important;
+    }
+
+    .hospital-card:hover::after {
+      transform: scale(1.3) rotate(15deg);
+      opacity: 0.6;
     }
 
     .hospital-card.active {
       background: linear-gradient(135deg, #16a34a, #10b981) !important;
       color: white !important;
-      border-color: #16a34a !important;
-      box-shadow: 0 6px 25px rgba(22, 163, 74, 0.25) !important;
+      border-color: #059669 !important;
+      box-shadow: 0 15px 40px rgba(22, 163, 74, 0.3), 0 0 0 8px rgba(22, 163, 74, 0.1) !important;
+      transform: scale(1.05) !important;
     }
 
-    /* Services Section - Green Theme */
-    .dropdown-item {
-      color: #15803d !important;
-      transition: all 0.3s ease !important;
+    .hospital-card.active::after {
+      content: '✅';
+      color: white;
+      opacity: 1;
+      transform: scale(1.2);
     }
 
-    .dropdown-item:hover {
-      background: #dcfce7 !important;
-      color: #166534 !important;
+    /* Services Section - Enhanced 3-Column Layout */
+    .services-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 2rem !important;
+      max-width: 1200px !important;
+      margin: 2rem auto !important;
+      padding: 0 1rem !important;
     }
 
     .service-card {
-      background: white !important;
-      border: 2px solid #bbf7d0 !important;
-      transition: all 0.3s ease !important;
-      box-shadow: 0 2px 10px rgba(22, 163, 74, 0.08) !important;
+      background: linear-gradient(135deg, white 0%, #fefefe 100%) !important;
+      border: 3px solid #bbf7d0 !important;
+      border-radius: 25px !important;
+      padding: 2.5rem 1.5rem !important;
+      text-align: center !important;
+      cursor: pointer !important;
+      position: relative !important;
+      overflow: hidden !important;
+      box-shadow: 0 6px 20px rgba(22, 163, 74, 0.08) !important;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      min-height: 200px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 30%, rgba(22, 163, 74, 0.05) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .service-card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(22, 163, 74, 0.1) 0%, transparent 50%);
+      transform: scale(0);
+      transition: transform 0.4s ease;
+      opacity: 0;
+    }
+
+    .service-card:hover::after {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .service-icon {
+      font-size: 4rem !important;
+      margin-bottom: 1rem !important;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+      filter: drop-shadow(0 4px 8px rgba(22, 163, 74, 0.2)) !important;
+      position: relative !important;
+      z-index: 10 !important;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.3) rotate(10deg) translateY(-5px) !important;
+      filter: drop-shadow(0 8px 16px rgba(22, 163, 74, 0.3)) !important;
+    }
+
+    .service-name {
+      color: #166534 !important;
+      font-weight: 700 !important;
+      font-size: 1.1rem !important;
+      line-height: 1.4 !important;
+      text-align: center !important;
+      transition: all 0.4s ease !important;
+      position: relative !important;
+      z-index: 10 !important;
     }
 
     .service-card:hover {
       border-color: #16a34a !important;
-      background: #f0fdf4 !important;
-      transform: translateY(-5px) !important;
-      box-shadow: 0 8px 30px rgba(22, 163, 74, 0.2) !important;
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%) !important;
+      transform: translateY(-12px) scale(1.05) !important;
+      box-shadow: 0 20px 45px rgba(22, 163, 74, 0.25), 0 0 0 8px rgba(22, 163, 74, 0.06) !important;
+    }
+
+    .service-card:hover .service-name {
+      color: #14532d !important;
+      transform: translateY(-2px) !important;
     }
 
     .service-card.selected {
       background: linear-gradient(135deg, #16a34a, #10b981) !important;
       color: white !important;
-      border-color: #16a34a !important;
-      box-shadow: 0 8px 30px rgba(22, 163, 74, 0.3) !important;
-    }
-
-    .service-name {
-      color: #166534 !important;
-      font-weight: 600 !important;
+      border-color: #059669 !important;
+      box-shadow: 0 25px 50px rgba(22, 163, 74, 0.4), 0 0 0 8px rgba(22, 163, 74, 0.1) !important;
+      transform: scale(1.08) translateY(-8px) !important;
     }
 
     .service-card.selected .service-name {
       color: white !important;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+    }
+
+    .service-card.selected .service-icon {
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3)) !important;
+      transform: scale(1.2) !important;
+    }
+
+    .service-card.selected::after {
+      background: radial-gradient(circle, rgba(255,255,255, 0.1) 0%, transparent 50%);
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* Dropdown Items Enhanced */
+    .dropdown-item {
+      color: #15803d !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      padding: 12px 20px !important;
+      border-radius: 10px !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .dropdown-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.1), transparent);
+      transition: left 0.4s ease;
+    }
+
+    .dropdown-item:hover::before {
+      left: 100%;
+    }
+
+    .dropdown-item:hover {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0) !important;
+      color: #166534 !important;
+      transform: translateX(5px) !important;
     }
 
     /* Form Container - Green Theme */
@@ -233,24 +401,20 @@
       box-shadow: 0 8px 40px rgba(22, 163, 74, 0.12) !important;
       border-radius: 20px !important;
     }
-
     .form-container input {
       border: 2px solid #bbf7d0 !important;
       border-radius: 12px !important;
       transition: all 0.3s ease !important;
       color: #166534 !important;
     }
-
     .form-container input:focus {
       border-color: #16a34a !important;
       box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1) !important;
       outline: none !important;
     }
-
     .form-container input::placeholder {
       color: #86efac !important;
     }
-
     .form-container button {
       background: linear-gradient(135deg, #16a34a, #10b981) !important;
       color: white !important;
@@ -260,21 +424,17 @@
       box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3) !important;
       transition: all 0.3s ease !important;
     }
-
     .form-container button:hover {
       background: linear-gradient(135deg, #15803d, #059669) !important;
       transform: translateY(-2px) !important;
       box-shadow: 0 6px 25px rgba(22, 163, 74, 0.4) !important;
     }
-
     #leaveBtn {
       background: linear-gradient(135deg, #dc2626, #ef4444) !important;
     }
-
     #leaveBtn:hover {
       background: linear-gradient(135deg, #b91c1c, #dc2626) !important;
     }
-
     /* Ticket Display - Green Theme */
     #ticket {
       background: white !important;
@@ -282,20 +442,16 @@
       border-radius: 20px !important;
       box-shadow: 0 10px 50px rgba(22, 163, 74, 0.2) !important;
     }
-
     #ticket h2 {
       color: #166534 !important;
       border-bottom: 2px solid #bbf7d0 !important;
     }
-
     #ticket p {
       color: #15803d !important;
     }
-
     #ticket strong {
       color: #14532d !important;
     }
-
     #printBtn {
       background: linear-gradient(135deg, #16a34a, #10b981) !important;
       color: white !important;
@@ -303,11 +459,9 @@
       border-radius: 12px !important;
       box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3) !important;
     }
-
     #printBtn:hover {
       background: linear-gradient(135deg, #15803d, #059669) !important;
     }
-
     #waBtn {
       background: linear-gradient(135deg, #059669, #10b981) !important;
       color: white !important;
@@ -318,7 +472,6 @@
       text-align: center !important;
       box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3) !important;
     }
-
     /* Position Message - Green Theme */
     #positionMsg {
       color: #15803d !important;
@@ -328,27 +481,32 @@
       padding: 15px !important;
       font-weight: 600 !important;
     }
-
     /* Global overrides for any remaining blue elements */
     .blue, .text-blue, .bg-blue, [class*="blue"] {
       color: #16a34a !important;
     }
-
     .border-blue, [class*="border-blue"] {
       border-color: #16a34a !important;
     }
-
     .bg-blue, [class*="bg-blue"] {
       background-color: #16a34a !important;
     }
-
     /* Remove floating buttons completely */
     .voice-assistant,
     .video-call-btn {
       display: none !important;
     }
+    /* Responsive Design - Enhanced */
+    @media (max-width: 1024px) {
+      .hospital-list, .services-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+      }
+      .service-icon {
+        font-size: 3.5rem !important;
+      }
+    }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
       nav {
         padding: 0 1rem !important;
@@ -371,7 +529,17 @@
       .user-profile {
         gap: 8px !important;
       }
+
+      .hospital-list, .services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+
+      .service-icon {
+        font-size: 3rem !important;
+      }
     }
+
     @media (max-width: 480px) {
       nav ul {
         display: none !important;
@@ -380,6 +548,27 @@
       .logo span {
         font-size: 20px !important;
       }
+
+      .service-card {
+        min-height: 160px !important;
+        padding: 1.5rem !important;
+      }
+
+      .hospital-card {
+        min-height: 100px !important;
+        padding: 1.5rem !important;
+      }
+    }
+
+    /* Keyframe Animations */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(22, 163, 74, 0.2); }
+      50% { box-shadow: 0 0 30px rgba(22, 163, 74, 0.4); }
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-10px); }
     }
   </style>
 </head>
@@ -444,13 +633,13 @@
       </div>
     </div>
     <div class="services-grid">
-      <div class="service-card" data-service="general"><div class="service-icon">👨‍⚕</div><div class="service-name">General Consultation</div></div>
+      <div class="service-card" data-service="general"><div class="service-icon">👨‍⚕️</div><div class="service-name">General Consultation</div></div>
       <div class="service-card" data-service="pediatrics"><div class="service-icon">👶</div><div class="service-name">Pediatrics</div></div>
       <div class="service-card" data-service="blood-test"><div class="service-icon">🩸</div><div class="service-name">Blood Test</div></div>
       <div class="service-card" data-service="imaging"><div class="service-icon">📷</div><div class="service-name">Diagnostic Imaging</div></div>
       <div class="service-card" data-service="dental"><div class="service-icon">🦷</div><div class="service-name">Dental Checkup</div></div>
-      <div class="service-card" data-service="eye"><div class="service-icon">👁</div><div class="service-name">Eye Examination</div></div>
-      <div class="service-card" data-service="cardiology"><div class="service-icon">❤</div><div class="service-name">Cardiology</div></div>
+      <div class="service-card" data-service="eye"><div class="service-icon">👁️</div><div class="service-name">Eye Examination</div></div>
+      <div class="service-card" data-service="cardiology"><div class="service-icon">❤️</div><div class="service-name">Cardiology</div></div>
       <div class="service-card" data-service="vaccination"><div class="service-icon">💉</div><div class="service-name">Vaccination</div></div>
       <div class="service-card" data-service="mental-health"><div class="service-icon">🧠</div><div class="service-name">Mental Health</div></div>
       <div class="service-card" data-service="orthopedics"><div class="service-icon">🦴</div><div class="service-name">Orthopedics</div></div>
@@ -477,7 +666,6 @@
       <a id="waBtn" href="#" target="_blank" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
   </div>
 </main>
-
 <!-- Firebase SDK --> 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -520,4 +708,3 @@
 <script src="service.js"></script>
 </body>
 </html>
-
