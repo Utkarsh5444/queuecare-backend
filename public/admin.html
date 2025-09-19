@@ -2,8 +2,9 @@
 <head>
   <title>AyurSutra Admin Panel</title>
   <link rel="stylesheet" href="userAdmin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* AyurSutra Green Color Theme Override */
+    /* AyurSutra Green Color Theme Variables */
     :root {
       --primary-green: #16a34a;
       --dark-green: #14532d;
@@ -16,56 +17,71 @@
       --remove-red: #ef4444;
     }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: linear-gradient(135deg, var(--bg-green) 0%, #ecfdf5 50%, var(--bg-green) 100%) !important;
     }
 
-    /* Navigation - Green Theme */
+    /* =========== COMPACT NAVIGATION - SAME AS USER.HTML =========== */
     nav {
-      background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-green) 100%) !important;
-      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.15) !important;
-      padding: 1rem 2rem !important;
-      border-radius: 0 0 15px 15px !important;
+      background: var(--primary-green);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .nav-logo {
-      color: white !important;
-      font-weight: 800 !important;
-      font-size: 1.6rem !important;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 10px !important;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
     }
 
-    .nav-logo::before {
-      content: '🌿' !important;
-      font-size: 1.8rem !important;
+    .nav-logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
     }
 
     nav ul {
-      display: flex !important;
-      list-style: none !important;
-      gap: 1.5rem !important;
-      margin: 0 !important;
-      padding: 0 !important;
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+      align-items: center;
+      margin: 0;
+      padding: 0;
     }
 
     nav ul li a {
-      color: white !important;
-      text-decoration: none !important;
-      font-weight: 600 !important;
-      transition: all 0.3s ease !important;
-      padding: 10px 20px !important;
-      border-radius: 25px !important;
-      background: rgba(255, 255, 255, 0.1) !important;
-      backdrop-filter: blur(10px) !important;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+      white-space: nowrap;
     }
 
     nav ul li a:hover {
-      background: rgba(255, 255, 255, 0.2) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+      background: rgba(255, 255, 255, 0.1);
     }
 
     /* Admin Panel Styling */
@@ -529,51 +545,6 @@
       font-size: 1.1rem;
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .queue-item {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 20px !important;
-      }
-
-      .action-buttons {
-        width: 100% !important;
-        justify-content: flex-end !important;
-      }
-
-      .admin-btn, .remove-btn, .emergency-btn {
-        font-size: 0.9rem !important;
-        padding: 10px 16px !important;
-      }
-
-      .nav-logo {
-        font-size: 1.3rem !important;
-      }
-
-      nav ul {
-        gap: 1rem !important;
-      }
-
-      nav ul li a {
-        padding: 8px 16px !important;
-        font-size: 0.9rem !important;
-      }
-    }
-
-    /* Override any blue colors globally */
-    .blue, .text-blue, .bg-blue, [class*="blue"] {
-      color: var(--primary-green) !important;
-    }
-
-    .border-blue, [class*="border-blue"] {
-      border-color: var(--primary-green) !important;
-    }
-
-    .bg-blue, [class*="bg-blue"] {
-      background-color: var(--primary-green) !important;
-    }
-
     /* Notification styles for better UX */
     .notification {
       position: fixed;
@@ -600,17 +571,135 @@
         transform: translateX(0);
       }
     }
+
+    /* =========== RESPONSIVE NAVIGATION - SAME AS USER.HTML =========== */
+    @media (max-width: 1200px) {
+      nav ul li a {
+        font-size: 13px;
+        padding: 6px 10px;
+      }
+      
+      nav ul {
+        gap: 0.5rem;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+      
+      .nav-logo {
+        font-size: 1.3rem;
+      }
+      
+      nav ul li a {
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 1rem;
+        height: 55px;
+      }
+
+      .nav-logo {
+        font-size: 1.2rem;
+        gap: 8px;
+      }
+
+      .nav-logo img {
+        height: 35px;
+        width: 35px;
+      }
+
+      nav ul {
+        gap: 0.3rem;
+      }
+
+      nav ul li a {
+        font-size: 11px;
+        padding: 5px 6px;
+      }
+
+      .queue-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 20px !important;
+      }
+
+      .action-buttons {
+        width: 100% !important;
+        justify-content: flex-end !important;
+      }
+
+      .admin-btn, .remove-btn, .emergency-btn {
+        font-size: 0.9rem !important;
+        padding: 10px 16px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav ul li a {
+        font-size: 10px;
+        padding: 4px 5px;
+      }
+      
+      .nav-logo {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 0 0.5rem;
+      }
+      
+      nav ul {
+        gap: 0.2rem;
+      }
+      
+      nav ul li a {
+        font-size: 9px;
+        padding: 3px 4px;
+      }
+      
+      .nav-logo {
+        font-size: 1rem;
+      }
+    }
+
+    /* Override any blue colors globally */
+    .blue, .text-blue, .bg-blue, [class*="blue"] {
+      color: var(--primary-green) !important;
+    }
+
+    .border-blue, [class*="border-blue"] {
+      border-color: var(--primary-green) !important;
+    }
+
+    .bg-blue, [class*="bg-blue"] {
+      background-color: var(--primary-green) !important;
+    }
   </style>
 </head>
 <body> 
+  <!-- Compact Navigation - Same as user.html -->
   <nav>
-    <div class="nav-logo">AyurSutra Admin</div>
+    <div class="nav-logo">
+      <img src="logo.jpg" alt="AyurSutra Logo">
+      <span>AyurSutra Admin</span>
+    </div>
     <ul>
-      <li><a href="#">📊 Dashboard</a></li>
-      <li><a href="#">⚡ Manage Queue</a></li>
-      <li><a href="#">🚪 Logout</a></li>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="user.html">Manage Queue</a></li>
+      <li><a href="reports.html">Reports</a></li>
+      <li><a href="logout.html">Logout</a></li>
     </ul>
   </nav>
+
   <main class="admin-panel">
     <h1>Queue Administration</h1>
     <p class="subtitle">View and manage the current queue in real-time with enhanced controls.</p>
@@ -631,12 +720,14 @@
     <button class="admin-btn" onclick="nextPerson()">Call Next Patient</button>
   </main>
 
+  <!-- Firebase SDK - PRESERVING ALL ORIGINAL FUNCTIONALITY -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   
-  <!-- FIXED: Matching Firebase Structure -->
+  <!-- PRESERVING ALL ORIGINAL BACKEND FUNCTIONALITY -->
   <script>
+    // KEEPING ALL ORIGINAL FIREBASE CONFIGURATION
     const firebaseConfig = {
       apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
       authDomain: "digital-queue-system-ca4a3.firebaseapp.com",
@@ -680,13 +771,13 @@
       }, 4000);
     }
 
-    // FIXED: Load queue for specific date (matching user structure)
+    // PRESERVING: Load queue for specific date (matching user structure)
     function loadQueueForDate(date) {
       console.log(`Loading queue for date: ${date}`);
       selectedDate = date;
       const queueList = document.getElementById('queueList');
       
-      // FIXED: Match user structure - queues/{date}
+      // PRESERVING: Match user structure - queues/{date}
       const queueRef = db.ref(`queues/${date}`);
       
       queueRef.on('value', (snapshot) => {
@@ -776,7 +867,7 @@
       });
     }
 
-    // FIXED: Real Remove Patient Function (with date)
+    // PRESERVING: Real Remove Patient Function (with date)
     function removePatient(patientId, patientName, date) {
       if (confirm(`⚠️ Are you sure you want to remove ${patientName} from the queue?\n\nThis action cannot be undone.`)) {
         console.log(`Removing patient: ${patientId} from ${date}`);
@@ -794,7 +885,7 @@
       }
     }
 
-    // FIXED: Real Emergency Function (with date)
+    // PRESERVING: Real Emergency Function (with date)
     function markEmergency(patientId, patientName, date) {
       if (confirm(`🚨 Mark ${patientName} as EMERGENCY priority?\n\nThis will move them to the front of the queue.`)) {
         console.log(`Marking as emergency: ${patientId} in ${date}`);
@@ -816,7 +907,7 @@
       }
     }
 
-    // FIXED: Real Next Person Function (with date)
+    // PRESERVING: Real Next Person Function (with date)
     function nextPerson() {
       if (currentQueueData.length === 0) {
         showNotification('📋 Queue is empty - No patients to call', 'info');
@@ -857,6 +948,8 @@
       loadQueueForDate(today);
     });
   </script>
+  
+  <!-- PRESERVING ALL ORIGINAL SCRIPTS -->
   <script src="userAdmin.js"></script>
 </body>
 </html>
