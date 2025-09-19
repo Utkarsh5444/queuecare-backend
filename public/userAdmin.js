@@ -68,7 +68,7 @@ function trackQueuePosition(userId, timestamp, name, phone, date, hospital, serv
     const position = sorted.findIndex(([key, val]) => key === userId) + 1;
     const estWait = (position - 1) * 5;
 
-    const msg = You are #${position} in the queue. Est. wait: ${estWait} mins.;
+    const msg = 'You are' #${position} 'in the queue. Est. wait: '${estWait} 'mins.';
     const positionMsg = document.getElementById("positionMsg");
     positionMsg.innerText = msg;
 
@@ -105,7 +105,7 @@ function trackQueuePosition(userId, timestamp, name, phone, date, hospital, serv
     }
 
     // WhatsApp Link
-    const waText = Hi ${name}, you're #${position} in the queue for ${service} at ${hospital} on ${date}. Estimated wait: ${estWait} mins.;
+    const waText = `Hi ${name}, you're #${position} in the queue for ${service} at ${hospital} on ${date}. Estimated wait: ${estWait} mins.`;
     const waLink = https://wa.me/91${phone}?text=${encodeURIComponent(waText)};
     const waBtn = document.createElement("a");
     waBtn.href = waLink;
@@ -221,3 +221,4 @@ function promoteToEmergency(userId) {
 if (document.querySelector(".admin-panel")) {
   renderQueueList();
 }
+
