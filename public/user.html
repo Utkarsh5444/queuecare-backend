@@ -9,7 +9,6 @@
   <!-- Include QR Code library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
   <style>
-    /* All your existing styles remain exactly the same */
     /* Header Styling to Match the Image */
     nav {
       background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%) !important;
@@ -374,12 +373,19 @@
       border: 2px solid #bbf7d0 !important;
       box-shadow: 0 8px 40px rgba(22, 163, 74, 0.12) !important;
       border-radius: 20px !important;
+      padding: 2rem !important;
+      margin: 2rem auto !important;
+      max-width: 600px !important;
     }
     .form-container input {
       border: 2px solid #bbf7d0 !important;
       border-radius: 12px !important;
       transition: all 0.3s ease !important;
       color: #166534 !important;
+      width: 100% !important;
+      padding: 12px !important;
+      margin: 10px 0 !important;
+      font-size: 16px !important;
     }
     .form-container input:focus {
       border-color: #16a34a !important;
@@ -397,6 +403,10 @@
       font-weight: 600 !important;
       box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3) !important;
       transition: all 0.3s ease !important;
+      width: 100% !important;
+      padding: 15px !important;
+      font-size: 16px !important;
+      margin: 10px 0 !important;
     }
     .form-container button:hover {
       background: linear-gradient(135deg, #15803d, #059669) !important;
@@ -415,16 +425,29 @@
       border: 3px solid #16a34a !important;
       border-radius: 20px !important;
       box-shadow: 0 10px 50px rgba(22, 163, 74, 0.2) !important;
+      padding: 2rem !important;
+      margin: 2rem auto !important;
+      max-width: 600px !important;
     }
     #ticket h2 {
       color: #166534 !important;
       border-bottom: 2px solid #bbf7d0 !important;
+      text-align: center !important;
+      padding-bottom: 1rem !important;
     }
     #ticket p {
       color: #15803d !important;
+      margin: 10px 0 !important;
+      font-size: 16px !important;
     }
     #ticket strong {
       color: #14532d !important;
+    }
+    #ticket img {
+      display: block !important;
+      margin: 20px auto !important;
+      border-radius: 10px !important;
+      border: 2px solid #bbf7d0 !important;
     }
     #printBtn {
       background: linear-gradient(135deg, #16a34a, #10b981) !important;
@@ -432,6 +455,8 @@
       border: none !important;
       border-radius: 12px !important;
       box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3) !important;
+      padding: 12px 20px !important;
+      margin: 10px 5px !important;
     }
     #printBtn:hover {
       background: linear-gradient(135deg, #15803d, #059669) !important;
@@ -445,6 +470,7 @@
       display: inline-block !important;
       text-align: center !important;
       box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3) !important;
+      margin: 10px 5px !important;
     }
     /* Position Message - Green Theme */
     #positionMsg {
@@ -454,6 +480,8 @@
       border-radius: 12px !important;
       padding: 15px !important;
       font-weight: 600 !important;
+      text-align: center !important;
+      margin: 20px 0 !important;
     }
     /* Global overrides for any remaining blue elements */
     .blue, .text-blue, .bg-blue, [class*="blue"] {
@@ -563,40 +591,28 @@
     </div>
   </div>
 </nav>
+
 <!-- Main Content -->
 <main>
   <h1>Digital Queue for Healthcare</h1>
   <p class="subtitle">Helping patients wait less and get care faster.</p>
+  
   <!-- Hospital Selection -->
   <section class="hospital-selection">
     <h2 class="section-title">Select Hospital</h2>
     <div class="hospital-list">
-      <div class="hospital-card active">Promhex Multispeciality Hospital</div>
-      <div class="hospital-card">Felix Hospital - Greater Noida</div>
-      <div class="hospital-card">Riverdale Healthcare</div>
-      <div class="hospital-card">Yatharth Super Speciality Hospital</div>
-      <div class="hospital-card">Apollo Spectra Hospital</div>
+      <div class="hospital-card active" data-hospital="Promhex Multispeciality Hospital">Promhex Multispeciality Hospital</div>
+      <div class="hospital-card" data-hospital="Felix Hospital - Greater Noida">Felix Hospital - Greater Noida</div>
+      <div class="hospital-card" data-hospital="Riverdale Healthcare">Riverdale Healthcare</div>
+      <div class="hospital-card" data-hospital="Yatharth Super Speciality Hospital">Yatharth Super Speciality Hospital</div>
+      <div class="hospital-card" data-hospital="Apollo Spectra Hospital">Apollo Spectra Hospital</div>
     </div>
   </section>
+  
   <!-- Services Section -->
   <section class="services-section">
     <div class="services-header">
       <h2 class="services-title">Available Services</h2>
-        </div>
-        <div class="dropdown-list" id="serviceList">
-          <div class="dropdown-item" data-value="all">All Services</div>
-          <div class="dropdown-item" data-value="general">General Consultation</div>
-          <div class="dropdown-item" data-value="pediatrics">Pediatrics</div>
-          <div class="dropdown-item" data-value="blood-test">Blood Test</div>
-          <div class="dropdown-item" data-value="imaging">Diagnostic Imaging</div>
-          <div class="dropdown-item" data-value="dental">Dental Checkup</div>
-          <div class="dropdown-item" data-value="eye">Eye Examination</div>
-          <div class="dropdown-item" data-value="cardiology">Cardiology</div>
-          <div class="dropdown-item" data-value="vaccination">Vaccination</div>
-          <div class="dropdown-item" data-value="mental-health">Mental Health Support</div>
-          <div class="dropdown-item" data-value="orthopedics">Orthopedics</div>
-        </div>
-      </div>
     </div>
     <div class="services-grid">
       <div class="service-card" data-service="general"><div class="service-icon">👨‍⚕️</div><div class="service-name">General Consultation</div></div>
@@ -611,6 +627,7 @@
       <div class="service-card" data-service="orthopedics"><div class="service-icon">🦴</div><div class="service-name">Orthopedics</div></div>
     </div>
   </section>
+  
   <!-- Queue Form -->
   <div class="form-container">
     <input type="text" id="name" placeholder="Your name" />
@@ -620,23 +637,28 @@
     <button id="leaveBtn" onclick="leaveQueue()" style="display:none;">Leave Queue</button>
     <p id="positionMsg"></p>
   </div>
+  
   <!-- Ticket Display -->
   <div id="ticket" style="display:none;">
-    <h2>🎟 Your Ticket</h2>
+    <h2>🎟 Your AyurSutra Hospital Ticket</h2>
     <p><strong>Name:</strong> <span id="ticketName"></span></p>
     <p><strong>Phone:</strong> <span id="ticketPhone"></span></p>
     <p><strong>Date:</strong> <span id="ticketDate"></span></p>
+    <p><strong>Hospital:</strong> <span id="ticketHospital"></span></p>
+    <p><strong>Service:</strong> <span id="ticketService"></span></p>
     <p><strong>Queue Number:</strong> <span id="ticketPosition"></span></p>
     <img id="qrCode" alt="QR Code" />
     <button id="printBtn" onclick="printTicket()">🖨 Print Ticket</button>
-      <a id="waBtn" href="#" onclick="sendWhatsAppMessage()" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
+    <a id="waBtn" href="#" onclick="sendWhatsAppMessage()">📱 Send via WhatsApp</a>
   </div>
 </main>
+
 <!-- Firebase SDK --> 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-<!-- Firebase Config & Auth Display -->
+
+<!-- Firebase Config & Complete JavaScript -->
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
@@ -649,6 +671,12 @@
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
+  
+  // Global variables for selections
+  let selectedHospital = "Promhex Multispeciality Hospital"; // Default selection
+  let selectedService = null;
+  
+  // Firebase Auth
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       const displayName = user.displayName;
@@ -660,6 +688,7 @@
       document.getElementById("avatar").textContent = initials;
     }
   });
+  
   document.getElementById("logoutBtn").addEventListener("click", () => {
     firebase.auth().signOut().then(() => {
       alert("You have been logged out.");
@@ -669,14 +698,68 @@
     });
   });
 
-  // Join Queue Function (QR system completely unchanged)
+  // Hospital and Service Selection - Fixed Implementation
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing selections...');
+    
+    // Hospital selection logic
+    const hospitalCards = document.querySelectorAll('.hospital-card');
+    console.log('Found hospital cards:', hospitalCards.length);
+    
+    hospitalCards.forEach(card => {
+      card.addEventListener('click', function() {
+        console.log('Hospital card clicked:', this.textContent.trim());
+        // Remove active class from all cards
+        hospitalCards.forEach(c => c.classList.remove('active'));
+        // Add active class to clicked card
+        this.classList.add('active');
+        // Update selected hospital
+        selectedHospital = this.textContent.trim();
+        console.log('Selected hospital:', selectedHospital);
+      });
+    });
+
+    // Service selection logic
+    const serviceCards = document.querySelectorAll('.service-card');
+    console.log('Found service cards:', serviceCards.length);
+    
+    serviceCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const serviceName = this.querySelector('.service-name').textContent.trim();
+        console.log('Service card clicked:', serviceName);
+        // Remove selected class from all cards
+        serviceCards.forEach(c => c.classList.remove('selected'));
+        // Add selected class to clicked card
+        this.classList.add('selected');
+        // Update selected service
+        selectedService = serviceName;
+        console.log('Selected service:', selectedService);
+      });
+    });
+  });
+
+  // Join Queue Function - Complete Implementation
   function joinQueue() {
+    console.log('Join queue called');
+    console.log('Current selections:', { selectedHospital, selectedService });
+    
     const name = document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const date = document.getElementById('appointmentDate').value;
     
+    // Validation
     if (!name || !phone || !date) {
       alert('Please fill all fields to join the queue');
+      return;
+    }
+    
+    if (!selectedHospital) {
+      alert('Please select a hospital');
+      return;
+    }
+    
+    if (!selectedService) {
+      alert('Please select a service');
       return;
     }
 
@@ -688,22 +771,26 @@
     // Generate random queue number
     const queueNumber = Math.floor(Math.random() * 100) + 1;
     
-    const ticketData = {
-      name: name,
-      phone: phone,
-      date: date,
-      position: queueNumber
-    };
-    
     // Update ticket display
     document.getElementById('ticketName').textContent = name;
     document.getElementById('ticketPhone').textContent = phone;
     document.getElementById('ticketDate').textContent = date;
+    document.getElementById('ticketHospital').textContent = selectedHospital;
+    document.getElementById('ticketService').textContent = selectedService;
     document.getElementById('ticketPosition').textContent = queueNumber;
     
-    // Generate QR code (keeping this exactly as it was)
+    // Generate QR code
+    const qrData = `AyurSutra Hospital Queue
+Patient: ${name}
+Phone: ${phone}
+Date: ${date}
+Hospital: ${selectedHospital}
+Service: ${selectedService}
+Queue: ${queueNumber}
+Time: ${new Date().toLocaleString()}`;
+    
     const qrCodeImg = document.getElementById('qrCode');
-    qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Patient:${name},Phone:${phone},Date:${date},Queue:${queueNumber}`;
+    qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}`;
     
     // Show ticket
     document.getElementById('ticket').style.display = 'block';
@@ -714,7 +801,7 @@
       `✅ Successfully joined queue! You are number ${queueNumber}. Estimated wait time: ${waitTime} minutes.`;
     document.getElementById('positionMsg').style.display = 'block';
 
-    // Hide form inputs
+    // Hide form inputs and show leave button
     document.getElementById('name').style.display = 'none';
     document.getElementById('phone').style.display = 'none';
     document.getElementById('appointmentDate').style.display = 'none';
@@ -725,14 +812,15 @@
     document.getElementById('ticket').scrollIntoView({ behavior: 'smooth' });
   }
 
-  // UPDATED: WhatsApp Function with exact format you requested
+  // WhatsApp Function with your exact format
   function sendWhatsAppMessage() {
     const name = document.getElementById('ticketName').textContent;
     const phone = document.getElementById('ticketPhone').textContent;
     const date = document.getElementById('ticketDate').textContent;
     const position = document.getElementById('ticketPosition').textContent;
+    const hospital = document.getElementById('ticketHospital').textContent;
+    const service = document.getElementById('ticketService').textContent;
     
-    // Current date and time in the exact format you specified
     const now = new Date();
     const bookingTime = now.toLocaleString('en-IN', {
       day: '2-digit',
@@ -744,7 +832,6 @@
       hour12: true
     });
 
-    // Exact WhatsApp message format as requested
     const message = `🏥 *AyurSutra Hospital - Digital Queue*
 
 🎟️ *Your Appointment Details:*
@@ -752,6 +839,8 @@
 👤 *Patient:* ${name}
 📞 *Phone:* ${phone}
 📅 *Date:* ${date}
+🏥 *Hospital:* ${hospital}
+⚕️ *Service:* ${service}
 🔢 *Queue Number:* ${position}
 ⏰ *Booked:* ${bookingTime}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -795,16 +884,22 @@ _This is an automated message from AyurSutra Digital Queue System_`;
       document.getElementById('phone').value = '';
       document.getElementById('appointmentDate').value = '';
       
+      // Reset selections
+      document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+      selectedService = null;
+      
       alert('You have successfully left the queue.');
     }
   }
 
-  // Print function (keeping original functionality)
+  // Print function
   function printTicket() {
     const printWindow = window.open('', '_blank');
     const name = document.getElementById('ticketName').textContent;
     const phone = document.getElementById('ticketPhone').textContent;
     const date = document.getElementById('ticketDate').textContent;
+    const hospital = document.getElementById('ticketHospital').textContent;
+    const service = document.getElementById('ticketService').textContent;
     const position = document.getElementById('ticketPosition').textContent;
     
     printWindow.document.write(`
@@ -829,6 +924,8 @@ _This is an automated message from AyurSutra Digital Queue System_`;
               <p><strong>Patient Name:</strong> ${name}</p>
               <p><strong>Phone Number:</strong> ${phone}</p>
               <p><strong>Appointment Date:</strong> ${date}</p>
+              <p><strong>Hospital:</strong> ${hospital}</p>
+              <p><strong>Service:</strong> ${service}</p>
               <p><strong>Queue Number:</strong> ${position}</p>
               <p><strong>Issued Time:</strong> ${new Date().toLocaleString()}</p>
             </div>
@@ -854,8 +951,5 @@ _This is an automated message from AyurSutra Digital Queue System_`;
     }, 500);
   }
 </script>
-<!-- Custom JS -->
-<script src="userAdmin.js"></script>
-<script src="service.js"></script>
 </body>
 </html>
