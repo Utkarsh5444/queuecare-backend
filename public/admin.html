@@ -39,7 +39,7 @@
     }
 
     .nav-logo::before {
-      content: 'logo.jpg' !important;
+      content: '🌿' !important;
       font-size: 1.8rem !important;
     }
 
@@ -142,6 +142,7 @@
       box-shadow: 0 4px 20px rgba(22, 163, 74, 0.08) !important;
       position: relative !important;
       overflow: hidden !important;
+      animation: slideIn 0.5s ease-out !important;
     }
 
     .queue-item::before {
@@ -465,6 +466,39 @@
       50% { transform: translateY(-10px); }
     }
 
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Loading State */
+    .loading-state {
+      text-align: center !important;
+      padding: 3rem !important;
+      color: var(--primary-green) !important;
+    }
+
+    .loading-spinner {
+      width: 50px !important;
+      height: 50px !important;
+      border: 4px solid var(--light-green) !important;
+      border-top: 4px solid var(--primary-green) !important;
+      border-radius: 50% !important;
+      animation: spin 1s linear infinite !important;
+      margin: 0 auto 1rem !important;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .queue-item {
@@ -510,22 +544,6 @@
       background-color: var(--primary-green) !important;
     }
 
-    /* Loading animations for dynamic feel */
-    @keyframes slideIn {
-      0% {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .queue-item {
-      animation: slideIn 0.5s ease-out !important;
-    }
-
     /* Notification styles for better UX */
     .notification {
       position: fixed;
@@ -566,7 +584,13 @@
   <main class="admin-panel">
     <h1>Queue Administration</h1>
     <p class="subtitle">View and manage the current queue in real-time with enhanced controls.</p>
-    <ul id="queueList" class="queue-list"></ul>
+    <ul id="queueList" class="queue-list">
+      <!-- Loading state initially -->
+      <li class="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Loading queue data...</p>
+      </li>
+    </ul>
     <button class="admin-btn" onclick="nextPerson()">Call Next Patient</button>
   </main>
 
@@ -574,7 +598,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   
-  <!-- Firebase Config & Enhanced Admin Functions -->
+  <!-- FIXED: Real Firebase Integration -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyChiv7yPoDxaae7mPOqgzuEQtoGmp4KdMU",
@@ -588,11 +612,8 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Keep the nextPerson function exactly as it was
-    function nextPerson() {
-      // Your existing nextPerson function logic here
-      alert("Calling next person in queue");
-    }
+    // Global queue data storage
+    let currentQueueData = [];
 
     // Enhanced notification system
     function showNotification(message, type = 'info') {
@@ -621,81 +642,177 @@
       }, 4000);
     }
 
-    // Example queue data rendering (keeping structure intact)
-    function renderQueueItems() {
+    // FIXED: Real Firebase Queue Loading
+    function loadRealTimeQueue() {
+      console.log('Loading real-time queue data...');
       const queueList = document.getElementById('queueList');
       
-      // Sample data for demonstration
-      const sampleQueue = [
-        { id: '1', name: 'John Doe', phone: '9876543210', priority: 'normal' },
-        { id: '2', name: 'Jane Smith', phone: '9876543211', priority: 'emergency' },
-        { id: '3', name: 'Mike Johnson', phone: '9876543212', priority: 'normal' }
-      ];
+      // Listen to the general queue path (adjust this to match your Firebase structure)
+      const queueRef = db.ref('queue');
+      
+      queueRef.on('value', (snapshot) => {
+        console.log('Firebase data received:', snapshot.val());
+        const data = snapshot.val();
+        currentQueueData = [];
+        queueList.innerHTML = '';
 
-      queueList.innerHTML = '';
+        if (!data) {
+          console.log('No queue data found');
+          queueList.innerHTML = `
+            <li class="empty-state">
+              <div class="empty-icon">🏥</div>
+              <h3>No patients in queue</h3>
+              <p>Queue is currently empty. New patients will appear here automatically.</p>
+            </li>
+          `;
+          return;
+        }
 
-      if (sampleQueue.length === 0) {
+        // Convert Firebase data to array and sort by timestamp
+        Object.keys(data).forEach(key => {
+          const patient = data[key];
+          patient.id = key;
+          currentQueueData.push(patient);
+        });
+
+        // Sort by timestamp (oldest first) and emergency priority
+        currentQueueData.sort((a, b) => {
+          // Emergency patients first
+          if (a.priority === 'emergency' && b.priority !== 'emergency') return -1;
+          if (b.priority === 'emergency' && a.priority !== 'emergency') return 1;
+          // Then by timestamp
+          return (a.timestamp || 0) - (b.timestamp || 0);
+        });
+
+        console.log('Processed queue data:', currentQueueData);
+
+        // Render each patient in the queue
+        currentQueueData.forEach((patient, index) => {
+          const li = document.createElement('li');
+          li.className = `queue-item ${patient.priority || 'normal'}`;
+          li.setAttribute('data-patient-id', patient.id);
+          
+          const statusClass = patient.priority === 'emergency' ? 'status-emergency' : 'status-waiting';
+          const priorityLabel = patient.priority === 'emergency' ? '🚨 EMERGENCY' : `#${index + 1}`;
+          
+          // Format timestamp
+          const timestamp = patient.timestamp ? new Date(patient.timestamp).toLocaleTimeString() : 'Unknown';
+          const joinedTime = patient.timestamp ? new Date(patient.timestamp).toLocaleString() : 'Unknown';
+          
+          li.innerHTML = `
+            <div class="queue-info">
+              <span class="status-indicator ${statusClass}"></span>
+              <strong>${priorityLabel} - ${patient.name || 'Unknown Patient'}</strong>
+              <br>
+              <span style="color: #15803d; font-size: 0.9rem;">
+                📞 ${patient.phone || 'N/A'} | 📅 ${patient.date || 'Today'} | ⏰ Joined: ${timestamp}
+              </span>
+              ${patient.hospital ? `<br><span style="color: #15803d; font-size: 0.8rem;">🏥 ${patient.hospital}</span>` : ''}
+              ${patient.service ? `<br><span style="color: #15803d; font-size: 0.8rem;">⚕️ ${patient.service}</span>` : ''}
+            </div>
+            <div class="action-buttons">
+              <button class="emergency-btn" onclick="markEmergency('${patient.id}', '${patient.name || 'Patient'}')">
+                Emergency
+              </button>
+              <button class="remove-btn" onclick="removePatient('${patient.id}', '${patient.name || 'Patient'}')">
+                Remove
+              </button>
+            </div>
+          `;
+          queueList.appendChild(li);
+        });
+
+        showNotification(`📊 Queue updated: ${currentQueueData.length} patients`, 'info');
+      }, (error) => {
+        console.error('Firebase error:', error);
         queueList.innerHTML = `
           <li class="empty-state">
-            <div class="empty-icon">🏥</div>
-            <h3>No patients in queue</h3>
-            <p>Queue is currently empty. New patients will appear here.</p>
+            <div class="empty-icon">❌</div>
+            <h3>Error loading queue</h3>
+            <p>Unable to connect to Firebase. Please check your connection.</p>
           </li>
         `;
-        return;
-      }
-
-      sampleQueue.forEach((patient, index) => {
-        const li = document.createElement('li');
-        li.className = `queue-item ${patient.priority || 'normal'}`;
-        li.setAttribute('data-patient-id', patient.id);
-        
-        const statusClass = patient.priority === 'emergency' ? 'status-emergency' : 'status-waiting';
-        const priorityLabel = patient.priority === 'emergency' ? '🚨 EMERGENCY' : `#${index + 1}`;
-        
-        li.innerHTML = `
-          <div class="queue-info">
-            <span class="status-indicator ${statusClass}"></span>
-            <strong>${priorityLabel} - ${patient.name}</strong>
-            <br>
-            <span style="color: #15803d; font-size: 0.9rem;">
-              📞 ${patient.phone} | 📅 Today | ⏰ ${new Date().toLocaleTimeString()}
-            </span>
-          </div>
-          <div class="action-buttons">
-            <button class="emergency-btn" onclick="markEmergency('${patient.id}', '${patient.name}')">
-              Emergency
-            </button>
-            <button class="remove-btn" onclick="removePatient('${patient.id}', '${patient.name}')">
-              Remove
-            </button>
-          </div>
-        `;
-        queueList.appendChild(li);
+        showNotification('❌ Failed to load queue data', 'error');
       });
     }
 
-    // Dynamic button functions (keeping functionality intact)
+    // FIXED: Real Remove Patient Function
     function removePatient(patientId, patientName) {
-      if (confirm(`⚠️ Remove ${patientName} from queue?`)) {
-        showNotification(`✅ ${patientName} removed from queue`, 'success');
-        // Your existing remove logic here
+      if (confirm(`⚠️ Are you sure you want to remove ${patientName} from the queue?\n\nThis action cannot be undone.`)) {
+        console.log('Removing patient:', patientId);
+        
+        // Remove from Firebase
+        db.ref(`queue/${patientId}`).remove()
+          .then(() => {
+            console.log(`Patient ${patientName} removed successfully`);
+            showNotification(`✅ ${patientName} has been removed from the queue`, 'success');
+          })
+          .catch(error => {
+            console.error('Error removing patient:', error);
+            showNotification(`❌ Failed to remove ${patientName}`, 'error');
+          });
       }
     }
 
+    // FIXED: Real Emergency Function
     function markEmergency(patientId, patientName) {
-      if (confirm(`🚨 Mark ${patientName} as EMERGENCY?`)) {
-        showNotification(`🚨 ${patientName} marked as EMERGENCY`, 'emergency');
-        // Your existing emergency logic here
+      if (confirm(`🚨 Mark ${patientName} as EMERGENCY priority?\n\nThis will move them to the front of the queue.`)) {
+        console.log('Marking as emergency:', patientId);
+        
+        // Update priority in Firebase
+        const updates = {};
+        updates[`queue/${patientId}/priority`] = 'emergency';
+        updates[`queue/${patientId}/timestamp`] = Date.now() - 1000000; // Move to front
+        
+        db.ref().update(updates)
+          .then(() => {
+            console.log(`${patientName} marked as emergency`);
+            showNotification(`🚨 ${patientName} marked as EMERGENCY - Moved to front of queue`, 'emergency');
+          })
+          .catch(error => {
+            console.error('Error marking emergency:', error);
+            showNotification(`❌ Failed to mark ${patientName} as emergency`, 'error');
+          });
       }
     }
 
-    // Initialize on page load
+    // FIXED: Real Next Person Function
+    function nextPerson() {
+      if (currentQueueData.length === 0) {
+        showNotification('📋 Queue is empty - No patients to call', 'info');
+        alert('📋 Queue is empty - No patients to call');
+        return;
+      }
+
+      const nextPatient = currentQueueData[0];
+      const patientName = nextPatient.name || 'Unknown Patient';
+      
+      if (confirm(`📢 Call ${patientName} to the consultation room?\n\nThis will remove them from the queue.`)) {
+        // Remove the patient from Firebase (they've been called)
+        db.ref(`queue/${nextPatient.id}`).remove()
+          .then(() => {
+            showNotification(`📢 Called: ${patientName} - Please proceed to consultation room`, 'success');
+            console.log(`Called and removed: ${patientName}`);
+          })
+          .catch(error => {
+            console.error('Error calling patient:', error);
+            showNotification(`❌ Failed to call ${patientName}`, 'error');
+          });
+      }
+    }
+
+    // Initialize real-time queue loading when page loads
     window.addEventListener('load', function() {
-      renderQueueItems(); // Remove this line in production - use your actual data
+      console.log('Page loaded, initializing real-time queue...');
+      loadRealTimeQueue();
+    });
+
+    // Also initialize when DOM is ready (backup)
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM ready, initializing real-time queue...');
+      loadRealTimeQueue();
     });
   </script>
   <script src="userAdmin.js"></script>
 </body>
 </html>
-
