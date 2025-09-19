@@ -7,50 +7,93 @@
   <link rel="stylesheet" href="userService.css" />
   <link rel="stylesheet" href="userAdmin.css">
   <style>
-    /* Header Styling to Match the Image */
+    /* Enhanced Header Styling to Match Image Exactly */
     nav {
-      background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%) !important;
-      padding: 0 2rem !important;
-      height: 70px !important;
+      background: linear-gradient(135deg, #16a34a 0%, #22c55e 50%, #10b981 100%) !important;
+      padding: 0 1.5rem !important;
+      height: 64px !important;
       display: flex !important;
       align-items: center !important;
       justify-content: space-between !important;
-      box-shadow: 0 2px 10px rgba(22, 163, 74, 0.1) !important;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.15), inset 0 1px 0 rgba(255,255,255,0.1) !important;
       position: relative !important;
       z-index: 1000 !important;
+      backdrop-filter: blur(10px) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.1) !important;
     }
 
-    /* Logo Section */
+    nav::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: nav-shimmer 3s infinite;
+    }
+
+    @keyframes nav-shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* Logo Section - Enhanced */
     .logo {
       display: flex !important;
       align-items: center !important;
-      gap: 15px !important;
+      gap: 12px !important;
+      position: relative !important;
+      z-index: 10 !important;
     }
 
     .logo img {
-      height: 50px !important;
-      width: 50px !important;
-      border-radius: 8px !important;
-      background: white !important;
-      padding: 2px !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+      height: 44px !important;
+      width: 44px !important;
+      border-radius: 10px !important;
+      background: linear-gradient(135deg, white, #f8fafc) !important;
+      padding: 3px !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8) !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      border: 1px solid rgba(255,255,255,0.2) !important;
+    }
+
+    .logo img:hover {
+      transform: scale(1.05) rotate(2deg) !important;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.9) !important;
     }
 
     .logo span {
-      color: white !important;
-      font-size: 28px !important;
-      font-weight: 700 !important;
-      letter-spacing: -0.5px !important;
+      background: linear-gradient(135deg, #ffffff, #f0fdf4) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      font-size: 26px !important;
+      font-weight: 800 !important;
+      letter-spacing: -1px !important;
       margin: 0 !important;
+      position: relative !important;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
     }
 
-    /* Navigation Menu */
+    .logo span::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      border-radius: 1px;
+    }
+
+    /* Navigation Menu - Premium Styling */
     nav ul {
       display: flex !important;
       list-style: none !important;
       margin: 0 !important;
       padding: 0 !important;
-      gap: 2rem !important;
+      gap: 0.5rem !important;
       align-items: center !important;
     }
 
@@ -58,143 +101,436 @@
       color: white !important;
       text-decoration: none !important;
       font-weight: 500 !important;
-      font-size: 16px !important;
-      padding: 8px 16px !important;
-      border-radius: 6px !important;
-      transition: all 0.3s ease !important;
+      font-size: 15px !important;
+      padding: 10px 18px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
       position: relative !important;
+      overflow: hidden !important;
+      backdrop-filter: blur(10px) !important;
+      border: 1px solid transparent !important;
+    }
+
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.5s ease;
+    }
+
+    nav ul li a:hover::before {
+      left: 100%;
     }
 
     nav ul li a:hover {
       background: rgba(255, 255, 255, 0.15) !important;
       transform: translateY(-1px) !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+      border: 1px solid rgba(255,255,255,0.2) !important;
     }
 
-    /* User Profile Section */
+    nav ul li a:active {
+      transform: translateY(0) !important;
+    }
+
+    /* User Profile Section - Ultra Premium */
     .user-profile {
       display: flex !important;
       align-items: center !important;
-      gap: 12px !important;
-      background: rgba(255, 255, 255, 0.1) !important;
-      padding: 8px 16px !important;
-      border-radius: 25px !important;
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      gap: 10px !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      backdrop-filter: blur(15px) !important;
+      padding: 6px 14px !important;
+      border-radius: 30px !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 2px 10px rgba(0,0,0,0.1) !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .user-profile::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+      animation: profile-glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes profile-glow {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
     }
 
     .avatar {
-      width: 36px !important;
-      height: 36px !important;
+      width: 38px !important;
+      height: 38px !important;
       border-radius: 50% !important;
-      background: #f59e0b !important;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
       color: white !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      font-weight: 600 !important;
+      font-weight: 700 !important;
       font-size: 14px !important;
-      border: 2px solid rgba(255, 255, 255, 0.3) !important;
+      border: 2px solid rgba(255, 255, 255, 0.4) !important;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+      position: relative !important;
+      z-index: 10 !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .avatar:hover {
+      transform: scale(1.05) !important;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255,255,255,0.3) !important;
     }
 
     #username {
       color: white !important;
-      font-weight: 500 !important;
+      font-weight: 600 !important;
       font-size: 14px !important;
       margin: 0 !important;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
+      position: relative !important;
+      z-index: 10 !important;
     }
 
     #logoutBtn {
-      background: rgba(220, 38, 38, 0.8) !important;
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.9), rgba(239, 68, 68, 0.8)) !important;
       color: white !important;
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
       padding: 6px 12px !important;
-      border-radius: 15px !important;
+      border-radius: 18px !important;
       font-size: 12px !important;
-      font-weight: 500 !important;
+      font-weight: 600 !important;
       cursor: pointer !important;
-      transition: all 0.3s ease !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
       margin: 0 !important;
+      backdrop-filter: blur(10px) !important;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2) !important;
+      position: relative !important;
+      z-index: 10 !important;
     }
 
     #logoutBtn:hover {
-      background: rgba(185, 28, 28, 0.9) !important;
+      background: linear-gradient(135deg, rgba(185, 28, 28, 0.95), rgba(220, 38, 38, 0.9)) !important;
       transform: translateY(-1px) !important;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3) !important;
     }
 
-    /* Notification Bell */
+    #logoutBtn:active {
+      transform: translateY(0) !important;
+    }
+
+    /* Notification Bell - Enhanced */
     .notification-bell {
       color: white !important;
-      font-size: 20px !important;
+      font-size: 18px !important;
       cursor: pointer !important;
-      padding: 8px !important;
+      padding: 10px !important;
       border-radius: 50% !important;
       transition: all 0.3s ease !important;
       position: relative !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+      z-index: 10 !important;
     }
 
     .notification-bell:hover {
-      background: rgba(255, 255, 255, 0.1) !important;
+      background: rgba(255, 255, 255, 0.15) !important;
+      transform: scale(1.1) !important;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
     }
 
-    /* Login Button Style */
-    .login-btn {
+    .notification-bell::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 6px;
+      height: 6px;
+      background: #ef4444;
+      border-radius: 50%;
+      border: 1px solid white;
+    }
+
+    /* Main Content - All Blue Colors Changed to Green */
+    body {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdf4 100%) !important;
+    }
+
+    h1 {
+      color: #14532d !important;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1) !important;
+    }
+
+    .subtitle {
+      color: #15803d !important;
+    }
+
+    /* Hospital Selection - Green Theme */
+    .hospital-card {
+      border: 2px solid #bbf7d0 !important;
       background: white !important;
-      color: #16a34a !important;
-      padding: 8px 20px !important;
-      border-radius: 20px !important;
-      font-weight: 600 !important;
-      text-decoration: none !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 8px !important;
       transition: all 0.3s ease !important;
-      border: none !important;
-      cursor: pointer !important;
+      box-shadow: 0 2px 10px rgba(22, 163, 74, 0.08) !important;
     }
 
-    .login-btn:hover {
+    .hospital-card:hover {
+      border-color: #16a34a !important;
       background: #f0fdf4 !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.15) !important;
+      transform: translateY(-2px) !important;
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
+    .hospital-card.active {
+      background: linear-gradient(135deg, #16a34a, #10b981) !important;
+      color: white !important;
+      border-color: #16a34a !important;
+      box-shadow: 0 6px 25px rgba(22, 163, 74, 0.25) !important;
+    }
+
+    /* Services Section - Green Theme */
+    .services-title, .section-title {
+      color: #166534 !important;
+      font-weight: 700 !important;
+    }
+
+    .dropdown-item {
+      color: #15803d !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .dropdown-item:hover {
+      background: #dcfce7 !important;
+      color: #166534 !important;
+    }
+
+    .service-card {
+      background: white !important;
+      border: 2px solid #bbf7d0 !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 2px 10px rgba(22, 163, 74, 0.08) !important;
+    }
+
+    .service-card:hover {
+      border-color: #16a34a !important;
+      background: #f0fdf4 !important;
+      transform: translateY(-5px) !important;
+      box-shadow: 0 8px 30px rgba(22, 163, 74, 0.2) !important;
+    }
+
+    .service-card.selected {
+      background: linear-gradient(135deg, #16a34a, #10b981) !important;
+      color: white !important;
+      border-color: #16a34a !important;
+      box-shadow: 0 8px 30px rgba(22, 163, 74, 0.3) !important;
+    }
+
+    .service-name {
+      color: #166534 !important;
+      font-weight: 600 !important;
+    }
+
+    .service-card.selected .service-name {
+      color: white !important;
+    }
+
+    /* Form Container - Green Theme */
+    .form-container {
+      background: white !important;
+      border: 2px solid #bbf7d0 !important;
+      box-shadow: 0 8px 40px rgba(22, 163, 74, 0.12) !important;
+      border-radius: 20px !important;
+    }
+
+    .form-container input {
+      border: 2px solid #bbf7d0 !important;
+      border-radius: 12px !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .form-container input:focus {
+      border-color: #16a34a !important;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1) !important;
+      outline: none !important;
+    }
+
+    .form-container button {
+      background: linear-gradient(135deg, #16a34a, #10b981) !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 12px !important;
+      font-weight: 600 !important;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .form-container button:hover {
+      background: linear-gradient(135deg, #15803d, #059669) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 25px rgba(22, 163, 74, 0.4) !important;
+    }
+
+    #leaveBtn {
+      background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+    }
+
+    #leaveBtn:hover {
+      background: linear-gradient(135deg, #b91c1c, #dc2626) !important;
+    }
+
+    /* Ticket Display - Green Theme */
+    #ticket {
+      background: white !important;
+      border: 3px solid #16a34a !important;
+      border-radius: 20px !important;
+      box-shadow: 0 10px 50px rgba(22, 163, 74, 0.2) !important;
+    }
+
+    #ticket h2 {
+      color: #166534 !important;
+      border-bottom: 2px solid #bbf7d0 !important;
+    }
+
+    #printBtn {
+      background: linear-gradient(135deg, #16a34a, #10b981) !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 12px !important;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3) !important;
+    }
+
+    #printBtn:hover {
+      background: linear-gradient(135deg, #15803d, #059669) !important;
+    }
+
+    #waBtn {
+      background: linear-gradient(135deg, #059669, #10b981) !important;
+      color: white !important;
+      text-decoration: none !important;
+      padding: 12px 20px !important;
+      border-radius: 12px !important;
+      display: inline-block !important;
+      text-align: center !important;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3) !important;
+    }
+
+    /* Position Message - Green Theme */
+    #positionMsg {
+      color: #15803d !important;
+      background: #dcfce7 !important;
+      border: 2px solid #bbf7d0 !important;
+      border-radius: 12px !important;
+      padding: 15px !important;
+      font-weight: 600 !important;
+    }
+
+    /* Global Green Color Override for Any Blue Elements */
+    * {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    /* Override any external CSS that might have blue colors */
+    .blue, .text-blue, .bg-blue, [class*="blue"] {
+      color: #16a34a !important;
+    }
+
+    .border-blue, [class*="border-blue"] {
+      border-color: #16a34a !important;
+    }
+
+    .bg-blue, [class*="bg-blue"] {
+      background-color: #16a34a !important;
+    }
+
+    /* Responsive Design - Perfected */
+    @media (max-width: 1024px) {
       nav {
         padding: 0 1rem !important;
-        height: 60px !important;
       }
       
       nav ul {
-        gap: 1rem !important;
+        gap: 0.3rem !important;
       }
       
       nav ul li a {
+        padding: 8px 14px !important;
         font-size: 14px !important;
-        padding: 6px 12px !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        height: 58px !important;
+        padding: 0 0.75rem !important;
+      }
+      
+      nav ul {
+        gap: 0.2rem !important;
+      }
+      
+      nav ul li a {
+        font-size: 13px !important;
+        padding: 6px 10px !important;
       }
       
       .logo span {
-        font-size: 24px !important;
+        font-size: 22px !important;
       }
       
       .user-profile {
         gap: 8px !important;
+        padding: 5px 12px !important;
+      }
+      
+      .avatar {
+        width: 34px !important;
+        height: 34px !important;
       }
     }
 
-    @media (max-width: 480px) {
-      nav ul {
-        display: none !important;
+    @media (max-width: 640px) {
+      nav ul li a {
+        padding: 5px 8px !important;
+        font-size: 12px !important;
       }
       
       .logo span {
         font-size: 20px !important;
       }
+      
+      #username {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav ul li:nth-child(n+5) {
+        display: none !important;
+      }
+      
+      .logo span {
+        font-size: 18px !important;
+      }
+    }
+
+    /* Remove floating buttons */
+    .voice-assistant,
+    .video-call-btn {
+      display: none !important;
     }
   </style>
 </head>
 <body>
-<!-- Navigation Header - Matching the Image -->
+<!-- Enhanced Navigation Header -->
 <nav>
   <div class="logo">
     <img src="1.jpg" alt="AyurSutra Logo">
@@ -211,7 +547,7 @@
     <li><a href="#reports">Reports</a></li>
   </ul>
   
-  <div style="display: flex; align-items: center; gap: 1rem;">
+  <div style="display: flex; align-items: center; gap: 0.75rem;">
     <div class="notification-bell">🔔</div>
     <div class="user-profile">
       <div class="avatar" id="avatar">SK</div>
@@ -290,14 +626,7 @@
       <a id="waBtn" href="#" target="_blank" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
   </div>
 </main>
-<!-- Voice Assistant Button -->
-  <div class="voice-assistant" onclick="startVoiceAssistant()">
-    <img src="voice.png" alt="Voice Assistant" />
-  </div>
-<!-- Video Call Button -->
-<a href="https://videocall-6nuu.onrender.com/patient.html" target="_blank" class="video-call-btn" title="Join Video Call">
-  <img src="video.png" alt="Video Call" />
-</a>
+
 <!-- Firebase SDK --> 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -327,7 +656,7 @@
     }
   });
   document.getElementById("logoutBtn").addEventListener("click", () => {
-    firebase.auth().signOut().then(() => {
+    firebase.auth().signOut().then() => {
       alert("You have been logged out.");
       window.location.href = "login.html";
     }).catch(error => {
