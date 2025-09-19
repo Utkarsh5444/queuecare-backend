@@ -6,6 +6,8 @@
   <title>AyurSutra</title>
   <link rel="stylesheet" href="userService.css" />
   <link rel="stylesheet" href="userAdmin.css">
+  <!-- Include QR Code library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
   <style>
     /* Header Styling to Match the Image */
     nav {
@@ -157,7 +159,6 @@
       color: #166534 !important;
       font-weight: 700 !important;
     }
-
     .hospital-list {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr) !important;
@@ -166,7 +167,6 @@
       margin: 2rem auto !important;
       padding: 0 1rem !important;
     }
-
     .hospital-card {
       border: 3px solid #bbf7d0 !important;
       background: linear-gradient(135deg, white 0%, #fefefe 100%) !important;
@@ -186,7 +186,6 @@
       align-items: center !important;
       justify-content: center !important;
     }
-
     .hospital-card::before {
       content: '';
       position: absolute;
@@ -197,11 +196,9 @@
       background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.1), transparent);
       transition: left 0.6s ease;
     }
-
     .hospital-card:hover::before {
       left: 100%;
     }
-
     .hospital-card::after {
       content: '🏥';
       position: absolute;
@@ -211,7 +208,6 @@
       opacity: 0.3;
       transition: all 0.4s ease;
     }
-
     .hospital-card:hover {
       border-color: #16a34a !important;
       background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%) !important;
@@ -219,12 +215,10 @@
       transform: translateY(-10px) scale(1.03) !important;
       color: #14532d !important;
     }
-
     .hospital-card:hover::after {
       transform: scale(1.3) rotate(15deg);
       opacity: 0.6;
     }
-
     .hospital-card.active {
       background: linear-gradient(135deg, #16a34a, #10b981) !important;
       color: white !important;
@@ -232,14 +226,12 @@
       box-shadow: 0 15px 40px rgba(22, 163, 74, 0.3), 0 0 0 8px rgba(22, 163, 74, 0.1) !important;
       transform: scale(1.05) !important;
     }
-
     .hospital-card.active::after {
       content: '✅';
       color: white;
       opacity: 1;
       transform: scale(1.2);
     }
-
     /* Services Section - Enhanced 3-Column Layout */
     .services-grid {
       display: grid !important;
@@ -249,7 +241,6 @@
       margin: 2rem auto !important;
       padding: 0 1rem !important;
     }
-
     .service-card {
       background: linear-gradient(135deg, white 0%, #fefefe 100%) !important;
       border: 3px solid #bbf7d0 !important;
@@ -267,7 +258,6 @@
       align-items: center !important;
       justify-content: center !important;
     }
-
     .service-card::before {
       content: '';
       position: absolute;
@@ -279,11 +269,9 @@
       transform: translateX(-100%);
       transition: transform 0.6s ease;
     }
-
     .service-card:hover::before {
       transform: translateX(100%);
     }
-
     .service-card::after {
       content: '';
       position: absolute;
@@ -296,12 +284,10 @@
       transition: transform 0.4s ease;
       opacity: 0;
     }
-
     .service-card:hover::after {
       transform: scale(1);
       opacity: 1;
     }
-
     .service-icon {
       font-size: 4rem !important;
       margin-bottom: 1rem !important;
@@ -310,12 +296,10 @@
       position: relative !important;
       z-index: 10 !important;
     }
-
     .service-card:hover .service-icon {
       transform: scale(1.3) rotate(10deg) translateY(-5px) !important;
       filter: drop-shadow(0 8px 16px rgba(22, 163, 74, 0.3)) !important;
     }
-
     .service-name {
       color: #166534 !important;
       font-weight: 700 !important;
@@ -326,19 +310,16 @@
       position: relative !important;
       z-index: 10 !important;
     }
-
     .service-card:hover {
       border-color: #16a34a !important;
       background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%) !important;
       transform: translateY(-12px) scale(1.05) !important;
       box-shadow: 0 20px 45px rgba(22, 163, 74, 0.25), 0 0 0 8px rgba(22, 163, 74, 0.06) !important;
     }
-
     .service-card:hover .service-name {
       color: #14532d !important;
       transform: translateY(-2px) !important;
     }
-
     .service-card.selected {
       background: linear-gradient(135deg, #16a34a, #10b981) !important;
       color: white !important;
@@ -346,23 +327,19 @@
       box-shadow: 0 25px 50px rgba(22, 163, 74, 0.4), 0 0 0 8px rgba(22, 163, 74, 0.1) !important;
       transform: scale(1.08) translateY(-8px) !important;
     }
-
     .service-card.selected .service-name {
       color: white !important;
       text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
     }
-
     .service-card.selected .service-icon {
       filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3)) !important;
       transform: scale(1.2) !important;
     }
-
     .service-card.selected::after {
       background: radial-gradient(circle, rgba(255,255,255, 0.1) 0%, transparent 50%);
       transform: scale(1);
       opacity: 1;
     }
-
     /* Dropdown Items Enhanced */
     .dropdown-item {
       color: #15803d !important;
@@ -372,7 +349,6 @@
       position: relative !important;
       overflow: hidden !important;
     }
-
     .dropdown-item::before {
       content: '';
       position: absolute;
@@ -383,17 +359,14 @@
       background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.1), transparent);
       transition: left 0.4s ease;
     }
-
     .dropdown-item:hover::before {
       left: 100%;
     }
-
     .dropdown-item:hover {
       background: linear-gradient(135deg, #dcfce7, #bbf7d0) !important;
       color: #166534 !important;
       transform: translateX(5px) !important;
     }
-
     /* Form Container - Green Theme */
     .form-container {
       background: white !important;
@@ -452,6 +425,23 @@
     #ticket strong {
       color: #14532d !important;
     }
+
+    /* QR Code Container */
+    #qrCodeContainer {
+      text-align: center !important;
+      margin: 20px 0 !important;
+      padding: 15px !important;
+      background: #f0fdf4 !important;
+      border-radius: 15px !important;
+      border: 2px solid #bbf7d0 !important;
+    }
+
+    #qrCode {
+      border: 3px solid #16a34a !important;
+      border-radius: 10px !important;
+      box-shadow: 0 4px 15px rgba(22, 163, 74, 0.2) !important;
+    }
+
     #printBtn {
       background: linear-gradient(135deg, #16a34a, #10b981) !important;
       color: white !important;
@@ -506,7 +496,6 @@
         font-size: 3.5rem !important;
       }
     }
-
     @media (max-width: 768px) {
       nav {
         padding: 0 1rem !important;
@@ -529,17 +518,14 @@
       .user-profile {
         gap: 8px !important;
       }
-
       .hospital-list, .services-grid {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
       }
-
       .service-icon {
         font-size: 3rem !important;
       }
     }
-
     @media (max-width: 480px) {
       nav ul {
         display: none !important;
@@ -548,24 +534,20 @@
       .logo span {
         font-size: 20px !important;
       }
-
       .service-card {
         min-height: 160px !important;
         padding: 1.5rem !important;
       }
-
       .hospital-card {
         min-height: 100px !important;
         padding: 1.5rem !important;
       }
     }
-
     /* Keyframe Animations */
     @keyframes pulse-glow {
       0%, 100% { box-shadow: 0 0 20px rgba(22, 163, 74, 0.2); }
       50% { box-shadow: 0 0 30px rgba(22, 163, 74, 0.4); }
     }
-
     @keyframes float-up {
       0% { transform: translateY(0px); }
       100% { transform: translateY(-10px); }
@@ -656,16 +638,20 @@
   </div>
   <!-- Ticket Display -->
   <div id="ticket" style="display:none;">
-    <h2>🎟 Your Ticket</h2>
+    <h2>🎟 Your AyurSutra Hospital Ticket</h2>
     <p><strong>Name:</strong> <span id="ticketName"></span></p>
     <p><strong>Phone:</strong> <span id="ticketPhone"></span></p>
     <p><strong>Date:</strong> <span id="ticketDate"></span></p>
     <p><strong>Queue Number:</strong> <span id="ticketPosition"></span></p>
-    <img id="qrCode" alt="QR Code" />
-    <button id="printBtn" onclick="printTicket()">🖨 Print Ticket</button>
-      <a id="waBtn" href="#" target="_blank" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
+    <div id="qrCodeContainer">
+      <canvas id="qrCode" style="margin: 10px 0;"></canvas>
+      <p style="font-size: 12px; color: #15803d; margin-top: 10px;">Scan this QR code to view your ticket details</p>
+    </div>
+    <button id="printBtn" onclick="printHospitalTicket()">🖨 Print Hospital Ticket</button>
+    <a id="waBtn" href="#" onclick="sendWhatsAppMessage()" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
   </div>
 </main>
+
 <!-- Firebase SDK --> 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -702,6 +688,236 @@
       alert("Logout failed: " + error.message);
     });
   });
+
+  // SAFE QR Code Generation - No dangerous URLs
+  function generateSafeQRCode(ticketData) {
+    const canvas = document.getElementById('qrCode');
+    
+    // Create safe text-only QR code content
+    const qrText = `╔════════════════════════════════╗
+║        AYURSUTRA HEALTHCARE    ║
+║      Digital Hospital Ticket  ║
+╠════════════════════════════════╣
+║ Patient: ${ticketData.name}
+║ Queue #: ${ticketData.position}
+║ Date: ${ticketData.date}
+║ Phone: ***-***-${ticketData.phone.slice(-4)}
+║ Time: ${new Date().toLocaleTimeString()}
+╠════════════════════════════════╣
+║ Status: VALID APPOINTMENT      ║
+║ Hospital: AyurSutra Healthcare ║
+║ Type: Digital Queue System     ║
+╚════════════════════════════════╝
+
+📋 INSTRUCTIONS:
+• Arrive 15 minutes early
+• Show this QR code at reception
+• Keep phone ready for updates
+• Wait for your number to be called
+
+✅ This is your official ticket
+🏥 Thank you for choosing AyurSutra!`;
+    
+    QRCode.toCanvas(canvas, qrText, {
+      width: 200,
+      height: 200,
+      colorDark: '#16a34a',
+      colorLight: '#ffffff',
+      errorCorrectionLevel: 'M'
+    }, function (error) {
+      if (error) {
+        console.error('QR Code generation error:', error);
+        // Fallback: Show simple ticket ID if QR fails
+        canvas.style.display = 'none';
+        const fallback = document.createElement('div');
+        fallback.innerHTML = `<p style="background: #f0fdf4; padding: 20px; border-radius: 10px; border: 2px solid #16a34a;">
+          <strong>Ticket ID:</strong> AYU-${Date.now().toString().slice(-8)}<br>
+          <strong>Queue:</strong> ${ticketData.position}<br>
+          <em>QR code unavailable - show this ID at reception</em>
+        </p>`;
+        canvas.parentNode.appendChild(fallback);
+      } else {
+        console.log('Safe QR Code generated successfully!');
+      }
+    });
+  }
+
+  // Enhanced Join Queue Function
+  function joinQueue() {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const date = document.getElementById('appointmentDate').value;
+    
+    if (!name || !phone || !date) {
+      alert('Please fill all fields to join the queue');
+      return;
+    }
+
+    if (phone.length < 10) {
+      alert('Please enter a valid phone number');
+      return;
+    }
+    
+    // Generate random queue number
+    const queueNumber = Math.floor(Math.random() * 100) + 1;
+    
+    const ticketData = {
+      name: name,
+      phone: phone,
+      date: date,
+      position: queueNumber
+    };
+    
+    // Update ticket display
+    document.getElementById('ticketName').textContent = name;
+    document.getElementById('ticketPhone').textContent = phone;
+    document.getElementById('ticketDate').textContent = date;
+    document.getElementById('ticketPosition').textContent = queueNumber;
+    
+    // Generate safe QR code
+    generateSafeQRCode(ticketData);
+    
+    // Show ticket
+    document.getElementById('ticket').style.display = 'block';
+    
+    // Update position message
+    const waitTime = queueNumber * 5;
+    document.getElementById('positionMsg').textContent = 
+      `✅ Successfully joined queue! You are number ${queueNumber}. Estimated wait time: ${waitTime} minutes.`;
+    document.getElementById('positionMsg').style.display = 'block';
+
+    // Hide form inputs
+    document.getElementById('name').style.display = 'none';
+    document.getElementById('phone').style.display = 'none';
+    document.getElementById('appointmentDate').style.display = 'none';
+    document.querySelector('button[onclick="joinQueue()"]').style.display = 'none';
+    document.getElementById('leaveBtn').style.display = 'block';
+
+    // Smooth scroll to ticket
+    document.getElementById('ticket').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Leave Queue Function
+  function leaveQueue() {
+    if (confirm('Are you sure you want to leave the queue?')) {
+      document.getElementById('ticket').style.display = 'none';
+      document.getElementById('positionMsg').style.display = 'none';
+      
+      // Show form inputs again
+      document.getElementById('name').style.display = 'block';
+      document.getElementById('phone').style.display = 'block';
+      document.getElementById('appointmentDate').style.display = 'block';
+      document.querySelector('button[onclick="joinQueue()"]').style.display = 'block';
+      document.getElementById('leaveBtn').style.display = 'none';
+      
+      // Clear form
+      document.getElementById('name').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('appointmentDate').value = '';
+      
+      alert('You have successfully left the queue.');
+    }
+  }
+
+  // Enhanced WhatsApp Function
+  function sendWhatsAppMessage() {
+    const name = document.getElementById('ticketName').textContent;
+    const phone = document.getElementById('ticketPhone').textContent;
+    const date = document.getElementById('ticketDate').textContent;
+    const position = document.getElementById('ticketPosition').textContent;
+    
+    const message = `🏥 *AyurSutra Hospital - Digital Queue*
+
+🎟️ *Your Appointment Details:*
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 *Patient:* ${name}
+📞 *Phone:* ${phone}
+📅 *Date:* ${date}  
+🔢 *Queue Number:* ${position}
+⏰ *Booked:* ${new Date().toLocaleString()}
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 *Instructions:*
+• Please arrive 15 minutes before your appointment
+• Show this message at the reception desk
+• Keep your phone ready for queue updates
+• Wait for your number to be called
+
+🏥 *Hospital:* AyurSutra Healthcare
+📍 *Location:* [Your Hospital Address]
+☎️ *Contact:* [Hospital Phone Number]
+
+✅ *Status:* CONFIRMED APPOINTMENT
+🌿 Thank you for choosing AyurSutra Healthcare!
+
+_This is an automated message from AyurSutra Digital Queue System_`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
+    
+    window.open(whatsappURL, '_blank');
+  }
+
+  // Enhanced Print Function (Keeping original functionality)
+  function printHospitalTicket() {
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank');
+    const name = document.getElementById('ticketName').textContent;
+    const phone = document.getElementById('ticketPhone').textContent;
+    const date = document.getElementById('ticketDate').textContent;
+    const position = document.getElementById('ticketPosition').textContent;
+    
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>AyurSutra Hospital Ticket</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            .ticket { border: 3px solid #16a34a; border-radius: 15px; padding: 30px; max-width: 400px; margin: 0 auto; }
+            .header { text-align: center; color: #16a34a; border-bottom: 2px solid #bbf7d0; padding-bottom: 15px; margin-bottom: 20px; }
+            .details { margin: 15px 0; }
+            .footer { margin-top: 30px; font-size: 12px; color: #15803d; text-align: center; }
+            .qr-placeholder { text-align: center; margin: 20px 0; padding: 20px; background: #f0fdf4; border: 2px dashed #16a34a; }
+          </style>
+        </head>
+        <body>
+          <div class="ticket">
+            <div class="header">
+              <h1>🏥 AyurSutra Healthcare</h1>
+              <h2>Digital Hospital Ticket</h2>
+            </div>
+            <div class="details">
+              <p><strong>Patient Name:</strong> ${name}</p>
+              <p><strong>Phone Number:</strong> ${phone}</p>
+              <p><strong>Appointment Date:</strong> ${date}</p>
+              <p><strong>Queue Number:</strong> ${position}</p>
+              <p><strong>Issued Time:</strong> ${new Date().toLocaleString()}</p>
+            </div>
+            <div class="qr-placeholder">
+              <p><strong>QR Code Placeholder</strong></p>
+              <p style="font-size: 10px;">Scan QR code from mobile app for digital verification</p>
+            </div>
+            <div class="footer">
+              <p><strong>Instructions:</strong></p>
+              <p>• Please arrive 15 minutes before your appointment</p>
+              <p>• Show this ticket at the reception desk</p>
+              <p>• Keep your phone ready for updates</p>
+              <p>• Wait for your number to be called</p>
+              <br>
+              <p><strong>Status:</strong> VALID APPOINTMENT</p>
+              <p>Thank you for choosing AyurSutra Healthcare!</p>
+            </div>
+          </div>
+        </body>
+      </html>
+    `);
+    
+    printWindow.document.close();
+    setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+    }, 500);
+  }
 </script>
 <!-- Custom JS -->
 <script src="userAdmin.js"></script>
