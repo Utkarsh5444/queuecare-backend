@@ -105,31 +105,7 @@ function trackQueuePosition(userId, timestamp, name, phone, date, hospital, serv
     }
 
     // WhatsApp Link
-    const waText = `🏥 *AyurSutra Hospital - Digital Queue*
-
-🎟️ *Your Appointment Details:*
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-👤 *Patient:* ${name}
-📞 *Phone:* ${phone}
-📅 *Date:* ${date}
-🔢 *Queue Number:* ${position}
-⏰ *Booked:* ${bookingTime}
-━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📋 *Instructions:*
-• Please arrive 15 minutes before your appointment
-• Show this message at the reception desk
-• Keep your phone ready for queue updates
-• Wait for your number to be called
-
-🏥 *Hospital:* AyurSutra Healthcare
-📍 *Location:* [Your Hospital Address]
-☎️ *Contact:* [Hospital Phone Number]
-
-✅ *Status:* CONFIRMED APPOINTMENT
-🌿 Thank you for choosing AyurSutra Healthcare!
-
-_This is an automated message from AyurSutra Digital Queue System_`;
+    const waText = `Hi ${name}, you're #${position} in the queue for ${service} at ${hospital} on ${date}. Estimated wait: ${estWait} mins.';
     const waLink = `https://wa.me/91${phone}?text=${encodeURIComponent(waText)}`;
     const waBtn = document.createElement("a");
     waBtn.href = waLink;
@@ -245,4 +221,5 @@ function promoteToEmergency(userId) {
 if (document.querySelector(".admin-panel")) {
   renderQueueList();
 }
+
 
