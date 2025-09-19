@@ -6,767 +6,300 @@
   <title>AyurSutra</title>
   <link rel="stylesheet" href="userService.css" />
   <link rel="stylesheet" href="userAdmin.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Include jsPDF and QR Code libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
   <style>
-    /* AyurSutra Premium Color Scheme */
+    /* AyurSutra Color Scheme Override */
     :root {
       --primary-green: #16a34a;
       --primary-green-dark: #15803d;
       --primary-green-light: #22c55e;
       --emerald: #10b981;
       --emerald-dark: #059669;
-      --emerald-light: #34d399;
       --green-50: #f0fdf4;
       --green-100: #dcfce7;
       --green-200: #bbf7d0;
-      --green-300: #86efac;
       --green-600: #16a34a;
       --green-700: #15803d;
       --green-800: #166534;
       --green-900: #14532d;
-      --gold: #f59e0b;
-      --gold-light: #fbbf24;
-      --warm-white: #fefefe;
-      --soft-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      --glow-shadow: 0 0 40px rgba(22, 163, 74, 0.15);
     }
 
-    /* Global Styling */
-    * {
-      font-family: 'Inter', sans-serif !important;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    }
-
-    body {
-      background: linear-gradient(135deg, 
-        var(--green-50) 0%, 
-        #ecfdf5 25%, 
-        #f0fdf4 50%, 
-        #dcfce7 75%, 
-        var(--green-100) 100%) !important;
-      background-attachment: fixed !important;
-      min-height: 100vh !important;
-      position: relative !important;
-    }
-
-    /* Updated Floating Background Elements */
-    body::before {
-      content: '';
-      position: fixed;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(22, 163, 74, 0.03) 0%, transparent 70%);
-      animation: float 20s ease-in-out infinite;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    body::after {
-      content: '🏥';
-      position: fixed;
-      top: 15%;
-      right: 8%;
-      font-size: 100px;
-      opacity: 0.06;
-      pointer-events: none;
-      z-index: -1;
-      animation: gentle-sway 15s ease-in-out infinite;
-    }
-
-    /* Additional floating elements */
-    .floating-element-1::before {
-      content: '💊';
-      position: fixed;
-      top: 60%;
-      left: 5%;
-      font-size: 80px;
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: -1;
-      animation: gentle-float 20s ease-in-out infinite;
-    }
-
-    .floating-element-2::before {
-      content: '🩺';
-      position: fixed;
-      bottom: 20%;
-      right: 3%;
-      font-size: 90px;
-      opacity: 0.05;
-      pointer-events: none;
-      z-index: -1;
-      animation: gentle-bounce 18s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(1deg); }
-    }
-
-    @keyframes gentle-sway {
-      0%, 100% { transform: rotate(-2deg); }
-      50% { transform: rotate(2deg); }
-    }
-
-    @keyframes gentle-float {
-      0%, 100% { transform: translateY(0px) rotate(-1deg); }
-      50% { transform: translateY(-15px) rotate(1deg); }
-    }
-
-    @keyframes gentle-bounce {
-      0%, 100% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(-10px) scale(1.02); }
-    }
-
-    /* Navigation - Premium Design */
+    /* Navigation Styling */
     nav {
-      background: linear-gradient(135deg, 
-        var(--primary-green) 0%, 
-        var(--emerald) 50%, 
-        var(--primary-green-light) 100%) !important;
-      backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-      box-shadow: 0 8px 32px rgba(22, 163, 74, 0.2), 
-                  inset 0 1px 0 rgba(255,255,255,0.1) !important;
-      position: relative !important;
-      overflow: hidden !important;
-    }
-
-    nav::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      animation: nav-shimmer 3s infinite;
-    }
-
-    @keyframes nav-shimmer {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
-
-    .logo {
-      position: relative !important;
-      z-index: 10 !important;
-    }
-
-    .logo img {
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)) !important;
-      transition: all 0.4s ease !important;
-    }
-
-    .logo:hover img {
-      transform: scale(1.05) !important;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3)) !important;
+      background: linear-gradient(135deg, var(--primary-green) 0%, var(--emerald) 100%) !important;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.15) !important;
     }
 
     .logo span {
-      background: linear-gradient(135deg, white, #f0fdf4) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-      background-clip: text !important;
-      text-shadow: none !important;
-      font-weight: 800 !important;
-      letter-spacing: -0.5px !important;
+      color: white !important;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
     }
 
     nav ul li a {
       color: white !important;
-      font-weight: 500 !important;
-      padding: 10px 20px !important;
-      border-radius: 25px !important;
-      position: relative !important;
-      overflow: hidden !important;
-    }
-
-    nav ul li a::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s ease;
-    }
-
-    nav ul li a:hover::before {
-      left: 100%;
+      transition: all 0.3s ease !important;
     }
 
     nav ul li a:hover {
-      background: rgba(255,255,255,0.15) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+      color: var(--green-100) !important;
+      background: rgba(255,255,255,0.1) !important;
+      border-radius: 8px !important;
+      padding: 8px 15px !important;
     }
 
-    /* Enhanced User Profile */
     .user-profile {
-      background: rgba(255,255,255,0.1) !important;
-      backdrop-filter: blur(10px) !important;
-      border-radius: 50px !important;
-      padding: 8px 20px !important;
-      border: 1px solid rgba(255,255,255,0.2) !important;
-      display: flex !important;
-      align-items: center !important;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1) !important;
+      color: white !important;
     }
 
     .avatar {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
+      background: var(--green-700) !important;
       color: white !important;
-      width: 40px !important;
-      height: 40px !important;
-      border-radius: 50% !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      font-weight: 700 !important;
-      font-size: 14px !important;
-      border: 2px solid rgba(255,255,255,0.3) !important;
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3) !important;
-      position: relative !important;
-      overflow: hidden !important;
-    }
-
-    .avatar::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-      animation: avatar-shine 2s infinite;
-    }
-
-    @keyframes avatar-shine {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    #username {
-      color: white !important;
-      font-weight: 600 !important;
-      font-size: 14px !important;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
+      border: 2px solid white !important;
     }
 
     #logoutBtn {
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.8), rgba(239, 68, 68, 0.8)) !important;
+      background: var(--green-700) !important;
       color: white !important;
-      border: 1px solid rgba(255,255,255,0.2) !important;
-      border-radius: 20px !important;
-      padding: 8px 16px !important;
-      font-weight: 600 !important;
-      font-size: 12px !important;
-      backdrop-filter: blur(10px) !important;
-      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2) !important;
+      border: 2px solid white !important;
+      transition: all 0.3s ease !important;
     }
 
     #logoutBtn:hover {
-      background: linear-gradient(135deg, rgba(185, 28, 28, 0.9), rgba(220, 38, 38, 0.9)) !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3) !important;
+      background: white !important;
+      color: var(--green-700) !important;
     }
 
     /* Main Content */
-    h1 {
-      background: linear-gradient(135deg, var(--green-900), var(--green-700)) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-      background-clip: text !important;
-      font-weight: 800 !important;
-      font-size: 3.5rem !important;
-      text-align: center !important;
-      letter-spacing: -2px !important;
-      margin: 2rem 0 !important;
-      position: relative !important;
+    body {
+      background: linear-gradient(135deg, var(--green-50) 0%, #ecfdf5 50%, #f0fdf4 100%) !important;
     }
 
-    h1::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 4px;
-      background: linear-gradient(90deg, var(--emerald), var(--primary-green-light));
-      border-radius: 2px;
+    h1 {
+      color: var(--green-900) !important;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1) !important;
     }
 
     .subtitle {
       color: var(--green-700) !important;
-      font-size: 1.5rem !important;
-      text-align: center !important;
-      font-weight: 500 !important;
-      margin-bottom: 3rem !important;
-      opacity: 0.9 !important;
     }
 
-    /* Hospital Selection - Card Style */
-    .hospital-selection {
-      position: relative !important;
-      margin-bottom: 4rem !important;
-    }
-
-    .section-title {
-      color: var(--green-800) !important;
-      font-weight: 700 !important;
-      font-size: 2rem !important;
-      text-align: center !important;
-      margin-bottom: 2rem !important;
-      position: relative !important;
-    }
-
-/*     .section-title::before {
-      content: '🏥';
-      position: absolute;
-      left: -50px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      animation: gentle-bounce 2s infinite;
-    } */
-
-    @keyframes gentle-bounce {
-      0%, 100% { transform: translateY(-50%); }
-      50% { transform: translateY(-60%); }
-    }
-
-    .hospital-list {
-      display: grid !important;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
-      gap: 1.5rem !important;
-      max-width: 1200px !important;
-      margin: 0 auto !important;
-    }
-
+    /* Hospital Selection */
     .hospital-card {
-      background: linear-gradient(135deg, white, #fefefe) !important;
       border: 2px solid var(--green-200) !important;
-      border-radius: 20px !important;
-      padding: 2rem !important;
-      text-align: center !important;
-      cursor: pointer !important;
-      position: relative !important;
-      overflow: hidden !important;
-      box-shadow: var(--soft-shadow) !important;
-      font-weight: 600 !important;
-      color: var(--green-800) !important;
-    }
-
-    .hospital-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.1), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .hospital-card:hover::before {
-      left: 100%;
+      background: white !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 2px 10px rgba(22, 163, 74, 0.08) !important;
     }
 
     .hospital-card:hover {
       border-color: var(--primary-green) !important;
-      transform: translateY(-8px) scale(1.02) !important;
-      box-shadow: var(--glow-shadow), var(--soft-shadow) !important;
+      background: var(--green-50) !important;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.15) !important;
+      transform: translateY(-2px) !important;
     }
 
     .hospital-card.active {
       background: linear-gradient(135deg, var(--primary-green), var(--emerald)) !important;
       color: white !important;
       border-color: var(--primary-green) !important;
-      transform: scale(1.05) !important;
-      box-shadow: var(--glow-shadow), 0 25px 50px rgba(22, 163, 74, 0.4) !important;
+      box-shadow: 0 6px 25px rgba(22, 163, 74, 0.25) !important;
     }
 
-    .hospital-card.active::after {
-      content: '✓';
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: var(--gold);
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 16px;
-    }
-
-    /* Services Section - Hospital Style Cards */
-    .services-section {
-      margin-bottom: 4rem !important;
-    }
-
+    /* Services Section */
     .services-title {
       color: var(--green-800) !important;
-      font-weight: 700 !important;
-      font-size: 2rem !important;
-      text-align: center !important;
-      margin-bottom: 2rem !important;
-      position: relative !important;
     }
 
-/*     .services-title::before {
-      content: '🏨';
-      position: absolute;
-      left: -50px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2rem;
-      animation: gentle-spin 4s linear infinite;
-    } */
-
-    @keyframes gentle-spin {
-      from { transform: translateY(-50%) rotate(0deg); }
-      to { transform: translateY(-50%) rotate(360deg); }
+    .dropdown-item {
+      color: var(--green-700) !important;
+      transition: all 0.3s ease !important;
     }
 
-    .services-header {
-      display: none !important; /* Hide the dropdown for cleaner design */
-    }
-
-    .services-grid {
-      display: grid !important;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
-      gap: 2rem !important;
-      max-width: 1400px !important;
-      margin: 0 auto !important;
-      position: relative !important;
+    .dropdown-item:hover {
+      background: var(--green-100) !important;
+      color: var(--green-800) !important;
     }
 
     .service-card {
-      background: linear-gradient(135deg, white 0%, #fefefe 100%) !important;
+      background: white !important;
       border: 2px solid var(--green-200) !important;
-      border-radius: 20px !important;
-      padding: 2rem !important;
-      text-align: center !important;
-      cursor: pointer !important;
-      position: relative !important;
-      overflow: hidden !important;
-      box-shadow: var(--soft-shadow) !important;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      min-height: 180px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      align-items: center !important;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .service-card:hover::before {
-      left: 100%;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 2px 10px rgba(22, 163, 74, 0.08) !important;
     }
 
     .service-card:hover {
-      border-color: var(--emerald) !important;
-      transform: translateY(-10px) scale(1.05) !important;
-      box-shadow: var(--glow-shadow), var(--soft-shadow) !important;
+      border-color: var(--primary-green) !important;
+      background: var(--green-50) !important;
+      transform: translateY(-5px) !important;
+      box-shadow: 0 8px 30px rgba(22, 163, 74, 0.2) !important;
     }
 
     .service-card.selected {
-      background: linear-gradient(135deg, var(--emerald), var(--primary-green-light)) !important;
+      background: linear-gradient(135deg, var(--primary-green), var(--emerald)) !important;
       color: white !important;
-      border-color: var(--emerald) !important;
-      transform: scale(1.08) !important;
-      box-shadow: var(--glow-shadow), 0 30px 60px rgba(16, 185, 129, 0.4) !important;
-    }
-
-    .service-card.selected::after {
-      content: '✓';
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: var(--gold);
-      color: white;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 18px;
-      animation: check-pulse 1s ease-in-out;
-    }
-
-    @keyframes check-pulse {
-      0% { transform: scale(0); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-
-    .service-icon {
-      font-size: 3rem !important;
-      margin-bottom: 1rem !important;
-      transition: all 0.4s ease !important;
-    }
-
-    .service-card:hover .service-icon {
-      transform: scale(1.2) rotate(5deg) !important;
-    }
-
-    .service-card.selected .service-icon {
-      transform: scale(1.3) !important;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)) !important;
+      border-color: var(--primary-green) !important;
+      box-shadow: 0 8px 30px rgba(22, 163, 74, 0.3) !important;
     }
 
     .service-name {
       color: var(--green-800) !important;
-      font-weight: 700 !important;
-      font-size: 1.1rem !important;
-      line-height: 1.4 !important;
-      text-align: center !important;
+      font-weight: 600 !important;
     }
 
     .service-card.selected .service-name {
       color: white !important;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
     }
 
-    /* Form Container - Ultra Premium */
+    /* Form Container */
     .form-container {
-      background: linear-gradient(135deg, white, #fefefe) !important;
+      background: white !important;
       border: 2px solid var(--green-200) !important;
-      border-radius: 30px !important;
-      padding: 3rem !important;
-      max-width: 600px !important;
-      margin: 3rem auto !important;
-      box-shadow: var(--glow-shadow), var(--soft-shadow) !important;
-      position: relative !important;
-      overflow: hidden !important;
-    }
-
-    .form-container::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(22, 163, 74, 0.05) 0%, transparent 70%);
-      animation: form-glow 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes form-glow {
-      0% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-
-    .form-container > * {
-      position: relative !important;
-      z-index: 10 !important;
+      box-shadow: 0 8px 40px rgba(22, 163, 74, 0.12) !important;
+      border-radius: 20px !important;
     }
 
     .form-container input {
-      background: white !important;
       border: 2px solid var(--green-200) !important;
-      border-radius: 15px !important;
-      padding: 1rem 1.5rem !important;
-      font-size: 1rem !important;
-      font-weight: 500 !important;
-      width: 100% !important;
-      margin-bottom: 1.5rem !important;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05) !important;
+      border-radius: 12px !important;
+      transition: all 0.3s ease !important;
     }
 
     .form-container input:focus {
-      border-color: var(--emerald) !important;
-      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1), inset 0 2px 4px rgba(0,0,0,0.05) !important;
+      border-color: var(--primary-green) !important;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1) !important;
       outline: none !important;
-      transform: scale(1.02) !important;
     }
 
     .form-container button {
-      background: linear-gradient(135deg, var(--emerald), var(--primary-green-light)) !important;
+      background: linear-gradient(135deg, var(--primary-green), var(--emerald)) !important;
       color: white !important;
       border: none !important;
-      border-radius: 15px !important;
-      padding: 1.2rem 2.5rem !important;
-      font-weight: 700 !important;
-      font-size: 1.1rem !important;
-      width: 100% !important;
-      margin-bottom: 1rem !important;
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3) !important;
-      position: relative !important;
-      overflow: hidden !important;
-    }
-
-    .form-container button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .form-container button:hover::before {
-      left: 100%;
+      border-radius: 12px !important;
+      font-weight: 600 !important;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3) !important;
+      transition: all 0.3s ease !important;
     }
 
     .form-container button:hover {
-      transform: translateY(-3px) scale(1.02) !important;
-      box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4) !important;
+      background: linear-gradient(135deg, var(--green-700), var(--emerald-dark)) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 25px rgba(22, 163, 74, 0.4) !important;
     }
 
-    /* Ticket Display - Masterpiece */
+    #leaveBtn {
+      background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+    }
+
+    #leaveBtn:hover {
+      background: linear-gradient(135deg, #b91c1c, #dc2626) !important;
+    }
+
+    /* Ticket Display */
     #ticket {
-      background: linear-gradient(135deg, white, #fefefe) !important;
-      border: 3px solid var(--emerald) !important;
-      border-radius: 25px !important;
-      padding: 3rem !important;
-      max-width: 500px !important;
-      margin: 2rem auto !important;
-      box-shadow: var(--glow-shadow), var(--soft-shadow) !important;
-      position: relative !important;
-      overflow: hidden !important;
-    }
-
-    #ticket::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, rgba(16, 185, 129, 0.05), rgba(22, 163, 74, 0.05));
-      pointer-events: none;
+      background: white !important;
+      border: 3px solid var(--primary-green) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 10px 50px rgba(22, 163, 74, 0.2) !important;
     }
 
     #ticket h2 {
-      background: linear-gradient(135deg, var(--emerald), var(--primary-green-light)) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-      background-clip: text !important;
-      text-align: center !important;
-      font-weight: 800 !important;
-      font-size: 1.8rem !important;
-      margin-bottom: 2rem !important;
-      position: relative !important;
-      z-index: 10 !important;
+      color: var(--green-800) !important;
+      border-bottom: 2px solid var(--green-200) !important;
     }
 
-    /* Enhanced Floating Action Buttons - Repositioned */
-    .voice-assistant, .video-call-btn {
-      position: fixed !important;
-      width: 70px !important;
-      height: 70px !important;
-      border-radius: 50% !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      box-shadow: var(--glow-shadow), var(--soft-shadow) !important;
-      z-index: 1000 !important;
-      border: 3px solid rgba(255,255,255,0.2) !important;
-      backdrop-filter: blur(10px) !important;
-    }
-
-    .voice-assistant {
-      bottom: 120px !important;
-      right: 30px !important;
+    #printBtn {
       background: linear-gradient(135deg, var(--primary-green), var(--emerald)) !important;
-      animation: voice-pulse 2s infinite;
+      color: white !important;
+      border: none !important;
+      border-radius: 12px !important;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3) !important;
     }
 
+    #printBtn:hover {
+      background: linear-gradient(135deg, var(--green-700), var(--emerald-dark)) !important;
+    }
+
+    #waBtn {
+      background: linear-gradient(135deg, #059669, #10b981) !important;
+      color: white !important;
+      text-decoration: none !important;
+      padding: 12px 20px !important;
+      border-radius: 12px !important;
+      display: inline-block !important;
+      text-align: center !important;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3) !important;
+    }
+
+    /* Voice Assistant Button */
+    .voice-assistant {
+      background: linear-gradient(135deg, var(--primary-green), var(--emerald)) !important;
+      box-shadow: 0 8px 30px rgba(22, 163, 74, 0.3) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .voice-assistant:hover {
+      background: linear-gradient(135deg, var(--green-700), var(--emerald-dark)) !important;
+      transform: scale(1.1) !important;
+      box-shadow: 0 10px 40px rgba(22, 163, 74, 0.4) !important;
+    }
+
+    /* Video Call Button */
     .video-call-btn {
-      bottom: 30px !important;
-      right: 30px !important;
       background: linear-gradient(135deg, var(--emerald), var(--primary-green-light)) !important;
-      animation: video-pulse 2s infinite 0.5s;
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.3) !important;
+      transition: all 0.3s ease !important;
     }
 
-    @keyframes voice-pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4), var(--soft-shadow); }
-      50% { box-shadow: 0 0 0 20px rgba(22, 163, 74, 0), var(--soft-shadow); }
+    .video-call-btn:hover {
+      background: linear-gradient(135deg, var(--emerald-dark), var(--primary-green)) !important;
+      transform: scale(1.1) !important;
+      box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4) !important;
     }
 
-    @keyframes video-pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4), var(--soft-shadow); }
-      50% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0), var(--soft-shadow); }
-    }
-
-    .voice-assistant:hover, .video-call-btn:hover {
-      transform: scale(1.15) !important;
-      box-shadow: var(--glow-shadow), 0 20px 40px rgba(0,0,0,0.2) !important;
-    }
-
-    .voice-assistant img, .video-call-btn img {
-      width: 35px !important;
-      height: 35px !important;
-      filter: brightness(0) invert(1) !important;
+    /* Section Titles */
+    .section-title, .services-title {
+      color: var(--green-800) !important;
+      font-weight: 700 !important;
     }
 
     /* Position Message */
     #positionMsg {
-      background: linear-gradient(135deg, var(--green-100), var(--green-200)) !important;
-      color: var(--green-800) !important;
-      border: 2px solid var(--green-300) !important;
-      border-radius: 15px !important;
-      padding: 1.5rem !important;
-      text-align: center !important;
+      color: var(--green-700) !important;
+      background: var(--green-100) !important;
+      border: 2px solid var(--green-200) !important;
+      border-radius: 12px !important;
+      padding: 15px !important;
       font-weight: 600 !important;
-      font-size: 1.1rem !important;
-      box-shadow: var(--soft-shadow) !important;
     }
 
-    /* Add floating elements */
-    .floating-element-1, .floating-element-2 {
-      position: fixed;
-      pointer-events: none;
-      z-index: -1;
+    /* Smooth Animations */
+    * {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      h1 { font-size: 2.5rem !important; }
-      .subtitle { font-size: 1.2rem !important; }
-      .section-title { font-size: 1.5rem !important; }
-      .services-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important; }
-      .hospital-list { grid-template-columns: 1fr !important; }
-      .form-container { margin: 2rem 1rem !important; padding: 2rem !important; }
-      .voice-assistant { bottom: 120px !important; right: 20px !important; }
-      .video-call-btn { bottom: 30px !important; right: 20px !important; }
-    }
-
-    /* Smooth scroll behavior */
-    html {
-      scroll-behavior: smooth !important;
+    /* Print Styles */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #ticket, #ticket * {
+        visibility: visible;
+      }
+      #ticket {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: white !important;
+        border: 2px solid var(--primary-green) !important;
+        padding: 30px !important;
+        width: 100% !important;
+      }
     }
   </style>
 </head>
 <body>
-<!-- Floating Elements -->
-<div class="floating-element-1"></div>
-<div class="floating-element-2"></div>
-
 <!-- Navigation -->
 <nav>
   <div class="logo">
@@ -787,7 +320,7 @@
 <!-- Main Content -->
 <main>
   <h1>Digital Queue for Healthcare</h1>
-  <p class="subtitle">🏥 Helping patients wait less and get quality care faster.</p>
+  <p class="subtitle">🌿 Helping patients wait less and get natural care faster.</p>
   <!-- Hospital Selection -->
   <section class="hospital-selection">
     <h2 class="section-title">Select Hospital</h2>
@@ -795,16 +328,16 @@
       <div class="hospital-card active">Promhex Multispeciality Hospital</div>
       <div class="hospital-card">Felix Hospital - Greater Noida</div>
       <div class="hospital-card">Riverdale Healthcare</div>
-      <div class="hospital-card">Yatharth Superspeciality Hospital</div>
-      <div class="hospital-card">Kailash Hospital</div>
+      <div class="hospital-card">Yatharth Super Speciality Hospital</div>
+      <div class="hospital-card">Apollo Spectra Hospital</div>
     </div>
   </section>
   <!-- Services Section -->
   <section class="services-section">
     <div class="services-header">
-      <h2 class="services-title">Available Hospital Services</h2>
+      <h2 class="services-title">Available Services</h2>
         </div>
-        <div class="dropdown-list" id="serviceList" style="display: none;">
+        <div class="dropdown-list" id="serviceList">
           <div class="dropdown-item" data-value="all">All Services</div>
           <div class="dropdown-item" data-value="general">General Consultation</div>
           <div class="dropdown-item" data-value="pediatrics">Pediatrics</div>
@@ -814,12 +347,11 @@
           <div class="dropdown-item" data-value="eye">Eye Examination</div>
           <div class="dropdown-item" data-value="cardiology">Cardiology</div>
           <div class="dropdown-item" data-value="vaccination">Vaccination</div>
-          <div class="dropdown-item" data-value="mental-health">Mental Health</div>
+          <div class="dropdown-item" data-value="mental-health">Mental Health Support</div>
           <div class="dropdown-item" data-value="orthopedics">Orthopedics</div>
         </div>
       </div>
     </div>
-    <h2 class="services-title">Available Hospital Services</h2>
     <div class="services-grid">
       <div class="service-card" data-service="general"><div class="service-icon">👨‍⚕️</div><div class="service-name">General Consultation</div></div>
       <div class="service-card" data-service="pediatrics"><div class="service-icon">👶</div><div class="service-name">Pediatrics</div></div>
@@ -838,30 +370,32 @@
     <input type="text" id="name" placeholder="Your name" />
     <input type="text" id="phone" placeholder="Phone number" />
     <input type="date" id="appointmentDate" />
-    <button onclick="joinQueue()">🏥 Join Hospital Queue</button>
+    <button onclick="joinQueue()">🌿 Join Queue</button>
     <button id="leaveBtn" onclick="leaveQueue()" style="display:none;">Leave Queue</button>
     <p id="positionMsg"></p>
   </div>
   <!-- Ticket Display -->
   <div id="ticket" style="display:none;">
-    <h2>🎫 Your Hospital Appointment Ticket</h2>
+    <h2>🎟️ Your AyurSutra Hospital Ticket</h2>
     <p><strong>Name:</strong> <span id="ticketName"></span></p>
     <p><strong>Phone:</strong> <span id="ticketPhone"></span></p>
     <p><strong>Date:</strong> <span id="ticketDate"></span></p>
     <p><strong>Queue Number:</strong> <span id="ticketPosition"></span></p>
-    <img id="qrCode" alt="QR Code" />
-    <button id="printBtn" onclick="printTicket()">🖨️ Print Hospital Ticket</button>
-      <a id="waBtn" href="#" target="_blank" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
+    <div id="qrCodeContainer">
+      <canvas id="qrCode" style="border: 1px solid #16a34a; margin: 10px 0;"></canvas>
+    </div>
+    <button id="printBtn" onclick="printHospitalTicket()">🖨️ Print Hospital Ticket</button>
+    <a id="waBtn" href="#" target="_blank" onclick="sendWhatsAppMessage()" style="display:block; margin-top:10px;">📱 Send via WhatsApp</a>
   </div>
 </main>
-<!-- <!-- Voice Assistant Button -->
-<!--   <div class="voice-assistant" onclick="startVoiceAssistant()">
+<!-- Voice Assistant Button -->
+  <div class="voice-assistant" onclick="startVoiceAssistant()">
     <img src="voice.png" alt="Voice Assistant" />
-  </div> -->
+  </div>
 <!-- Video Call Button -->
-<!-- <a href="https://videocall-6nuu.onrender.com/patient.html" target="_blank" class="video-call-btn" title="Join Video Consultation">
-  <img src="video.png" alt="Video Consultation" />
-</a> --> -->
+<a href="https://videocall-6nuu.onrender.com/patient.html" target="_blank" class="video-call-btn" title="Join Video Call">
+  <img src="video.png" alt="Video Call" />
+</a>
 <!-- Firebase SDK --> 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -898,11 +432,142 @@
       alert("Logout failed: " + error.message);
     });
   });
+
+  // Enhanced PDF Print Function
+  function printHospitalTicket() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    // AyurSutra Header
+    doc.setFillColor(22, 163, 74);
+    doc.rect(0, 0, 210, 40, 'F');
+    
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(24);
+    doc.setFont(undefined, 'bold');
+    doc.text('AyurSutra Healthcare', 20, 25);
+    
+    doc.setFontSize(12);
+    doc.text('Digital Queue System', 20, 35);
+    
+    // Reset color
+    doc.setTextColor(0, 0, 0);
+    
+    // Ticket Title
+    doc.setFontSize(18);
+    doc.setFont(undefined, 'bold');
+    doc.text('🎟️ Hospital Appointment Ticket', 20, 60);
+    
+    // Patient Details
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'normal');
+    const name = document.getElementById('ticketName').textContent;
+    const phone = document.getElementById('ticketPhone').textContent;
+    const date = document.getElementById('ticketDate').textContent;
+    const position = document.getElementById('ticketPosition').textContent;
+    
+    doc.text(`Name: ${name}`, 20, 80);
+    doc.text(`Phone: ${phone}`, 20, 95);
+    doc.text(`Date: ${date}`, 20, 110);
+    doc.text(`Queue Number: ${position}`, 20, 125);
+    
+    // QR Code
+    const canvas = document.getElementById('qrCode');
+    if (canvas) {
+      const qrDataURL = canvas.toDataURL('image/png');
+      doc.addImage(qrDataURL, 'PNG', 20, 140, 50, 50);
+    }
+    
+    // Instructions
+    doc.setFontSize(10);
+    doc.text('Instructions:', 20, 210);
+    doc.text('• Please arrive 15 minutes before your appointment', 20, 220);
+    doc.text('• Show this ticket at the reception desk', 20, 230);
+    doc.text('• Keep your phone handy for updates', 20, 240);
+    
+    // Footer
+    doc.setFillColor(240, 253, 244);
+    doc.rect(0, 260, 210, 37, 'F');
+    doc.setFontSize(8);
+    doc.setTextColor(22, 163, 74);
+    doc.text('Generated by AyurSutra Digital Queue System | Thank you for choosing us!', 20, 280);
+    
+    // Save the PDF
+    doc.save(`AyurSutra_Ticket_${position}_${new Date().toISOString().slice(0,10)}.pdf`);
+  }
+
+  // Enhanced WhatsApp Function
+  function sendWhatsAppMessage() {
+    const name = document.getElementById('ticketName').textContent;
+    const phone = document.getElementById('ticketPhone').textContent;
+    const date = document.getElementById('ticketDate').textContent;
+    const position = document.getElementById('ticketPosition').textContent;
+    
+    const message = `🏥 *AyurSutra Hospital Appointment*
+    
+🎟️ *Ticket Details:*
+👤 Name: ${name}
+📞 Phone: ${phone}
+📅 Date: ${date}
+🔢 Queue Number: ${position}
+
+⏰ *Instructions:*
+• Please arrive 15 minutes early
+• Show this message at reception
+• Keep your phone ready for updates
+
+🌿 Thank you for choosing AyurSutra Healthcare!
+Generated by Digital Queue System`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
+    
+    window.open(whatsappURL, '_blank');
+  }
+
+  // Generate QR Code when ticket is displayed
+  function generateQRCode(ticketData) {
+    const canvas = document.getElementById('qrCode');
+    const qrText = `AyurSutra Ticket: ${ticketData.name} | Queue: ${ticketData.position} | Date: ${ticketData.date} | Phone: ${ticketData.phone}`;
+    
+    QRCode.toCanvas(canvas, qrText, {
+      width: 200,
+      height: 200,
+      colorDark: '#16a34a',
+      colorLight: '#ffffff'
+    }, function (error) {
+      if (error) console.error('QR Code generation error:', error);
+      else console.log('QR Code generated successfully!');
+    });
+  }
+
+  // Enhanced Join Queue Function (integrate with your existing code)
+  function joinQueue() {
+    // Your existing join queue logic here
+    
+    // After successful queue join, generate QR code
+    const ticketData = {
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      date: document.getElementById('appointmentDate').value,
+      position: Math.floor(Math.random() * 100) + 1 // Replace with actual queue position
+    };
+    
+    // Update ticket display
+    document.getElementById('ticketName').textContent = ticketData.name;
+    document.getElementById('ticketPhone').textContent = ticketData.phone;
+    document.getElementById('ticketDate').textContent = ticketData.date;
+    document.getElementById('ticketPosition').textContent = ticketData.position;
+    
+    // Generate QR Code
+    generateQRCode(ticketData);
+    
+    // Show ticket
+    document.getElementById('ticket').style.display = 'block';
+  }
 </script>
 <!-- Custom JS -->
 <script src="userAdmin.js"></script>
 <script src="service.js"></script>
 </body>
 </html>
-
-
