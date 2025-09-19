@@ -59,20 +59,16 @@
 
     /* =========== Navigation - Updated with Logo and Menu =========== */
     nav {
-      background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-green) 50%, var(--emerald-600) 100%);
-      padding: 0 3rem;
-      height: 80px;
+      background: var(--primary-green);
+      padding: 0 2rem;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 
-        0 8px 32px rgba(22, 163, 74, 0.15),
-        0 4px 16px rgba(22, 163, 74, 0.1);
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.1);
       position: sticky;
       top: 0;
       z-index: 1000;
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     nav::before {
@@ -94,23 +90,18 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 12px;
       color: white;
-      font-weight: 800;
-      font-size: 2rem;
-      position: relative;
-      z-index: 10;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+      font-size: 1.5rem;
     }
 
     .logo img {
-      height: 55px;
-      width: 55px;
-      border-radius: 15px;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 6px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 40px;
+      width: 40px;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
     }
 
     .logo:hover img {
@@ -118,28 +109,24 @@
       box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
     }
 
-    nav ul {
+   nav ul {
       display: flex;
       list-style: none;
-      gap: 2rem;
+      gap: 1rem;
       align-items: center;
-      position: relative;
-      z-index: 10;
+      margin: 0;
+      padding: 0;
     }
 
     nav ul li a {
       color: white;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      padding: 12px 20px;
-      border-radius: 25px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      position: relative;
-      overflow: hidden;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+      white-space: nowrap;
     }
 
     nav ul li a::before {
@@ -158,25 +145,19 @@
     }
 
     nav ul li a:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.1);
     }
+
 
     .user-profile {
       display: flex;
       align-items: center;
-      gap: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      padding: 10px 25px;
-      border-radius: 50px;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(20px);
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 10;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 15px;
+      border-radius: 20px;
     }
+
 
     .user-profile:hover {
       background: rgba(255, 255, 255, 0.2);
@@ -186,19 +167,16 @@
     }
 
     .avatar {
-      width: 45px;
-      height: 45px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold-accent), #f97316);
+      background: var(--gold-accent);
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 18px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 14px;
     }
 
     .avatar:hover {
@@ -206,30 +184,27 @@
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
     }
 
-    #username {
+   #username {
       color: white;
-      font-weight: 600;
-      font-size: 16px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      font-weight: 500;
+      font-size: 14px;
     }
 
+
     #logoutBtn {
-      background: linear-gradient(135deg, #dc2626, #ef4444);
+      background: #dc2626;
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-size: 14px;
-      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+      transition: background-color 0.2s ease;
     }
 
     #logoutBtn:hover {
-      background: linear-gradient(135deg, #b91c1c, #dc2626);
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+      background: #b91c1c;
     }
 
     /* =========== Main Content Styling =========== */
@@ -1486,3 +1461,4 @@ _This is an automated message from AyurSutra Digital Queue System_`;
 <script src="service.js"></script>
 </body>
 </html>
+
